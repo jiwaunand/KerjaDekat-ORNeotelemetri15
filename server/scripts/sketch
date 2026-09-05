@@ -1,0 +1,41 @@
+podman run -d \
+  --name kerjadekat-db \
+  -e POSTGRES_USER=admin \
+  -e POSTGRES_PASSWORD=14731332 \
+  -e POSTGRES_DB=test \
+  -p 5432:5432 \
+  -v ~/.local/databases/postgresdev:/var/lib/postgresql/data \
+  40710ae20139
+
+1. Tabel users
+    id (UUID, Primary Key)
+    nama_lengkap (VARCHAR)
+    no_hp (VARCHAR, unik) - Pekerja informal seringkali lebih aktif menggunakan nomor HP dibanding email.
+    password_hash (VARCHAR)
+    role (ENUM: 'worker', 'employer')
+    rating_akumulasi (DECIMAL) - Untuk membangun sistem kepercayaan (trust).
+    lokasi_terakhir (GEOGRAPHY(Point, 4326)) - Koordinat GPS pekerja untuk perhitungan jarak terdekat.
+    keahlian (TEXT[]) - Array string (misal: ['Tukang Kayu', 'Cat', 'Pipa']). Format array ini sangat mudah ditarik dan dikirim ke model ML TF-IDF.
+
+2. Tabel jobs (Lowongan Pekerjaan)
+    id (UUID, Primary Key)
+    employer_id (UUID, Foreign Key ke users)
+    judul_pekerjaan (VARCHAR)
+    deskripsi (TEXT)
+    syarat_keahlian (TEXT[]) - Akan dicocokkan dengan keahlian pekerja menggunakan Cosine Similarity.
+    upah_ditawarkan (NUMERIC)
+    lokasi_kerja (GEOGRAPHY(Point, 4326)) - Titik koordinat tempat kerja.
+    status (ENUM: 'open', 'in_progress', 'completed')
+
+3. Tabel job_applications (Lamaran / Pekerjaan Berjalan)
+    id (UUID, Primary Key)
+    job_id (UUID, Foreign Key ke jobs)
+    worker_id (UUID, Foreign Key ke users)
+    skor_kecocokan (DECIMAL) - Tempat menyimpan hasil perhitungan final dari model ML (TF-IDF + Haversine) sebagai log sistem.
+    status (ENUM: 'applied', 'accepted', 'rejected', 'finished')
+
+4. Tabel escrows (Sistem Keamanan Pembayaran)
+    id (UUID, Primary Key)
+    application_id (UUID, Foreign Key ke job_applications)
+    jumlah_deposit (NUMERIC)
+    status_dana (ENUM: 'held', 'released_to_worker', 'refunded_to_employer')
