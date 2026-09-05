@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyJobSeeker</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_profile">Profile</string>
+    <string name="search_hint">Search jobs&#8230;</string>
+</resources>
