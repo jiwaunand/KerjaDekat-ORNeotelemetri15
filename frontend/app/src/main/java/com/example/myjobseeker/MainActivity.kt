@@ -1,14 +1,13 @@
 package com.example.myjobseeker
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import com.example.myjobseeker.ui.home.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.search.SearchBar
-import com.google.android.material.search.SearchView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,33 +20,40 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val searchBar = findViewById<SearchBar>(R.id.search_bar)
-        val searchView = findViewById<SearchView>(R.id.search_view)
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-        searchView.editText.setOnEditorActionListener { _, _, _ ->
-            searchBar.setText(searchView.text)
-            searchView.hide()
-            Toast.makeText(this, "Searching for: ${searchView.text}", Toast.LENGTH_SHORT).show()
-            false
+        if (savedInstanceState == null) {
+            loadFragment(HomeFragment())
         }
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    Toast.makeText(this, "Home selected", Toast.LENGTH_SHORT).show()
+                    loadFragment(HomeFragment())
                     true
                 }
                 R.id.nav_search -> {
-                    Toast.makeText(this, "Search selected", Toast.LENGTH_SHORT).show()
+                    //loadFragment(SearchFragment())
+                    true
+                }
+                R.id.nav_applications -> {
+                    // loadFragment(ApplicationsFragment())
                     true
                 }
                 R.id.nav_profile -> {
-                    Toast.makeText(this, "Profile selected", Toast.LENGTH_SHORT).show()
+                    //loadFragment(ProfileFragment())
                     true
                 }
                 else -> false
             }
         }
+
+
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
 }

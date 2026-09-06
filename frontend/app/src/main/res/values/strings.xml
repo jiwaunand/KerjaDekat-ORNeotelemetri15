@@ -1,7 +1,30 @@
 <resources>
     <string name="app_name">MyJobSeeker</string>
-    <string name="nav_home">Home</string>
-    <string name="nav_search">Search</string>
-    <string name="nav_profile">Profile</string>
-    <string name="search_hint">Search jobs&#8230;</string>
+    <string name="nav_home">Beranda</string>
+    <string name="nav_search">Cari</string>
+    <string name="nav_applications">Lamaran</string>
+    <string name="nav_profile">Profil</string>
+    <string name="search_hint">Cari Pekerjaan&#8230;</string>
+    <string name="recommendation_title">Rekomendasi Pekerjaan</string>
+    <string name="see_all">Lihat Semua</string>
+    <string name="apply">Lamar</string>
+    <string name="apply_job">Lamar Pekerjaan</string>
+    <string name="location_placeholder">Padang, Sumatera Barat</string>
+    <string name="job_detail_title">Detail Pekerjaan</string>
+    <string name="job_description">Deskripsi Pekerjaan</string>
+    <string name="main_skills">Keahlian Utama</string>
+    <string name="match_percentage">Persentasi Kecocokan</string>
+    <string name="verified_employer">Pemberi Kerja Terverifikasi</string>
+    <string name="shift_night">Shift Malam</string>
+    <string name="distance_label">Jarak</string>
+    <string name="net_salary">Gaji Bersih</string>
+    <string name="distance_near_format">%s terdekat</string>
+    <string name="match_format">%d%% cocok</string>
+    <string name="job_description_placeholder">Sebagai barista yang &#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;</string>
+    <string name="skills_placeholder">• Membuat Kopi\n• Meracik minuman\n• Cepat\n• Mengoperasikan mesin kopi</string>
+    <string name="logo">Logo</string>
+    <string name="skill_1">• Membuat Kopi</string>
+    <string name="skill_2">• Meracik minuman</string>
+    <string name="skill_3">• Cepat</string>
+    <string name="skill_4">• Mengoperasikan mesin kopi</string>
 </resources>

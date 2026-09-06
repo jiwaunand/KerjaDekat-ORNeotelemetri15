@@ -2,4 +2,22 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Blue Palette from Design -->
+    <color name="blue_lighter">#B2CBEF</color>
+    <color name="blue_normal">#2067DA</color>
+    <color name="blue_dark">#0B244C</color>
+    <color name="logo_blue">#5D8BF4</color>
+
+    <!-- Semantic Colors -->
+    <color name="nav_navy">@color/blue_dark</color>
+    <color name="nav_active">@color/blue_lighter</color>
+    <color name="nav_inactive">#FFFFFF</color>
+
+    <color name="background_light_blue">#EAF2F8</color>
+    <color name="text_dark">#2F3640</color>
+    <color name="text_gray">#7F8C8D</color>
+    <color name="success_green">#27AE60</color>
+    <color name="success_green_light">#E8F6EF</color>
+    <color name="accent_blue_light">#F0F3F9</color>
 </resources>
