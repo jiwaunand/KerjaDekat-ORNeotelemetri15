@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.MyJobSeeker" parent="Base.Theme.MyJobSeeker" />
+
+    <style name="Circle">
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

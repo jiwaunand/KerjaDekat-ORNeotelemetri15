@@ -27,4 +27,17 @@
     <string name="skill_2">• Meracik minuman</string>
     <string name="skill_3">• Cepat</string>
     <string name="skill_4">• Mengoperasikan mesin kopi</string>
+
+    <!-- Profile -->
+    <string name="profile_name">Raa</string>
+    <string name="profile_username">\@rawzraa</string>
+    <string name="stat_lamaran">Lamaran</string>
+    <string name="stat_diprogres">Diprogres</string>
+    <string name="stat_selesai">Selesai</string>
+    <string name="menu_profile">Profil Saya</string>
+    <string name="menu_skill">Skill Saya</string>
+    <string name="menu_riwayat">Riwayat Pekerjaan</string>
+    <string name="menu_pengaturan">Pengaturan</string>
+    <string name="menu_bantuan">Pusat Bantuan</string>
+    <string name="logout">Keluar</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.myjobseeker
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +8,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.myjobseeker.ui.home.HomeFragment
+import com.example.myjobseeker.ui.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var bottomNavigation: BottomNavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -20,11 +25,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
-        if (savedInstanceState == null) {
-            loadFragment(HomeFragment())
-        }
+        bottomNavigation = findViewById(R.id.bottom_navigation)
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -41,14 +42,26 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_profile -> {
-                    //loadFragment(ProfileFragment())
+                    loadFragment(ProfileFragment())
                     true
                 }
                 else -> false
             }
         }
 
+        if (savedInstanceState == null) {
+            val navigateTo = intent.getIntExtra("NAVIGATE_TO", R.id.nav_home)
+            bottomNavigation.selectedItemId = navigateTo
+        }
+    }
 
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        val navigateTo = intent.getIntExtra("NAVIGATE_TO", -1)
+        if (navigateTo != -1) {
+            bottomNavigation.selectedItemId = navigateTo
+        }
     }
 
     private fun loadFragment(fragment: Fragment) {

@@ -1,9 +1,12 @@
 package com.example.myjobseeker.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.myjobseeker.MainActivity
 import com.example.myjobseeker.R
 import com.example.myjobseeker.model.Job
 
@@ -27,6 +30,18 @@ class DetailActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.detail_distance).text = getString(R.string.distance_near_format, it.distance)
             findViewById<TextView>(R.id.detail_salary).text = it.salary
             findViewById<TextView>(R.id.detail_match).text = getString(R.string.match_format, it.matchPercentage)
+        }
+
+        setupClickListeners()
+    }
+
+    private fun setupClickListeners() {
+        findViewById<ImageView>(R.id.iv_profile).setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            intent.putExtra("NAVIGATE_TO", R.id.nav_profile)
+            startActivity(intent)
+            finish()
         }
     }
 }
