@@ -2,4 +2,24 @@ version: '3.8'
 
 services:
   database:
-    image:
+    image: postgre:15.19
+    container_name: database
+    restart: always
+    network_mode: "pod:mainpod"
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: mainsever
+    restart: always
+    network_mode: "pod:mainpod"
+    env_file:
+      - .env
+    depends_on:
+      - database
+
+volumes:
+  postgres_data:
