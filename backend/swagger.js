@@ -1,4 +1,4 @@
-const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerJSDoc = require("swagger-jsdoc");
 
 const options = {
   definition: {
@@ -6,7 +6,7 @@ const options = {
     info: {
       title: "KerjaDekat API",
       version: "1.0.0",
-      description: "API backend aplikasi KerjaDekat"
+      description: "API untuk platform KerjaDekat"
     },
     servers: [
       {
@@ -27,15 +27,15 @@ const options = {
           properties: {
             job_name: {
               type: "string",
-              example: "Tukang Kayu"
+              example: "Backend Developer"
             },
             nama_perusahaan: {
               type: "string",
-              example: "CV Maju Jaya"
+              example: "PT Contoh Indonesia"
             },
             deskripsi_utama: {
               type: "string",
-              example: "Membutuhkan tukang kayu untuk membuat meja."
+              example: "Mengembangkan REST API"
             },
             lokasi: {
               type: "string",
@@ -43,25 +43,32 @@ const options = {
             },
             perkiraan_salary: {
               type: "number",
-              example: 500000
+              example: 7000000
             },
             status_enum: {
               type: "string",
-              enum: ["open", "in_progress", "completed"],
+              enum: [
+                "open",
+                "in_progress",
+                "completed"
+              ],
               example: "open"
             },
             scoring: {
               type: "number",
-              example: 85.5
+              example: 85
             }
           }
         }
       }
     }
   },
-  apis: ["./routes/*.js"]
+
+  apis: [
+    "./routes/*.js"
+  ]
 };
 
-const swaggerSpec = swaggerJsdoc(options);
+const swaggerSpec = swaggerJSDoc(options);
 
 module.exports = swaggerSpec;

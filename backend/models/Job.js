@@ -1,46 +1,39 @@
-const mongoose = require("mongoose");
+const { pool } = require("../config/db");
 
-const jobSchema = new mongoose.Schema(
-  {
-    job_name: {
-      type: String,
-      required: true
-    },
+const Job = {
+  async getAll() {
+    const result = await pool.query(
+      "SELECT * FROM jobs ORDER BY id DESC"
+    );
 
-    nama_perusahaan: {
-      type: String,
-      required: true
-    },
-
-    deskripsi_utama: {
-      type: String,
-      required: true
-    },
-
-    lokasi: {
-      type: String,
-      required: true
-    },
-
-    perkiraan_salary: {
-      type: Number,
-      required: true
-    },
-
-    status_enum: {
-      type: String,
-      enum: ["open", "in_progress", "completed"],
-      default: "open"
-    },
-
-    scoring: {
-      type: Number,
-      default: 0
-    }
+    return result.rows;
   },
-  {
-    timestamps: true
-  }
-);
 
-module.exports = mongoose.model("Job", jobSchema);
+  async create(data) {
+    const {
+      job_name,
+      nama_perusahaan,
+      deskripsi_utama,
+      lokasi,
+      perkiraan_salary
+    } = data;
+
+    const result = await pool.query(
+      `INSERT INTO jobs
+      (job_name, nama_perusahaan, deskripsi_utama, lokasi, perkiraan_salary)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *`,
+      [
+        job_name,
+        nama_perusahaan,
+        deskripsi_utama,
+        lokasi,
+        perkiraan_salary
+      ]
+    );
+
+    return result.rows[0];
+  }
+};
+
+module.exports = Job;
