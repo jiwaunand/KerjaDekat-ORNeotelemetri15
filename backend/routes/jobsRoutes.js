@@ -12,16 +12,20 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: Daftar pekerjaan
+ *       500:
+ *         description: Gagal mengambil data jobs
  */
 router.get("/", async (req, res) => {
   try {
-    const jobs = await Job.find().sort({ createdAt: -1 });
+    const jobs = await Job.getAll();
 
     res.status(200).json(jobs);
   } catch (error) {
     console.error(error);
+
     res.status(500).json({
-      message: "Gagal mengambil data jobs"
+      message: "Gagal mengambil data jobs",
+      error: error.message
     });
   }
 });
@@ -46,29 +50,12 @@ router.get("/", async (req, res) => {
  */
 router.post("/", async (req, res) => {
   try {
-    const {
-      job_name,
-      nama_perusahaan,
-      deskripsi_utama,
-      lokasi,
-      perkiraan_salary,
-      status_enum,
-      scoring
-    } = req.body;
-
-    const job = await Job.create({
-      job_name,
-      nama_perusahaan,
-      deskripsi_utama,
-      lokasi,
-      perkiraan_salary,
-      status_enum,
-      scoring
-    });
+    const job = await Job.create(req.body);
 
     res.status(201).json(job);
   } catch (error) {
     console.error(error);
+
     res.status(400).json({
       message: "Gagal membuat job",
       error: error.message

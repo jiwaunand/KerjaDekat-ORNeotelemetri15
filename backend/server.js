@@ -1,37 +1,31 @@
 require("dotenv").config();
 
 const express = require("express");
-const connectDB = require("./config/db");
-
-const jobsRouter = require("./routes/jobsRoutes");
-
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./swagger");
+const { connectDB } = require("./config/db");
+const jobRoutes = require("./routes/jobsRoutes");
 
 const app = express();
-
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(express.json());
 
-// Connect MongoDB
 connectDB();
 
-// Health check
-app.get("/health", (req, res) => {
+app.get("/", (req, res) => {
   res.json({
-    status: "OK"
+    message: "API KerjaDekat berjalan"
   });
 });
 
-// Jobs
-app.use("/jobs", jobsRouter);
+app.use("/jobs", jobRoutes);
 
-// Swagger
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get("/health", (req, res) => {
+  res.json({
+    status: "OK",
+    message: "API KerjaDekat sehat"
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Server berjalan di http://localhost:${PORT}`);
-  console.log(`Swagger: http://localhost:${PORT}/api-docs`);
 });
