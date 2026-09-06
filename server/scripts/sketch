@@ -39,3 +39,6 @@ podman run -d \
     application_id (UUID, Foreign Key ke job_applications)
     jumlah_deposit (NUMERIC)
     status_dana (ENUM: 'held', 'released_to_worker', 'refunded_to_employer')
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
