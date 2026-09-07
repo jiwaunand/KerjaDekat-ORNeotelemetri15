@@ -22,3 +22,16 @@ Solusi untuk membantu para pencari pekerja untuk mencari pekerjaan yang sesuai, 
 **Client:** Mobile app - Kotlin
 
 **Server:** Node, Express
+
+
+## Environment Variables
+
+Mohon diperhatikan bagian ini jika ingin testing ke machine masing2
+
+letakkan `.env` di root folder project ini
+
+`DB_HOST` \
+`DB_PORT` \
+`DB_NAME` \
+`DB_USER` \
+`DB_PASSWORD`
