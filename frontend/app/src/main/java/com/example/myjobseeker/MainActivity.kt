@@ -1,10 +1,12 @@
 package com.example.myjobseeker
 
-import com.example.myjobseeker.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -16,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -30,6 +33,7 @@ import com.example.myjobseeker.ui.applications.ApplicationsScreen
 import com.example.myjobseeker.ui.detail.DetailScreen
 import com.example.myjobseeker.ui.home.HomeScreen
 import com.example.myjobseeker.ui.profile.ProfileScreen
+import com.example.myjobseeker.ui.theme.BackgroundLightBlue
 import com.example.myjobseeker.ui.theme.LogoutRed
 import com.example.myjobseeker.ui.theme.MyJobSeekerTheme
 import com.example.myjobseeker.ui.theme.NavNavyHeader
@@ -82,6 +86,8 @@ class MainActivity : ComponentActivity() {
                 var selectedApplication by remember { mutableStateOf<Application?>(null) }
                 
                 Scaffold(
+                    containerColor = BackgroundLightBlue,
+                    contentWindowInsets = WindowInsets(0, 0, 0, 0),
                     bottomBar = { 
                         if (selectedJob == null && selectedApplication == null) {
                             BottomNavigationBar(navController) 
@@ -197,13 +203,14 @@ fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
         NavigationItem("home", "Beranda", R.drawable.ic_home),
         NavigationItem("search", "Cari", R.drawable.ic_search),
-        NavigationItem("applications", "Lamaran", R.drawable.ic_message),
+        NavigationItem("applications", "Lamaran", R.drawable.ic_work),
         NavigationItem("profile", "Profil", R.drawable.ic_person)
     )
     
     NavigationBar(
         containerColor = NavNavyHeader,
-        contentColor = Color.White
+        contentColor = Color.White,
+        tonalElevation = 0.dp
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -222,12 +229,13 @@ fun BottomNavigationBar(navController: NavHostController) {
                         restoreState = true
                     }
                 },
+                alwaysShowLabel = true,
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Color.White,
-                    selectedTextColor = Color.White,
-                    unselectedIconColor = Color.White.copy(alpha = 0.6f),
-                    unselectedTextColor = Color.White.copy(alpha = 0.6f),
-                    indicatorColor = Color(0xFF5D8BF4)
+                    selectedIconColor = Color(0xFF5D8BF4),
+                    selectedTextColor = Color(0xFF5D8BF4),
+                    unselectedIconColor = Color.White,
+                    unselectedTextColor = Color.White,
+                    indicatorColor = Color.Transparent
                 )
             )
         }

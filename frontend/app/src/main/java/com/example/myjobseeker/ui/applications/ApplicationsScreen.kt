@@ -127,6 +127,7 @@ fun ApplicationsHeader(onProfileClick: () -> Unit, location: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .statusBarsPadding()
             .background(NavNavyHeader)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically

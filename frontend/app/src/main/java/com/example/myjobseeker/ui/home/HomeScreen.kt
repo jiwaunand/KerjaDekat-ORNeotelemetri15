@@ -49,14 +49,15 @@ fun HomeScreen(
         }
     }
 
-    Scaffold(
-        topBar = { HomeHeader(onProfileClick, location) }
-    ) { padding ->
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(BackgroundLightBlue)
+    ) {
+        HomeHeader(onProfileClick, location)
+        
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .background(BackgroundLightBlue)
+            modifier = Modifier.fillMaxSize()
         ) {
             item {
                 SearchBar(
@@ -115,6 +116,7 @@ fun HomeHeader(onProfileClick: () -> Unit, location: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .statusBarsPadding()
             .background(NavNavyHeader)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -124,6 +126,12 @@ fun HomeHeader(onProfileClick: () -> Unit, location: String) {
             color = LogoBlue,
             shape = RoundedCornerShape(4.dp)
         ) {
+            /*Icon(
+                painter = painterResource(id = R.drawable.ic_settings),
+                contentDescription = null,
+                modifier = Modifier.size(16.dp),
+                tint = Color.White
+            )*/
             Text(
                 text = "login",
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),

@@ -38,6 +38,7 @@ fun DetailScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .statusBarsPadding()
                 .background(NavNavyHeader)
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -71,12 +72,15 @@ fun DetailScreen(
                     modifier = Modifier.padding(start = 4.dp)
                 )
             }
-            
+
             Icon(
                 painter = painterResource(id = R.drawable.ic_notifications),
-                contentDescription = null,
+                contentDescription = "Notifications",
                 tint = Color.White,
-                modifier = Modifier.size(24.dp).padding(end = 16.dp)
+                modifier = Modifier
+                    .padding(end = 12.dp)
+                    .size(24.dp)
+                    .clickable { }
             )
             
             Box(
