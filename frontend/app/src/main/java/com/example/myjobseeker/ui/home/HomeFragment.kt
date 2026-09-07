@@ -1,10 +1,15 @@
 package com.example.myjobseeker.ui.home
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myjobseeker.R
@@ -18,6 +23,20 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var voiceRecognitionLauncher: ActivityResultLauncher<Intent>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        voiceRecognitionLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+                val results = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                if (!results.isNullOrEmpty()) {
+                    binding.etSearch.setText(results[0])
+                }
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +75,22 @@ class HomeFragment : Fragment() {
         binding.ivProfile.setOnClickListener {
             // Navigate to Profile tab in BottomNavigationView
             activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)?.selectedItemId = R.id.nav_profile
+        }
+
+        binding.ivMic.setOnClickListener {
+            startVoiceRecognition()
+        }
+    }
+
+    private fun startVoiceRecognition() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_PROMPT, "Silakan bicara...")
+        }
+        try {
+            voiceRecognitionLauncher.launch(intent)
+        } catch (e: Exception) {
+            Toast.makeText(context, "Voice recognition not supported on this device", Toast.LENGTH_SHORT).show()
         }
     }
 
