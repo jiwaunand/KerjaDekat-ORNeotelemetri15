@@ -40,4 +40,16 @@
     <string name="menu_pengaturan">Pengaturan</string>
     <string name="menu_bantuan">Pusat Bantuan</string>
     <string name="logout">Keluar</string>
+
+    <!-- Applications -->
+    <string name="status_processed">Diproses</string>
+    <string name="status_accepted">Diterima</string>
+    <string name="status_rejected">Ditolak</string>
+    <string name="salary_offer">Gaji Penawaran</string>
+    <string name="applied_time">Waktu Melamar</string>
+    <string name="response_time_info">Respon biasanya 1-2 hari</string>
+    <string name="see_detail">Lihat Detail</string>
+    <string name="yesterday">Kemaren</string>
+    <string name="today">Hari Ini</string>
+    <string name="cancel_application">Batalkan</string>
 </resources>

@@ -20,7 +20,7 @@ import com.example.myjobseeker.R
 import com.example.myjobseeker.ui.theme.*
 
 @Composable
-fun ProfileScreen(onBackClick: () -> Unit) {
+fun ProfileScreen(onBackClick: () -> Unit, location: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -148,7 +148,7 @@ fun ProfileScreen(onBackClick: () -> Unit) {
                         tint = LogoBlue
                     )
                     Text(
-                        text = stringResource(id = R.string.location_placeholder),
+                        text = location,
                         modifier = Modifier.padding(start = 4.dp),
                         color = TextGray,
                         fontWeight = FontWeight.Bold,

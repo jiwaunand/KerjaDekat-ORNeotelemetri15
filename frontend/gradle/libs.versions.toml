@@ -13,8 +13,10 @@ composeBom = "2024.12.01"
 activityCompose = "1.10.0"
 navigationCompose = "2.8.5"
 kotlin = "2.0.21"
+playServicesLocation = "21.3.0"
 
 [libraries]
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -34,4 +36,5 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

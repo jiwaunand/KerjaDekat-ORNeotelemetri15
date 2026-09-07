@@ -19,7 +19,7 @@ import com.example.myjobseeker.model.Job
 import com.example.myjobseeker.ui.theme.*
 
 @Composable
-fun JobCard(job: Job, onClick: () -> Unit) {
+fun JobCard(job: Job, onClick: () -> Unit, onApplyClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -166,7 +166,7 @@ fun JobCard(job: Job, onClick: () -> Unit) {
 
                 // btn_apply
                 Button(
-                    onClick = { /* Handle apply */ },
+                    onClick = onApplyClick,
                     modifier = Modifier.height(38.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BlueNormal),

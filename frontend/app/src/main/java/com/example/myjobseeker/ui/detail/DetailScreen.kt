@@ -21,7 +21,14 @@ import com.example.myjobseeker.model.Job
 import com.example.myjobseeker.ui.theme.*
 
 @Composable
-fun DetailScreen(job: Job, onBackClick: () -> Unit) {
+fun DetailScreen(
+    job: Job,
+    onBackClick: () -> Unit,
+    onApplyClick: () -> Unit,
+    location: String,
+    buttonText: String = stringResource(id = R.string.apply_job),
+    buttonColor: Color = NavNavyHeader
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -58,7 +65,7 @@ fun DetailScreen(job: Job, onBackClick: () -> Unit) {
                     tint = Color.White
                 )
                 Text(
-                    text = stringResource(id = R.string.location_placeholder),
+                    text = location,
                     color = Color.White,
                     fontSize = 12.sp,
                     modifier = Modifier.padding(start = 4.dp)
@@ -317,13 +324,13 @@ fun DetailScreen(job: Job, onBackClick: () -> Unit) {
                         }
                         Spacer(modifier = Modifier.width(16.dp))
                         Button(
-                            onClick = { },
+                            onClick = onApplyClick,
                             modifier = Modifier.weight(1f).height(56.dp),
                             shape = RoundedCornerShape(8.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = NavNavyHeader)
+                            colors = ButtonDefaults.buttonColors(containerColor = buttonColor)
                         ) {
                             Text(
-                                text = stringResource(id = R.string.apply_job),
+                                text = buttonText,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 16.sp,
                                 color = Color.White

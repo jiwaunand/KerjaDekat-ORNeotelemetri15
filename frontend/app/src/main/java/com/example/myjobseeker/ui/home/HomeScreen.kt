@@ -30,7 +30,12 @@ import com.example.myjobseeker.ui.components.JobCard
 import com.example.myjobseeker.ui.theme.*
 
 @Composable
-fun HomeScreen(onJobClick: (Job) -> Unit, onProfileClick: () -> Unit) {
+fun HomeScreen(
+    onJobClick: (Job) -> Unit,
+    onProfileClick: () -> Unit,
+    onApplyClick: (Job) -> Unit,
+    location: String
+) {
     var searchText by remember { mutableStateOf("") }
 
     val voiceRecognitionLauncher = rememberLauncherForActivityResult(
@@ -45,7 +50,7 @@ fun HomeScreen(onJobClick: (Job) -> Unit, onProfileClick: () -> Unit) {
     }
 
     Scaffold(
-        topBar = { HomeHeader(onProfileClick) }
+        topBar = { HomeHeader(onProfileClick, location) }
     ) { padding ->
         LazyColumn(
             modifier = Modifier
@@ -91,7 +96,11 @@ fun HomeScreen(onJobClick: (Job) -> Unit, onProfileClick: () -> Unit) {
             }
 
             items(getDummyJobs()) { job ->
-                JobCard(job = job, onClick = { onJobClick(job) })
+                JobCard(
+                    job = job,
+                    onClick = { onJobClick(job) },
+                    onApplyClick = { onApplyClick(job) }
+                )
             }
             
             item {
@@ -102,7 +111,7 @@ fun HomeScreen(onJobClick: (Job) -> Unit, onProfileClick: () -> Unit) {
 }
 
 @Composable
-fun HomeHeader(onProfileClick: () -> Unit) {
+fun HomeHeader(onProfileClick: () -> Unit, location: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -138,7 +147,7 @@ fun HomeHeader(onProfileClick: () -> Unit) {
                 tint = Color.White
             )
             Text(
-                text = stringResource(id = R.string.location_placeholder),
+                text = location,
                 color = Color.White,
                 fontSize = 12.sp,
                 modifier = Modifier.padding(start = 4.dp)

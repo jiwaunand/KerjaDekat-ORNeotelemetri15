@@ -1,5 +1,6 @@
 package com.example.myjobseeker
 
+import com.example.myjobseeker.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,12 +22,27 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myjobseeker.model.Application
 import com.example.myjobseeker.model.Job
+import com.example.myjobseeker.ui.applications.ApplicationsScreen
 import com.example.myjobseeker.ui.detail.DetailScreen
 import com.example.myjobseeker.ui.home.HomeScreen
 import com.example.myjobseeker.ui.profile.ProfileScreen
+import com.example.myjobseeker.ui.theme.LogoutRed
 import com.example.myjobseeker.ui.theme.MyJobSeekerTheme
 import com.example.myjobseeker.ui.theme.NavNavyHeader
+import com.example.myjobseeker.viewmodel.JobViewModel
+
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat
+import com.example.myjobseeker.viewmodel.LocationViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,12 +50,40 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyJobSeekerTheme {
+                val context = LocalContext.current
                 val navController = rememberNavController()
+                val jobViewModel: JobViewModel = viewModel()
+                val locationViewModel: LocationViewModel = viewModel()
+                
+                val locationPermissionLauncher = rememberLauncherForActivityResult(
+                    ActivityResultContracts.RequestMultiplePermissions()
+                ) { permissions ->
+                    if (permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+                        permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true) {
+                        locationViewModel.fetchLocation(context)
+                    }
+                }
+
+                LaunchedEffect(Unit) {
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        locationViewModel.fetchLocation(context)
+                    } else {
+                        locationPermissionLauncher.launch(
+                            arrayOf(
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION
+                            )
+                        )
+                    }
+                }
+
+                val currentAddress by locationViewModel.currentLocation
                 var selectedJob by remember { mutableStateOf<Job?>(null) }
+                var selectedApplication by remember { mutableStateOf<Application?>(null) }
                 
                 Scaffold(
                     bottomBar = { 
-                        if (selectedJob == null) {
+                        if (selectedJob == null && selectedApplication == null) {
                             BottomNavigationBar(navController) 
                         }
                     }
@@ -63,16 +107,40 @@ class MainActivity : ComponentActivity() {
                                         launchSingleTop = true
                                         restoreState = true
                                     }
-                                }
+                                },
+                                onApplyClick = { job ->
+                                    jobViewModel.applyForJob(job)
+                                    navController.navigate("applications") {
+                                        popUpTo(navController.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
+                                    }
+                                },
+                                location = currentAddress
                             )
                         }
                         composable("search") { Text("Search Screen") }
-                        composable("applications") { Text("Applications Screen") }
+                        composable("applications") { 
+                            ApplicationsScreen(
+                                viewModel = jobViewModel,
+                                onProfileClick = {
+                                    navController.navigate("profile")
+                                },
+                                onDetailClick = { application ->
+                                    selectedApplication = application
+                                    navController.navigate("application_detail")
+                                },
+                                location = currentAddress
+                            )
+                        }
                         composable("profile") { 
                             ProfileScreen(
                                 onBackClick = {
                                     navController.popBackStack()
-                                }
+                                },
+                                location = currentAddress
                             )
                         }
                         composable("detail") {
@@ -82,7 +150,38 @@ class MainActivity : ComponentActivity() {
                                     onBackClick = {
                                         selectedJob = null
                                         navController.popBackStack()
-                                    }
+                                    },
+                                    onApplyClick = {
+                                        jobViewModel.applyForJob(job)
+                                        navController.navigate("applications") {
+                                            popUpTo(navController.graph.findStartDestination().id) {
+                                                saveState = true
+                                            }
+                                            launchSingleTop = true
+                                            restoreState = true
+                                        }
+                                        selectedJob = null
+                                    },
+                                    location = currentAddress
+                                )
+                            }
+                        }
+                        composable("application_detail") {
+                            selectedApplication?.let { app ->
+                                DetailScreen(
+                                    job = app.job,
+                                    onBackClick = {
+                                        selectedApplication = null
+                                        navController.popBackStack()
+                                    },
+                                    onApplyClick = {
+                                        jobViewModel.cancelApplication(app.id)
+                                        navController.popBackStack()
+                                        selectedApplication = null
+                                    },
+                                    buttonText = stringResource(id = R.string.cancel_application),
+                                    buttonColor = LogoutRed,
+                                    location = currentAddress
                                 )
                             }
                         }
