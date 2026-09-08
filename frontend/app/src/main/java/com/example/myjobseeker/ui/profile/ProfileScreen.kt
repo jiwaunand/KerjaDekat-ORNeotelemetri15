@@ -24,57 +24,61 @@ fun ProfileScreen(onBackClick: () -> Unit, location: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundLightBlue)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         // Header
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(NavNavyHeader)
-                .statusBarsPadding()
-                .padding(horizontal = 16.dp)
-                .height(60.dp),
-            verticalAlignment = Alignment.CenterVertically
+        Surface(
+            color = MaterialTheme.colorScheme.surface,
+            shadowElevation = 2.dp
         ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_back),
-                contentDescription = "Back",
+            Row(
                 modifier = Modifier
-                    .size(24.dp)
-                    .clickable(onClick = onBackClick),
-                tint = Color.White
-            )
-
-            Spacer(modifier = Modifier.width(12.dp))
-
-            Box(
-                modifier = Modifier
-                    .size(32.dp)
-                    .background(Color(0xFF0B244C), CircleShape),
-                contentAlignment = Alignment.Center
+                    .fillMaxWidth()
+                    .statusBarsPadding()
+                    .padding(horizontal = 16.dp)
+                    .height(60.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_person),
+                    painter = painterResource(id = R.drawable.ic_back),
+                    contentDescription = "Back",
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickable(onClick = onBackClick),
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                Box(
+                    modifier = Modifier
+                        .size(32.dp)
+                        .background(MaterialTheme.colorScheme.surfaceVariant, CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_person),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
+                
+                Text(
+                    text = stringResource(id = R.string.nav_profile),
+                    modifier = Modifier.padding(start = 12.dp).weight(1f),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_notifications),
                     contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.size(20.dp)
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(32.dp).padding(4.dp)
                 )
             }
-            
-            Text(
-                text = stringResource(id = R.string.nav_profile),
-                modifier = Modifier.padding(start = 12.dp).weight(1f),
-                color = Color.White,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
-            
-            Icon(
-                painter = painterResource(id = R.drawable.ic_notifications),
-                contentDescription = null,
-                tint = Color.White,
-                modifier = Modifier.size(32.dp).padding(4.dp)
-            )
         }
 
         // Main Content Card
@@ -83,7 +87,7 @@ fun ProfileScreen(onBackClick: () -> Unit, location: String) {
                 .fillMaxSize()
                 .padding(16.dp),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Column(
@@ -102,8 +106,8 @@ fun ProfileScreen(onBackClick: () -> Unit, location: String) {
                     Surface(
                         modifier = Modifier.size(100.dp),
                         shape = CircleShape,
-                        color = Color(0xFFD9D9D9),
-                        border = BorderStroke(2.dp, TextDark)
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface)
                     ) {
                         // Image placeholder
                     }
@@ -129,12 +133,12 @@ fun ProfileScreen(onBackClick: () -> Unit, location: String) {
                     modifier = Modifier.padding(top = 8.dp),
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
-                    color = TextDark
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 
                 Text(
                     text = "@loremipsum",
-                    color = TextGray,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 14.sp
                 )
                 
@@ -151,7 +155,7 @@ fun ProfileScreen(onBackClick: () -> Unit, location: String) {
                     Text(
                         text = location,
                         modifier = Modifier.padding(start = 4.dp),
-                        color = TextGray,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp
                     )
@@ -201,7 +205,7 @@ fun ProfileScreen(onBackClick: () -> Unit, location: String) {
                         .padding(horizontal = 32.dp, vertical = 24.dp)
                         .height(48.dp),
                     shape = RoundedCornerShape(8.dp),
-                    border = BorderStroke(1.dp, CardStatBg),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.surfaceVariant),
                     colors = ButtonDefaults.outlinedButtonColors(contentColor = LogoutRed)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -228,15 +232,15 @@ fun ProfileScreen(onBackClick: () -> Unit, location: String) {
 fun StatBlock(label: String, value: String, modifier: Modifier) {
     Surface(
         modifier = modifier.padding(4.dp),
-        color = CardStatBg,
+        color = MaterialTheme.colorScheme.surfaceVariant,
         shape = RoundedCornerShape(4.dp)
     ) {
         Column(
             modifier = Modifier.padding(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = value, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = TextDark)
-            Text(text = label, fontSize = 12.sp, color = TextDark)
+            Text(text = value, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = MaterialTheme.colorScheme.onSurface)
+            Text(text = label, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurface)
         }
     }
 }
@@ -249,7 +253,7 @@ fun ProfileMenuItem(icon: Int, title: String, isLast: Boolean = false) {
             .padding(bottom = if (isLast) 24.dp else 8.dp)
             .clickable { },
         shape = RoundedCornerShape(8.dp),
-        color = Color(0xFFF8F9FA) // bg_menu_item color or similar light gray
+        color = MaterialTheme.colorScheme.surfaceVariant
     ) {
         Row(
             modifier = Modifier.padding(12.dp),
@@ -259,13 +263,13 @@ fun ProfileMenuItem(icon: Int, title: String, isLast: Boolean = false) {
                 painter = painterResource(id = icon),
                 contentDescription = null,
                 modifier = Modifier.size(20.dp),
-                tint = TextDark
+                tint = MaterialTheme.colorScheme.onSurface
             )
             Text(
                 text = title,
                 modifier = Modifier.padding(start = 12.dp),
                 fontWeight = FontWeight.Bold,
-                color = TextDark,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 15.sp
             )
         }

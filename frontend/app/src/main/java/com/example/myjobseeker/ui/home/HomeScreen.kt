@@ -29,15 +29,20 @@ import com.example.myjobseeker.model.Job
 import com.example.myjobseeker.ui.components.JobCard
 import com.example.myjobseeker.ui.theme.*
 
+import com.example.myjobseeker.viewmodel.JobViewModel
+
 @Composable
 fun HomeScreen(
+    jobViewModel: JobViewModel,
     onJobClick: (Job) -> Unit,
     onProfileClick: () -> Unit,
     onApplyClick: (Job) -> Unit,
     onSearchClick: (String) -> Unit,
+    onMenuClick: () -> Unit,
     location: String
 ) {
     var searchText by remember { mutableStateOf("") }
+    val bookmarkedJobs = jobViewModel.bookmarkedJobs
 
     val voiceRecognitionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
@@ -53,9 +58,9 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundLightBlue)
+            .background(MaterialTheme.colorScheme.background)
     ) {
-        HomeHeader(onProfileClick, location)
+        HomeHeader(onProfileClick, onMenuClick, location)
         
         LazyColumn(
             modifier = Modifier.fillMaxSize()
@@ -87,7 +92,7 @@ fun HomeScreen(
                         text = stringResource(id = R.string.recommendation_title),
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp,
-                        color = TextDark
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                     Text(
                         text = stringResource(id = R.string.see_all),
@@ -102,7 +107,9 @@ fun HomeScreen(
                 JobCard(
                     job = job,
                     onClick = { onJobClick(job) },
-                    onApplyClick = { onApplyClick(job) }
+                    onApplyClick = { onApplyClick(job) },
+                    isBookmarked = jobViewModel.isBookmarked(job.id),
+                    onBookmarkClick = { jobViewModel.toggleBookmark(job) }
                 )
             }
             
@@ -114,82 +121,83 @@ fun HomeScreen(
 }
 
 @Composable
-fun HomeHeader(onProfileClick: () -> Unit, location: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(NavNavyHeader)
-            .statusBarsPadding()
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
+fun HomeHeader(onProfileClick: () -> Unit, onMenuClick: () -> Unit, location: String) {
+    Surface(
+        color = MaterialTheme.colorScheme.surface,
+        shadowElevation = 2.dp
     ) {
-        // tv_logo
-        Surface(
-            color = LogoBlue,
-            shape = RoundedCornerShape(4.dp)
-        ) {
-            /*Icon(
-                painter = painterResource(id = R.drawable.ic_settings),
-                contentDescription = null,
-                modifier = Modifier.size(16.dp),
-                tint = Color.White
-            )*/
-            Text(
-                text = "login",
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-                fontSize = 14.sp
-            )
-        }
-
-        Spacer(modifier = Modifier.width(12.dp))
-
-        // Location Info
         Row(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .statusBarsPadding()
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_location),
-                contentDescription = null,
-                modifier = Modifier.size(16.dp),
-                tint = Color.White
-            )
-            Text(
-                text = location,
-                color = Color.White,
-                fontSize = 12.sp,
-                modifier = Modifier.padding(start = 4.dp)
-            )
-        }
+            // tv_logo -> Now a clickable settings icon for drawer
+            Surface(
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                shape = RoundedCornerShape(4.dp),
+                modifier = Modifier.clickable(onClick = onMenuClick)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_settings),
+                    contentDescription = "Menu",
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                        .size(20.dp),
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
 
-        // iv_notification
-        Icon(
-            painter = painterResource(id = R.drawable.ic_notifications),
-            contentDescription = "Notifications",
-            tint = Color.White,
-            modifier = Modifier
-                .padding(end = 12.dp)
-                .size(24.dp)
-                .clickable { }
-        )
+            Spacer(modifier = Modifier.width(12.dp))
 
-        // iv_profile
-        Box(
-            modifier = Modifier
-                .size(32.dp)
-                .clip(CircleShape)
-                .background(Color(0xFF0B244C)) // bg_circle_dark color or similar
-                .clickable(onClick = onProfileClick),
-            contentAlignment = Alignment.Center
-        ) {
+            // Location Info
+            Row(
+                modifier = Modifier.weight(1f),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_location),
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp),
+                    tint = LogoBlue
+                )
+                Text(
+                    text = location,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(start = 4.dp),
+                    fontWeight = FontWeight.Medium
+                )
+            }
+
+            // iv_notification
             Icon(
-                painter = painterResource(id = R.drawable.ic_person),
-                contentDescription = "Profile",
-                tint = Color.White,
-                modifier = Modifier.size(20.dp)
+                painter = painterResource(id = R.drawable.ic_notifications),
+                contentDescription = "Notifications",
+                tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier
+                    .padding(end = 12.dp)
+                    .size(24.dp)
+                    .clickable { }
             )
+
+            // iv_profile
+            Box(
+                modifier = Modifier
+                    .size(32.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
+                    .clickable(onClick = onProfileClick),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_person),
+                    contentDescription = "Profile",
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
         }
     }
 }
@@ -209,7 +217,7 @@ fun SearchBar(
             .padding(16.dp)
             .then(if (onClick != null) Modifier.clickable(onClick = { onClick(text) }) else Modifier),
         shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(
@@ -223,7 +231,7 @@ fun SearchBar(
             Icon(
                 painter = painterResource(id = R.drawable.ic_search),
                 contentDescription = null,
-                tint = TextGray,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(20.dp)
             )
             
@@ -238,14 +246,14 @@ fun SearchBar(
                     Text(
                         text = stringResource(id = R.string.search_hint),
                         fontSize = 14.sp,
-                        color = TextGray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
                 BasicTextField(
                     value = text,
                     onValueChange = onTextChange,
                     modifier = Modifier.fillMaxWidth(),
-                    textStyle = TextStyle(fontSize = 14.sp, color = TextDark),
+                    textStyle = TextStyle(fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface),
                     singleLine = true
                 )
             }
@@ -254,7 +262,7 @@ fun SearchBar(
             Icon(
                 painter = painterResource(id = R.drawable.ic_mic),
                 contentDescription = "Voice Search",
-                tint = TextDark,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier
                     .padding(end = 12.dp)
                     .size(20.dp)
@@ -266,7 +274,7 @@ fun SearchBar(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_filter),
                     contentDescription = "Filter",
-                    tint = TextDark,
+                    tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
                         .size(20.dp)
                         .clickable { showMenu = true }

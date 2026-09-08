@@ -25,78 +25,21 @@ fun DetailScreen(
     job: Job,
     onBackClick: () -> Unit,
     onApplyClick: () -> Unit,
+    onMenuClick: () -> Unit,
+    onProfileClick: () -> Unit,
     location: String,
+    isBookmarked: Boolean = false,
+    onBookmarkClick: () -> Unit = {},
     buttonText: String = stringResource(id = R.string.apply_job),
     buttonColor: Color = NavNavyHeader
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundLightBlue)
+            .background(MaterialTheme.colorScheme.background)
     ) {
-        // Top Dark Bar (Header)
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(NavNavyHeader)
-                .statusBarsPadding()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Surface(
-                color = LogoBlue,
-                shape = RoundedCornerShape(4.dp)
-            ) {
-                Text(
-                    text = stringResource(id = R.string.logo),
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 14.sp
-                )
-            }
-            
-            Spacer(modifier = Modifier.width(12.dp))
-            
-            Row(modifier = Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_location),
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp),
-                    tint = Color.White
-                )
-                Text(
-                    text = location,
-                    color = Color.White,
-                    fontSize = 12.sp,
-                    modifier = Modifier.padding(start = 4.dp)
-                )
-            }
-
-            Icon(
-                painter = painterResource(id = R.drawable.ic_notifications),
-                contentDescription = "Notifications",
-                tint = Color.White,
-                modifier = Modifier
-                    .padding(end = 12.dp)
-                    .size(24.dp)
-                    .clickable { }
-            )
-            
-            Box(
-                modifier = Modifier
-                    .size(32.dp)
-                    .background(Color(0xFF0B244C), CircleShape),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_person),
-                    contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.size(20.dp)
-                )
-            }
-        }
+        // App Bar (Following Home Screen Style)
+        DetailHeader(onProfileClick, onMenuClick, onBackClick, location)
 
         // Main Content Card
         Card(
@@ -104,7 +47,7 @@ fun DetailScreen(
                 .fillMaxSize()
                 .padding(12.dp),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
@@ -127,20 +70,20 @@ fun DetailScreen(
                             modifier = Modifier
                                 .size(24.dp)
                                 .clickable(onClick = onBackClick),
-                            tint = TextDark
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                         Text(
                             text = stringResource(id = R.string.job_detail_title),
                             modifier = Modifier.padding(start = 16.dp).weight(1f),
                             fontWeight = FontWeight.Bold,
                             fontSize = 18.sp,
-                            color = TextDark
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                         Icon(
                             painter = painterResource(id = R.drawable.ic_share),
                             contentDescription = "Share",
                             modifier = Modifier.size(24.dp),
-                            tint = TextDark
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
 
@@ -205,12 +148,14 @@ fun DetailScreen(
                                 }
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Surface(
-                                    modifier = Modifier.size(32.dp),
+                                    modifier = Modifier.size(32.dp).clickable(onClick = onBookmarkClick),
                                     color = Color.White.copy(alpha = 0.9f),
                                     shape = RoundedCornerShape(8.dp)
                                 ) {
                                     Icon(
-                                        painter = painterResource(id = R.drawable.ic_bookmark_outline),
+                                        painter = painterResource(
+                                            id = if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outline
+                                        ),
                                         contentDescription = null,
                                         modifier = Modifier.padding(8.dp),
                                         tint = TextDark
@@ -224,11 +169,11 @@ fun DetailScreen(
                             Row(verticalAlignment = Alignment.Top) {
                                 Box(modifier = Modifier.size(48.dp).background(Color(0xFF5D6D7E)))
                                 Column(modifier = Modifier.padding(start = 12.dp).weight(1f)) {
-                                    Text(text = job.title, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = TextDark)
-                                    Text(text = job.companyName, color = TextGray, fontSize = 14.sp)
+                                    Text(text = job.title, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = MaterialTheme.colorScheme.onSurface)
+                                    Text(text = job.companyName, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
                                 }
                                 Surface(
-                                    color = Color(0xFFEBF2FF),
+                                    color = MaterialTheme.colorScheme.surfaceVariant,
                                     shape = RoundedCornerShape(8.dp)
                                 ) {
                                     Text(
@@ -249,8 +194,8 @@ fun DetailScreen(
                                     value = stringResource(id = R.string.distance_near_format, job.distance),
                                     icon = R.drawable.ic_location,
                                     iconColor = BlueNormal,
-                                    bgColor = AccentBlueLight,
-                                    iconBgColor = Color(0xFFEBF2FF),
+                                    bgColor = MaterialTheme.colorScheme.surfaceVariant,
+                                    iconBgColor = MaterialTheme.colorScheme.background,
                                     modifier = Modifier.weight(1f)
                                 )
                                 Spacer(modifier = Modifier.width(12.dp))
@@ -259,8 +204,8 @@ fun DetailScreen(
                                     value = job.salary,
                                     icon = R.drawable.ic_cash,
                                     iconColor = SuccessGreen,
-                                    bgColor = AccentBlueLight,
-                                    iconBgColor = Color(0xFFE8F6EF),
+                                    bgColor = MaterialTheme.colorScheme.surfaceVariant,
+                                    iconBgColor = MaterialTheme.colorScheme.background,
                                     modifier = Modifier.weight(1f)
                                 )
                             }
@@ -271,7 +216,7 @@ fun DetailScreen(
                             SectionContainer(title = stringResource(id = R.string.job_description)) {
                                 Text(
                                     text = stringResource(id = R.string.job_description_placeholder),
-                                    color = TextGray,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     fontSize = 13.sp
                                 )
                             }
@@ -307,7 +252,7 @@ fun DetailScreen(
                 // Bottom Action Bar
                 Surface(
                     modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth(),
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.surface,
                     shadowElevation = 8.dp
                 ) {
                     Row(
@@ -316,14 +261,14 @@ fun DetailScreen(
                     ) {
                         Surface(
                             modifier = Modifier.size(48.dp),
-                            color = AccentBlueLight,
+                            color = MaterialTheme.colorScheme.surfaceVariant,
                             shape = RoundedCornerShape(8.dp)
                         ) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_chat),
                                 contentDescription = null,
                                 modifier = Modifier.padding(12.dp),
-                                tint = TextDark
+                                tint = MaterialTheme.colorScheme.onSurface
                             )
                         }
                         Spacer(modifier = Modifier.width(16.dp))
@@ -342,6 +287,88 @@ fun DetailScreen(
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun DetailHeader(onProfileClick: () -> Unit, onMenuClick: () -> Unit, onBackClick: () -> Unit, location: String) {
+    Surface(
+        color = MaterialTheme.colorScheme.surface,
+        shadowElevation = 2.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .statusBarsPadding()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Settings Icon (Drawer) - Now on the left in the box
+            Surface(
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                shape = RoundedCornerShape(4.dp),
+                modifier = Modifier.clickable(onClick = onMenuClick)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_settings),
+                    contentDescription = "Menu",
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                        .size(20.dp),
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            Spacer(modifier = Modifier.width(12.dp))
+
+            // Location Info
+            Row(
+                modifier = Modifier.weight(1f),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_location),
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp),
+                    tint = LogoBlue
+                )
+                Text(
+                    text = location,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(start = 4.dp),
+                    fontWeight = FontWeight.Medium
+                )
+            }
+
+            // Notification Icon (Replacing the Arrow)
+            Icon(
+                painter = painterResource(id = R.drawable.ic_notifications),
+                contentDescription = "Notifications",
+                tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier
+                    .padding(end = 12.dp)
+                    .size(24.dp)
+                    .clickable { /* Notification Action */ }
+            )
+
+            // Profile Icon
+            Box(
+                modifier = Modifier
+                    .size(32.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
+                    .clickable(onClick = onProfileClick),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_person),
+                    contentDescription = "Profile",
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(20.dp)
+                )
             }
         }
     }
@@ -368,8 +395,8 @@ fun InfoBlock(label: String, value: String, icon: Int, iconColor: Color, bgColor
                 )
             }
             Column(modifier = Modifier.padding(start = 10.dp)) {
-                Text(text = label, fontSize = 10.sp, color = TextGray)
-                Text(text = value, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = TextDark)
+                Text(text = label, fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(text = value, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
             }
         }
     }
@@ -378,12 +405,12 @@ fun InfoBlock(label: String, value: String, icon: Int, iconColor: Color, bgColor
 @Composable
 fun SectionContainer(title: String, content: @Composable () -> Unit) {
     Surface(
-        color = AccentBlueLight,
+        color = MaterialTheme.colorScheme.surfaceVariant,
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = title, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = TextDark)
+            Text(text = title, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = MaterialTheme.colorScheme.onSurface)
             Spacer(modifier = Modifier.height(8.dp))
             content()
         }
@@ -394,7 +421,7 @@ fun SectionContainer(title: String, content: @Composable () -> Unit) {
 fun SkillTag(skill: String) {
     Surface(
         modifier = Modifier.padding(end = 8.dp, bottom = 8.dp),
-        color = Color.White,
+        color = MaterialTheme.colorScheme.surface,
         shape = RoundedCornerShape(8.dp)
     ) {
         Text(

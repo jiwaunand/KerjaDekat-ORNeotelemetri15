@@ -19,13 +19,19 @@ import com.example.myjobseeker.model.Job
 import com.example.myjobseeker.ui.theme.*
 
 @Composable
-fun JobCard(job: Job, onClick: () -> Unit, onApplyClick: () -> Unit) {
+fun JobCard(
+    job: Job,
+    onClick: () -> Unit,
+    onApplyClick: () -> Unit,
+    isBookmarked: Boolean = false,
+    onBookmarkClick: () -> Unit = {}
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 6.dp),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
@@ -54,20 +60,24 @@ fun JobCard(job: Job, onClick: () -> Unit, onApplyClick: () -> Unit) {
                         text = job.title,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = TextDark
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
                         text = "${job.companyName} • ${job.location}",
                         fontSize = 12.sp,
-                        color = TextGray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 
                 // btn_bookmark
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_bookmark),
+                    painter = painterResource(
+                        id = if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outline
+                    ),
                     contentDescription = null,
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickable(onClick = onBookmarkClick),
                     tint = BlueNormal
                 )
             }
@@ -100,14 +110,14 @@ fun JobCard(job: Job, onClick: () -> Unit, onApplyClick: () -> Unit) {
                     modifier = Modifier
                         .width(56.dp)
                         .height(25.dp),
-                    color = AccentBlueLight,
+                    color = MaterialTheme.colorScheme.surfaceVariant,
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         Text(
                             text = job.distance,
                             fontSize = 10.sp,
-                            color = TextGray
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
@@ -121,7 +131,7 @@ fun JobCard(job: Job, onClick: () -> Unit, onApplyClick: () -> Unit) {
                 modifier = Modifier.align(Alignment.End),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
-                color = TextDark
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             // details_layout and btn_apply
@@ -137,14 +147,14 @@ fun JobCard(job: Job, onClick: () -> Unit, onApplyClick: () -> Unit) {
                 ) {
                     Surface(
                         modifier = Modifier.height(25.dp),
-                        color = AccentBlueLight,
+                        color = MaterialTheme.colorScheme.surfaceVariant,
                         shape = RoundedCornerShape(8.dp)
                     ) {
                         Text(
                             text = job.timeRange,
                             modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                             fontSize = 10.sp,
-                            color = TextGray
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
 
@@ -152,14 +162,14 @@ fun JobCard(job: Job, onClick: () -> Unit, onApplyClick: () -> Unit) {
 
                     Surface(
                         modifier = Modifier.height(25.dp),
-                        color = AccentBlueLight,
+                        color = MaterialTheme.colorScheme.surfaceVariant,
                         shape = RoundedCornerShape(8.dp)
                     ) {
                         Text(
                             text = job.skill,
                             modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                             fontSize = 10.sp,
-                            color = TextGray
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }

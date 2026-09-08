@@ -16,13 +16,15 @@ private val DarkColorScheme = darkColorScheme(
     primary = BlueNormal,
     secondary = BlueLighter,
     tertiary = LogoBlue,
-    background = Color(0xFF1C1B1F),
-    surface = Color(0xFF1C1B1F),
+    background = BackgroundDark,
+    surface = SurfaceDark,
     onPrimary = Color.White,
     onSecondary = Color.White,
     onTertiary = Color.White,
-    onBackground = Color(0xFFE6E1E5),
-    onSurface = Color(0xFFE6E1E5),
+    onBackground = TextDarkDark,
+    onSurface = TextDarkDark,
+    onSurfaceVariant = TextGrayDark,
+    surfaceVariant = CardStatBgDark
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -36,6 +38,8 @@ private val LightColorScheme = lightColorScheme(
     onTertiary = Color.White,
     onBackground = TextDark,
     onSurface = TextDark,
+    onSurfaceVariant = TextGray,
+    surfaceVariant = CardStatBg
 )
 
 @Composable
@@ -51,8 +55,8 @@ fun MyJobSeekerTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = NavNavyHeader.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
+            window.statusBarColor = Color.Transparent.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }
 

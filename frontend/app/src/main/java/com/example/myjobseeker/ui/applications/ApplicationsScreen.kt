@@ -31,6 +31,7 @@ fun ApplicationsScreen(
     viewModel: JobViewModel,
     onProfileClick: () -> Unit,
     onDetailClick: (Application) -> Unit,
+    onMenuClick: () -> Unit,
     location: String
 ) {
     var selectedTab by remember { mutableIntStateOf(0) }
@@ -52,9 +53,9 @@ fun ApplicationsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundLightBlue)
+            .background(MaterialTheme.colorScheme.background)
     ) {
-        ApplicationsHeader(onProfileClick, location)
+        ApplicationsHeader(onProfileClick, onMenuClick, location)
         
         // Tab Selector
         Surface(
@@ -63,7 +64,7 @@ fun ApplicationsScreen(
                 .fillMaxWidth()
                 .height(48.dp),
             shape = RoundedCornerShape(12.dp),
-            color = Color(0xFFDDE6F0) // Light blue-gray for tab background
+            color = MaterialTheme.colorScheme.surfaceVariant
         ) {
             Row(modifier = Modifier.fillMaxSize()) {
                 tabs.forEachIndexed { index, title ->
@@ -74,14 +75,14 @@ fun ApplicationsScreen(
                             .fillMaxHeight()
                             .padding(4.dp)
                             .clip(RoundedCornerShape(8.dp))
-                            .background(if (isSelected) Color.White else Color.Transparent)
+                            .background(if (isSelected) MaterialTheme.colorScheme.surface else Color.Transparent)
                             .clickable { selectedTab = index },
                         contentAlignment = Alignment.Center
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
                                 text = title,
-                                color = if (isSelected) TextDark else TextGray,
+                                color = if (isSelected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
                                 fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
                                 fontSize = 14.sp
                             )
@@ -123,72 +124,79 @@ fun ApplicationsScreen(
 }
 
 @Composable
-fun ApplicationsHeader(onProfileClick: () -> Unit, location: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(NavNavyHeader)
-            .statusBarsPadding()
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
+fun ApplicationsHeader(onProfileClick: () -> Unit, onMenuClick: () -> Unit, location: String) {
+    Surface(
+        color = MaterialTheme.colorScheme.surface,
+        shadowElevation = 2.dp
     ) {
-        Surface(
-            color = LogoBlue,
-            shape = RoundedCornerShape(4.dp)
-        ) {
-            Text(
-                text = "Logo",
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-                fontSize = 14.sp
-            )
-        }
-
-        Spacer(modifier = Modifier.width(12.dp))
-
         Row(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .statusBarsPadding()
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_location),
-                contentDescription = null,
-                modifier = Modifier.size(16.dp),
-                tint = Color.White
-            )
-            Text(
-                text = location,
-                color = Color.White,
-                fontSize = 12.sp,
-                modifier = Modifier.padding(start = 4.dp)
-            )
-        }
+            Surface(
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                shape = RoundedCornerShape(4.dp),
+                modifier = Modifier.clickable(onClick = onMenuClick)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_settings),
+                    contentDescription = "Menu",
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                        .size(20.dp),
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
 
-        Icon(
-            painter = painterResource(id = R.drawable.ic_notifications),
-            contentDescription = "Notifications",
-            tint = Color.White,
-            modifier = Modifier
-                .padding(end = 12.dp)
-                .size(24.dp)
-                .clickable { }
-        )
+            Spacer(modifier = Modifier.width(12.dp))
 
-        Box(
-            modifier = Modifier
-                .size(32.dp)
-                .clip(CircleShape)
-                .background(Color(0xFF0B244C))
-                .clickable(onClick = onProfileClick),
-            contentAlignment = Alignment.Center
-        ) {
+            Row(
+                modifier = Modifier.weight(1f),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_location),
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp),
+                    tint = LogoBlue
+                )
+                Text(
+                    text = location,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(start = 4.dp),
+                    fontWeight = FontWeight.Medium
+                )
+            }
+
             Icon(
-                painter = painterResource(id = R.drawable.ic_person),
-                contentDescription = "Profile",
-                tint = Color.White,
-                modifier = Modifier.size(20.dp)
+                painter = painterResource(id = R.drawable.ic_notifications),
+                contentDescription = "Notifications",
+                tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier
+                    .padding(end = 12.dp)
+                    .size(24.dp)
+                    .clickable { }
             )
+
+            Box(
+                modifier = Modifier
+                    .size(32.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
+                    .clickable(onClick = onProfileClick),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_person),
+                    contentDescription = "Profile",
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
         }
     }
 }
@@ -211,7 +219,7 @@ fun ApplicationCard(application: Application, onDetailClick: () -> Unit) {
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
@@ -238,12 +246,12 @@ fun ApplicationCard(application: Application, onDetailClick: () -> Unit) {
                         text = job.title,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = TextDark
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
                         text = "${job.companyName} • ${job.distance}",
                         fontSize = 12.sp,
-                        color = TextGray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 
@@ -285,28 +293,28 @@ fun ApplicationCard(application: Application, onDetailClick: () -> Unit) {
                 // Salary Info
                 Surface(
                     modifier = Modifier.weight(1f).padding(end = 8.dp),
-                    color = Color(0xFFF1F1F1),
+                    color = MaterialTheme.colorScheme.surfaceVariant,
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Column(modifier = Modifier.padding(8.dp)) {
-                        Text(text = stringResource(id = R.string.salary_offer), fontSize = 10.sp, color = TextGray)
-                        Text(text = job.salary, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = TextDark)
+                        Text(text = stringResource(id = R.string.salary_offer), fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(text = job.salary, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
                     }
                 }
 
                 // Applied Time
                 Surface(
                     modifier = Modifier.weight(1f).padding(start = 8.dp),
-                    color = Color(0xFFF1F1F1),
+                    color = MaterialTheme.colorScheme.surfaceVariant,
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Column(modifier = Modifier.padding(8.dp)) {
-                        Text(text = stringResource(id = R.string.applied_time), fontSize = 10.sp, color = TextGray)
+                        Text(text = stringResource(id = R.string.applied_time), fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         Text(
                             text = timeDisplay,
                             fontSize = 12.sp, 
                             fontWeight = FontWeight.Bold, 
-                            color = TextDark
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
@@ -324,13 +332,13 @@ fun ApplicationCard(application: Application, onDetailClick: () -> Unit) {
                         painter = painterResource(id = R.drawable.ic_work_history),
                         contentDescription = null,
                         modifier = Modifier.size(14.dp),
-                        tint = TextGray
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = stringResource(id = R.string.response_time_info),
                         fontSize = 10.sp,
-                        color = TextGray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
                 

@@ -30,6 +30,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myjobseeker.model.Application
 import com.example.myjobseeker.model.Job
 import com.example.myjobseeker.ui.applications.ApplicationsScreen
+import com.example.myjobseeker.ui.bookmark.BookmarkScreen
+import com.example.myjobseeker.ui.components.NavDrawerContent
 import com.example.myjobseeker.ui.detail.DetailScreen
 import com.example.myjobseeker.ui.home.HomeScreen
 import com.example.myjobseeker.ui.profile.ProfileScreen
@@ -38,8 +40,11 @@ import com.example.myjobseeker.ui.theme.BackgroundLightBlue
 import com.example.myjobseeker.ui.theme.LogoutRed
 import com.example.myjobseeker.ui.theme.MyJobSeekerTheme
 import com.example.myjobseeker.ui.theme.NavNavyHeader
+import com.example.myjobseeker.ui.theme.TextDark
+import com.example.myjobseeker.ui.theme.TextGray
 import com.example.myjobseeker.viewmodel.JobViewModel
 import com.example.myjobseeker.viewmodel.SearchViewModel
+import kotlinx.coroutines.launch
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -49,13 +54,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import com.example.myjobseeker.viewmodel.LocationViewModel
+import com.example.myjobseeker.viewmodel.ThemeViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyJobSeekerTheme {
+            val themeViewModel: ThemeViewModel = viewModel()
+            val isDarkTheme by themeViewModel.isDarkTheme
+
+            MyJobSeekerTheme(darkTheme = isDarkTheme) {
                 val context = LocalContext.current
                 val navController = rememberNavController()
                 val jobViewModel: JobViewModel = viewModel()
@@ -87,90 +96,154 @@ class MainActivity : ComponentActivity() {
                 val currentAddress by locationViewModel.currentLocation
                 var selectedJob by remember { mutableStateOf<Job?>(null) }
                 var selectedApplication by remember { mutableStateOf<Application?>(null) }
-                
-                Scaffold(
-                    containerColor = BackgroundLightBlue,
-                    contentWindowInsets = WindowInsets(0, 0, 0, 0),
-                    bottomBar = { 
-                        if (selectedJob == null && selectedApplication == null) {
-                            BottomNavigationBar(navController) 
-                        }
+
+                val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+                val scope = rememberCoroutineScope()
+
+                ModalNavigationDrawer(
+                    drawerState = drawerState,
+                    drawerContent = {
+                        NavDrawerContent(
+                            isDark = isDarkTheme,
+                            onBookmarkClick = {
+                                navController.navigate("bookmarks") {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                                scope.launch { drawerState.close() }
+                            },
+                            onModeClick = {
+                                themeViewModel.toggleTheme()
+                                scope.launch { drawerState.close() }
+                            },
+                            onSettingsClick = {
+                                // Add logic for settings navigation
+                                scope.launch { drawerState.close() }
+                            },
+                            onLoginClick = {
+                                // Add logic for login/register
+                                scope.launch { drawerState.close() }
+                            }
+                        )
                     }
-                ) { innerPadding ->
-                    NavHost(
-                        navController = navController,
-                        startDestination = "home",
-                        modifier = Modifier.padding(innerPadding)
-                    ) {
-                        composable("home") {
-                            HomeScreen(
-                                onJobClick = { job ->
-                                    selectedJob = job
-                                    navController.navigate("detail")
-                                },
-                                onProfileClick = {
-                                    navController.navigate("profile") {
-                                        popUpTo(navController.graph.findStartDestination().id) {
-                                            saveState = true
-                                        }
-                                        launchSingleTop = true
-                                        restoreState = true
-                                    }
-                                },
-                                onApplyClick = { job ->
-                                    jobViewModel.applyForJob(job)
-                                    navController.navigate("applications") {
-                                        popUpTo(navController.graph.findStartDestination().id) {
-                                            saveState = true
-                                        }
-                                        launchSingleTop = true
-                                        restoreState = true
-                                    }
-                                },
-                                onSearchClick = { query ->
-                                    searchViewModel.onSearchQueryChange(query)
-                                    navController.navigate("search") {
-                                        popUpTo(navController.graph.findStartDestination().id) {
-                                            saveState = true
-                                        }
-                                        launchSingleTop = true
-                                        restoreState = true
-                                    }
-                                },
-                                location = currentAddress
-                            )
+                ) {
+                    Scaffold(
+                        containerColor = MaterialTheme.colorScheme.background,
+                        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+                        bottomBar = {
+                            if (selectedJob == null && selectedApplication == null) {
+                                BottomNavigationBar(navController)
+                            }
                         }
-                        composable("search") { 
-                            SearchScreen(
-                                viewModel = searchViewModel,
-                                onJobClick = { job ->
-                                    selectedJob = job
-                                    navController.navigate("detail")
-                                },
-                                onProfileClick = {
-                                    navController.navigate("profile")
-                                },
-                                onApplyClick = { job ->
-                                    jobViewModel.applyForJob(job)
-                                    navController.navigate("applications")
-                                },
-                                location = currentAddress
-                            )
-                        }
-                        composable("applications") { 
-                            ApplicationsScreen(
-                                viewModel = jobViewModel,
-                                onProfileClick = {
-                                    navController.navigate("profile")
-                                },
-                                onDetailClick = { application ->
-                                    selectedApplication = application
-                                    navController.navigate("application_detail")
-                                },
-                                location = currentAddress
-                            )
-                        }
-                        composable("profile") { 
+                    ) { innerPadding ->
+                        NavHost(
+                            navController = navController,
+                            startDestination = "home",
+                            modifier = Modifier.padding(innerPadding)
+                        ) {
+                            composable("home") {
+                                HomeScreen(
+                                    jobViewModel = jobViewModel,
+                                    onJobClick = { job ->
+                                        selectedJob = job
+                                        navController.navigate("detail")
+                                    },
+                                    onProfileClick = {
+                                        navController.navigate("profile") {
+                                            popUpTo(navController.graph.findStartDestination().id) {
+                                                saveState = true
+                                            }
+                                            launchSingleTop = true
+                                            restoreState = true
+                                        }
+                                    },
+                                    onApplyClick = { job ->
+                                        jobViewModel.applyForJob(job)
+                                        navController.navigate("applications") {
+                                            popUpTo(navController.graph.findStartDestination().id) {
+                                                saveState = true
+                                            }
+                                            launchSingleTop = true
+                                            restoreState = true
+                                        }
+                                    },
+                                    onSearchClick = { query ->
+                                        searchViewModel.onSearchQueryChange(query)
+                                        navController.navigate("search") {
+                                            popUpTo(navController.graph.findStartDestination().id) {
+                                                saveState = true
+                                            }
+                                            launchSingleTop = true
+                                            restoreState = true
+                                        }
+                                    },
+                                    onMenuClick = {
+                                        scope.launch { drawerState.open() }
+                                    },
+                                    location = currentAddress
+                                )
+                            }
+                            composable("search") {
+                                SearchScreen(
+                                    viewModel = searchViewModel,
+                                    jobViewModel = jobViewModel,
+                                    onJobClick = { job ->
+                                        selectedJob = job
+                                        navController.navigate("detail")
+                                    },
+                                    onProfileClick = {
+                                        navController.navigate("profile")
+                                    },
+                                    onApplyClick = { job ->
+                                        jobViewModel.applyForJob(job)
+                                        navController.navigate("applications")
+                                    },
+                                    onMenuClick = {
+                                        scope.launch { drawerState.open() }
+                                    },
+                                    location = currentAddress
+                                )
+                            }
+                            composable("bookmarks") {
+                                BookmarkScreen(
+                                    viewModel = jobViewModel,
+                                    onJobClick = { job ->
+                                        selectedJob = job
+                                        navController.navigate("detail")
+                                    },
+                                    onApplyClick = { job ->
+                                        jobViewModel.applyForJob(job)
+                                        navController.navigate("applications")
+                                    },
+                                    onProfileClick = {
+                                        navController.navigate("profile")
+                                    },
+                                    onMenuClick = {
+                                        scope.launch { drawerState.open() }
+                                    },
+                                    location = currentAddress
+                                )
+                            }
+                            composable("applications") {
+                                ApplicationsScreen(
+                                    viewModel = jobViewModel,
+                                    onProfileClick = {
+                                        navController.navigate("profile")
+                                    },
+                                    onDetailClick = { application ->
+                                        selectedApplication = application
+                                        navController.navigate("application_detail")
+                                    },
+                                    onMenuClick = {
+                                        scope.launch { drawerState.open() }
+                                    },
+                                    location = currentAddress
+                                )
+                            }
+                            composable("profile") {
                             ProfileScreen(
                                 onBackClick = {
                                     navController.popBackStack()
@@ -197,6 +270,14 @@ class MainActivity : ComponentActivity() {
                                         }
                                         selectedJob = null
                                     },
+                                    onMenuClick = {
+                                        scope.launch { drawerState.open() }
+                                    },
+                                    onProfileClick = {
+                                        navController.navigate("profile")
+                                    },
+                                    isBookmarked = jobViewModel.isBookmarked(job.id),
+                                    onBookmarkClick = { jobViewModel.toggleBookmark(job) },
                                     location = currentAddress
                                 )
                             }
@@ -214,6 +295,12 @@ class MainActivity : ComponentActivity() {
                                         navController.popBackStack()
                                         selectedApplication = null
                                     },
+                                    onMenuClick = {
+                                        scope.launch { drawerState.open() }
+                                    },
+                                    onProfileClick = {
+                                        navController.navigate("profile")
+                                    },
                                     buttonText = stringResource(id = R.string.cancel_application),
                                     buttonColor = LogoutRed,
                                     location = currentAddress
@@ -226,6 +313,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+}
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
@@ -237,8 +325,8 @@ fun BottomNavigationBar(navController: NavHostController) {
     )
     
     NavigationBar(
-        containerColor = NavNavyHeader,
-        contentColor = Color.White,
+        containerColor = MaterialTheme.colorScheme.surface,
+        contentColor = MaterialTheme.colorScheme.onSurface,
         tonalElevation = 0.dp
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -262,8 +350,8 @@ fun BottomNavigationBar(navController: NavHostController) {
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = Color(0xFF5D8BF4),
                     selectedTextColor = Color(0xFF5D8BF4),
-                    unselectedIconColor = Color.White,
-                    unselectedTextColor = Color.White,
+                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     indicatorColor = Color.Transparent
                 )
             )

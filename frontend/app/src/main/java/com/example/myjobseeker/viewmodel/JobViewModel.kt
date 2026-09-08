@@ -11,6 +11,9 @@ class JobViewModel : ViewModel() {
     private val _applications = mutableStateListOf<Application>()
     val applications: List<Application> = _applications
 
+    private val _bookmarkedJobs = mutableStateListOf<Job>()
+    val bookmarkedJobs: List<Job> = _bookmarkedJobs
+
     fun applyForJob(job: Job) {
         // Avoid duplicate applications for the same job if needed
         if (_applications.any { it.job.id == job.id }) return
@@ -26,5 +29,17 @@ class JobViewModel : ViewModel() {
 
     fun cancelApplication(applicationId: Int) {
         _applications.removeIf { it.id == applicationId }
+    }
+
+    fun toggleBookmark(job: Job) {
+        if (_bookmarkedJobs.any { it.id == job.id }) {
+            _bookmarkedJobs.removeIf { it.id == job.id }
+        } else {
+            _bookmarkedJobs.add(job)
+        }
+    }
+
+    fun isBookmarked(jobId: Int): Boolean {
+        return _bookmarkedJobs.any { it.id == jobId }
     }
 }
