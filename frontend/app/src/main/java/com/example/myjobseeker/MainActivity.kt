@@ -33,11 +33,13 @@ import com.example.myjobseeker.ui.applications.ApplicationsScreen
 import com.example.myjobseeker.ui.detail.DetailScreen
 import com.example.myjobseeker.ui.home.HomeScreen
 import com.example.myjobseeker.ui.profile.ProfileScreen
+import com.example.myjobseeker.ui.search.SearchScreen
 import com.example.myjobseeker.ui.theme.BackgroundLightBlue
 import com.example.myjobseeker.ui.theme.LogoutRed
 import com.example.myjobseeker.ui.theme.MyJobSeekerTheme
 import com.example.myjobseeker.ui.theme.NavNavyHeader
 import com.example.myjobseeker.viewmodel.JobViewModel
+import com.example.myjobseeker.viewmodel.SearchViewModel
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -58,6 +60,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val jobViewModel: JobViewModel = viewModel()
                 val locationViewModel: LocationViewModel = viewModel()
+                val searchViewModel: SearchViewModel = viewModel()
                 
                 val locationPermissionLauncher = rememberLauncherForActivityResult(
                     ActivityResultContracts.RequestMultiplePermissions()
@@ -124,10 +127,36 @@ class MainActivity : ComponentActivity() {
                                         restoreState = true
                                     }
                                 },
+                                onSearchClick = { query ->
+                                    searchViewModel.onSearchQueryChange(query)
+                                    navController.navigate("search") {
+                                        popUpTo(navController.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
+                                    }
+                                },
                                 location = currentAddress
                             )
                         }
-                        composable("search") { Text("Search Screen") }
+                        composable("search") { 
+                            SearchScreen(
+                                viewModel = searchViewModel,
+                                onJobClick = { job ->
+                                    selectedJob = job
+                                    navController.navigate("detail")
+                                },
+                                onProfileClick = {
+                                    navController.navigate("profile")
+                                },
+                                onApplyClick = { job ->
+                                    jobViewModel.applyForJob(job)
+                                    navController.navigate("applications")
+                                },
+                                location = currentAddress
+                            )
+                        }
                         composable("applications") { 
                             ApplicationsScreen(
                                 viewModel = jobViewModel,

@@ -34,6 +34,7 @@ fun HomeScreen(
     onJobClick: (Job) -> Unit,
     onProfileClick: () -> Unit,
     onApplyClick: (Job) -> Unit,
+    onSearchClick: (String) -> Unit,
     location: String
 ) {
     var searchText by remember { mutableStateOf("") }
@@ -69,7 +70,8 @@ fun HomeScreen(
                             putExtra(RecognizerIntent.EXTRA_PROMPT, "Silakan bicara...")
                         }
                         voiceRecognitionLauncher.launch(intent)
-                    }
+                    },
+                    onClick = { onSearchClick(it) }
                 )
             }
 
@@ -116,8 +118,8 @@ fun HomeHeader(onProfileClick: () -> Unit, location: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .statusBarsPadding()
             .background(NavNavyHeader)
+            .statusBarsPadding()
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -196,12 +198,16 @@ fun HomeHeader(onProfileClick: () -> Unit, location: String) {
 fun SearchBar(
     text: String,
     onTextChange: (String) -> Unit,
-    onMicClick: () -> Unit
+    onMicClick: () -> Unit,
+    onClick: ((String) -> Unit)? = null
 ) {
+    var showMenu by remember { mutableStateOf(false) }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(16.dp)
+            .then(if (onClick != null) Modifier.clickable(onClick = { onClick(text) }) else Modifier),
         shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -255,15 +261,64 @@ fun SearchBar(
                     .clickable { onMicClick() }
             )
             
-            // iv_filter
-            Icon(
-                painter = painterResource(id = R.drawable.ic_filter),
-                contentDescription = "Filter",
-                tint = TextDark,
-                modifier = Modifier
-                    .size(20.dp)
-                    .clickable { }
-            )
+            // iv_filter with Dropdown
+            Box {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_filter),
+                    contentDescription = "Filter",
+                    tint = TextDark,
+                    modifier = Modifier
+                        .size(20.dp)
+                        .clickable { showMenu = true }
+                )
+                DropdownMenu(
+                    expanded = showMenu,
+                    onDismissRequest = { showMenu = false }
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Category") },
+                        onClick = {
+                            if (onClick != null) onClick("category: ") else onTextChange("category: ")
+                            showMenu = false
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Company") },
+                        onClick = {
+                            if (onClick != null) onClick("company: ") else onTextChange("company: ")
+                            showMenu = false
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Skill") },
+                        onClick = {
+                            if (onClick != null) onClick("skill: ") else onTextChange("skill: ")
+                            showMenu = false
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Salary") },
+                        onClick = {
+                            if (onClick != null) onClick("salary: ") else onTextChange("salary: ")
+                            showMenu = false
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Location") },
+                        onClick = {
+                            if (onClick != null) onClick("location: ") else onTextChange("location: ")
+                            showMenu = false
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Time Range") },
+                        onClick = {
+                            if (onClick != null) onClick("timerange: ") else onTextChange("timerange: ")
+                            showMenu = false
+                        }
+                    )
+                }
+            }
         }
     }
 }
@@ -271,5 +326,7 @@ fun SearchBar(
 private fun getDummyJobs(): List<Job> = listOf(
     Job(1, "Barista", "Kopi Kenangan", "Khatib Sulaiman", 99, "1.8 km", "Rp. 70.000/hari", "15.00 - 22.00", "Basic Coffee"),
     Job(2, "Admin Toko", "Toko Fotocopy", "Limau Manis", 70, "7.5 km", "Rp. 100.000/mg", "19.00 - 21.00", "Printing, dll"),
-    Job(3, "Social Media Designer", "Kopi Kenangan", "Khatib Sulaiman", 75, "1.8 km", "Rp. 50.000/design", "free time", "Design")
+    Job(3, "Social Media Designer", "Kopi Kenangan", "Khatib Sulaiman", 75, "1.8 km", "Rp. 50.000/design", "free time", "Design"),
+    Job(4, "programer", "PT. mencari cinta sejati", "Padang", 90, "20km","RP. 10.000.000/project","8 jam","coding"),
+    Job(5, "programer", "PT. mencari cinta sejati", "bukittinggi", 90, "90km","RP. 10.000.000/project","part time","coding"),
 )

@@ -30,8 +30,8 @@ fun ProfileScreen(onBackClick: () -> Unit, location: String) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .statusBarsPadding()
                 .background(NavNavyHeader)
+                .statusBarsPadding()
                 .padding(horizontal = 16.dp)
                 .height(60.dp),
             verticalAlignment = Alignment.CenterVertically

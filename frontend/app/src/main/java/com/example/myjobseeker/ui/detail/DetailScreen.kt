@@ -38,8 +38,8 @@ fun DetailScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .statusBarsPadding()
                 .background(NavNavyHeader)
+                .statusBarsPadding()
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
