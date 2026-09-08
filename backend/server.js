@@ -3,11 +3,15 @@ require("dotenv").config();
 const express = require("express");
 const { connectDB } = require("./config/db");
 const jobRoutes = require("./routes/jobsRoutes");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 connectDB();
 
