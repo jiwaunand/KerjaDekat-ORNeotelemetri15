@@ -84,7 +84,7 @@ fun NavDrawerContent(
         )
         
         DrawerItem(
-            icon = if (isDark) R.drawable.ic_search else R.drawable.ic_filter, // placeholder icon, user should have better ones
+            icon = if (isDark) R.drawable.ic_sun else R.drawable.ic_moon, // placeholder icon, user should have better ones
             label = if (isDark) "Light Mode" else "Dark Mode",
             onClick = onModeClick
         )
