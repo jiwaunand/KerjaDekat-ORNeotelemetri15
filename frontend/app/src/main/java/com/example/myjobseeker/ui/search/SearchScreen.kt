@@ -41,6 +41,7 @@ fun SearchScreen(
     onJobClick: (Job) -> Unit,
     onProfileClick: () -> Unit,
     onApplyClick: (Job) -> Unit,
+    onNotificationClick: () -> Unit,
     onMenuClick: () -> Unit,
     location: String
 ) {
@@ -65,43 +66,47 @@ fun SearchScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        HomeHeader(onProfileClick = onProfileClick, onMenuClick = onMenuClick, location = location)
+        HomeHeader(
+            onProfileClick = onProfileClick,
+            onMenuClick = onMenuClick,
+            onNotificationClick = onNotificationClick,
+            location = location
+        )
 
-        Column(modifier = Modifier.fillMaxSize()) {
-            SearchBar(
-                text = searchQuery,
-                onTextChange = { viewModel.onSearchQueryChange(it) },
-                onMicClick = {
-                    val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-                        putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-                        putExtra(RecognizerIntent.EXTRA_PROMPT, "Silakan bicara...")
-                    }
-                    voiceRecognitionLauncher.launch(intent)
+        SearchBar(
+            text = searchQuery,
+            onTextChange = { viewModel.onSearchQueryChange(it) },
+            onMicClick = {
+                val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                    putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+                    putExtra(RecognizerIntent.EXTRA_PROMPT, "Silakan bicara...")
                 }
-            )
+                voiceRecognitionLauncher.launch(intent)
+            }
+        )
 
-            FilterChipsRow(
-                onFilterSelect = { filterTag ->
-                    val query = when (filterTag.lowercase()) {
-                        "terdekat" -> "location: Padang" // Example mapping
-                        "shift fleksibel" -> "timerange: part time"
-                        "gaji harian" -> "salary: 70000"
-                        "category" -> "category: "
-                        "company" -> "company: "
-                        "skill" -> "skill: "
-                        "salary" -> "salary: "
-                        "location" -> "location: "
-                        "time range" -> "timerange: "
-                        else -> filterTag
-                    }
-                    viewModel.onSearchQueryChange(query)
+        FilterChipsRow(
+            onFilterSelect = { filterTag ->
+                val query = when (filterTag.lowercase()) {
+                    "terdekat" -> "location: Padang" // Example mapping
+                    "shift fleksibel" -> "timerange: part time"
+                    "gaji harian" -> "salary: 70000"
+                    "category" -> "category: "
+                    "company" -> "company: "
+                    "skill" -> "skill: "
+                    "salary" -> "salary: "
+                    "location" -> "location: "
+                    "time range" -> "timerange: "
+                    else -> filterTag
                 }
-            )
+                viewModel.onSearchQueryChange(query)
+            }
+        )
 
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(bottom = 16.dp)
-            ) {
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            contentPadding = PaddingValues(bottom = 16.dp)
+        ) {
                 if (searchQuery.isEmpty()) {
                     // Show Search History
                     item {
@@ -148,7 +153,6 @@ fun SearchScreen(
                     }
                 }
             }
-        }
     }
 }
 

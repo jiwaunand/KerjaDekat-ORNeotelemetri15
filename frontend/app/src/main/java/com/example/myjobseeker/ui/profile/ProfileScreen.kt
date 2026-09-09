@@ -19,14 +19,26 @@ import androidx.compose.ui.unit.sp
 import com.example.myjobseeker.R
 import com.example.myjobseeker.ui.theme.*
 
+import com.example.myjobseeker.viewmodel.JobViewModel
+import com.example.myjobseeker.model.ApplicationStatus
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+
 @Composable
 fun ProfileScreen(
+    jobViewModel: JobViewModel,
     onBackClick: () -> Unit,
     location: String,
     username: String?,
     email: String?,
     onLogoutClick: () -> Unit
 ) {
+    val applications by jobViewModel.applications.collectAsState()
+    
+    val totalLamaran = applications.size
+    val diproses = applications.count { it.status == ApplicationStatus.DIPROSES }
+    val selesai = applications.count { it.status == ApplicationStatus.DITERIMA || it.status == ApplicationStatus.DITOLAK }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -175,17 +187,17 @@ fun ProfileScreen(
                 ) {
                     StatBlock(
                         label = stringResource(id = R.string.stat_lamaran),
-                        value = "7",
+                        value = totalLamaran.toString(),
                         modifier = Modifier.weight(1f)
                     )
                     StatBlock(
                         label = stringResource(id = R.string.stat_diprogres),
-                        value = "3",
+                        value = diproses.toString(),
                         modifier = Modifier.weight(1f)
                     )
                     StatBlock(
                         label = stringResource(id = R.string.stat_selesai),
-                        value = "1",
+                        value = selesai.toString(),
                         modifier = Modifier.weight(1f)
                     )
                 }

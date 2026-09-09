@@ -34,6 +34,7 @@ fun BookmarkScreen(
     onJobClick: (Job) -> Unit,
     onApplyClick: (Job) -> Unit,
     onProfileClick: () -> Unit,
+    onNotificationClick: () -> Unit,
     onMenuClick: () -> Unit,
     location: String
 ) {
@@ -46,7 +47,7 @@ fun BookmarkScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        HomeHeader(onProfileClick = onProfileClick, onMenuClick = onMenuClick, location = location)
+        HomeHeader(onProfileClick, onMenuClick, onNotificationClick, location)
 
         Text(
             text = "Halaman Bookmark",

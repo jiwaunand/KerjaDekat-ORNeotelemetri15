@@ -31,6 +31,12 @@ class JobViewModel(application: AndroidApp) : AndroidViewModel(application) {
             else flowOf(emptyList())
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
+    val notifications: StateFlow<List<com.example.myjobseeker.model.Notification>> = _currentUserId
+        .flatMapLatest { userId ->
+            if (userId != -1) userDao.getNotificationsByUserId(userId)
+            else flowOf(emptyList())
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
     fun setCurrentUser(userId: Int) {
         _currentUserId.value = userId
     }
@@ -50,12 +56,54 @@ class JobViewModel(application: AndroidApp) : AndroidViewModel(application) {
                 appliedAt = LocalDateTime.now().toString()
             )
             userDao.insertApplication(newApplication)
+            userDao.insertNotification(
+                com.example.myjobseeker.model.Notification(
+                    userId = userId,
+                    title = "Lamaran Baru",
+                    message = "Lamaran baru telah ditambahkan, anda ingin melihat?"
+                )
+            )
+        }
+    }
+
+    fun updateApplicationStatus(applicationId: Int, status: ApplicationStatus) {
+        val userId = _currentUserId.value
+        if (userId == -1) return
+        viewModelScope.launch {
+            userDao.updateApplicationStatus(applicationId, status)
+            val message = when (status) {
+                ApplicationStatus.DITERIMA -> "Selamat! lamaran anda baru saja diterima, silahkan dilihat!"
+                ApplicationStatus.DITOLAK -> "Sayangnya, lamaran anda telah ditolak. berusaha lebih giat lagi!"
+                else -> null
+            }
+            message?.let {
+                userDao.insertNotification(
+                    com.example.myjobseeker.model.Notification(
+                        userId = userId,
+                        title = if (status == ApplicationStatus.DITERIMA) "Lamaran Diterima" else "Lamaran Ditolak",
+                        message = it
+                    )
+                )
+            }
         }
     }
 
     fun cancelApplication(applicationId: Int) {
+        updateApplicationStatus(applicationId, ApplicationStatus.DITOLAK)
+    }
+
+    fun markNotificationAsRead(notificationId: Int) {
         viewModelScope.launch {
-            userDao.deleteApplication(applicationId)
+            userDao.markAsRead(notificationId)
+        }
+    }
+
+    fun clearNotifications() {
+        val userId = _currentUserId.value
+        if (userId != -1) {
+            viewModelScope.launch {
+                userDao.clearNotifications(userId)
+            }
         }
     }
 

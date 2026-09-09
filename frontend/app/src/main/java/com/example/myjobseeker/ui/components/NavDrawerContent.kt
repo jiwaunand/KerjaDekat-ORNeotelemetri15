@@ -101,7 +101,7 @@ fun NavDrawerContent(
 
         DrawerItem(
             icon = R.drawable.ic_logout,
-            label = "Keluar",
+            label = "Log out",
             onClick = onLogoutClick,
             textColor = Color.Red
         )

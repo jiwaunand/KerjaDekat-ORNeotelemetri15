@@ -56,6 +56,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
+import com.example.myjobseeker.ui.notifications.NotificationsScreen
 import com.example.myjobseeker.viewmodel.LocationViewModel
 import com.example.myjobseeker.viewmodel.ThemeViewModel
 
@@ -79,8 +80,6 @@ class MainActivity : ComponentActivity() {
                 val isLoggedIn by authViewModel.isLoggedIn.collectAsState()
                 val currentUser by authViewModel.currentUser.collectAsState(initial = null)
                 val currentUserId by authViewModel.userId.collectAsState()
-
-                val isDarkTheme by themeViewModel.isDarkTheme.collectAsState()
 
                 LaunchedEffect(currentUserId) {
                     jobViewModel.setCurrentUser(currentUserId)
@@ -228,6 +227,9 @@ class MainActivity : ComponentActivity() {
                                             restoreState = true
                                         }
                                     },
+                                    onNotificationClick = {
+                                        navController.navigate("notifications")
+                                    },
                                     onMenuClick = {
                                         scope.launch { drawerState.open() }
                                     },
@@ -245,9 +247,18 @@ class MainActivity : ComponentActivity() {
                                     onProfileClick = {
                                         navController.navigate("profile")
                                     },
+                                    onNotificationClick = {
+                                        navController.navigate("notifications")
+                                    },
                                     onApplyClick = { job ->
                                         jobViewModel.applyForJob(job)
-                                        navController.navigate("applications")
+                                        navController.navigate("applications") {
+                                            popUpTo(navController.graph.findStartDestination().id) {
+                                                saveState = true
+                                            }
+                                            launchSingleTop = true
+                                            restoreState = true
+                                        }
                                     },
                                     onMenuClick = {
                                         scope.launch { drawerState.open() }
@@ -264,10 +275,19 @@ class MainActivity : ComponentActivity() {
                                     },
                                     onApplyClick = { job ->
                                         jobViewModel.applyForJob(job)
-                                        navController.navigate("applications")
+                                        navController.navigate("applications") {
+                                            popUpTo(navController.graph.findStartDestination().id) {
+                                                saveState = true
+                                            }
+                                            launchSingleTop = true
+                                            restoreState = true
+                                        }
                                     },
                                     onProfileClick = {
                                         navController.navigate("profile")
+                                    },
+                                    onNotificationClick = {
+                                        navController.navigate("notifications")
                                     },
                                     onMenuClick = {
                                         scope.launch { drawerState.open() }
@@ -281,6 +301,9 @@ class MainActivity : ComponentActivity() {
                                     onProfileClick = {
                                         navController.navigate("profile")
                                     },
+                                    onNotificationClick = {
+                                        navController.navigate("notifications")
+                                    },
                                     onDetailClick = { application ->
                                         selectedApplication = application
                                         navController.navigate("application_detail")
@@ -293,6 +316,7 @@ class MainActivity : ComponentActivity() {
                             }
                             composable("profile") {
                                 ProfileScreen(
+                                    jobViewModel = jobViewModel,
                                     onBackClick = {
                                         navController.popBackStack()
                                     },
@@ -302,6 +326,18 @@ class MainActivity : ComponentActivity() {
                                     onLogoutClick = {
                                         authViewModel.logout()
                                     }
+                                )
+                            }
+                            composable("notifications") {
+                                NotificationsScreen(
+                                    viewModel = jobViewModel,
+                                    onBackClick = {
+                                        navController.popBackStack()
+                                    },
+                                    onMenuClick = {
+                                        scope.launch { drawerState.open() }
+                                    },
+                                    location = currentAddress
                                 )
                             }
                         composable("detail") {

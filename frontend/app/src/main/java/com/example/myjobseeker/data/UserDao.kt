@@ -36,9 +36,22 @@ interface UserDao {
     @Insert
     suspend fun insertApplication(application: Application)
 
-    @Query("DELETE FROM applications WHERE id = :applicationId")
-    suspend fun deleteApplication(applicationId: Int)
+    @Query("UPDATE applications SET status = :status WHERE id = :applicationId")
+    suspend fun updateApplicationStatus(applicationId: Int, status: com.example.myjobseeker.model.ApplicationStatus)
 
     @Query("SELECT * FROM applications WHERE userId = :userId")
     fun getApplicationsByUserId(userId: Int): Flow<List<Application>>
+
+    // Notifications
+    @Insert
+    suspend fun insertNotification(notification: com.example.myjobseeker.model.Notification)
+
+    @Query("SELECT * FROM notifications WHERE userId = :userId ORDER BY timestamp DESC")
+    fun getNotificationsByUserId(userId: Int): Flow<List<com.example.myjobseeker.model.Notification>>
+
+    @Query("UPDATE notifications SET isRead = 1 WHERE id = :notificationId")
+    suspend fun markAsRead(notificationId: Int)
+
+    @Query("DELETE FROM notifications WHERE userId = :userId")
+    suspend fun clearNotifications(userId: Int)
 }

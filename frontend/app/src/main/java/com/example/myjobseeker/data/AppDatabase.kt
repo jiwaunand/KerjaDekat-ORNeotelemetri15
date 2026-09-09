@@ -5,10 +5,22 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.myjobseeker.model.Application
+import com.example.myjobseeker.model.ApplicationStatus
 import com.example.myjobseeker.model.Bookmark
 import com.example.myjobseeker.model.User
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 
-@Database(entities = [User::class, Bookmark::class, Application::class], version = 2, exportSchema = false)
+class Converters {
+    @TypeConverter
+    fun fromStatus(status: ApplicationStatus): String = status.name
+
+    @TypeConverter
+    fun toStatus(value: String): ApplicationStatus = ApplicationStatus.valueOf(value)
+}
+
+@Database(entities = [User::class, Bookmark::class, Application::class, com.example.myjobseeker.model.Notification::class], version = 3, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 

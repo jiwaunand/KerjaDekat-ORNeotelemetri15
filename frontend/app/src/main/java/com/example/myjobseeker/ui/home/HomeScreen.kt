@@ -38,6 +38,7 @@ fun HomeScreen(
     onProfileClick: () -> Unit,
     onApplyClick: (Job) -> Unit,
     onSearchClick: (String) -> Unit,
+    onNotificationClick: () -> Unit,
     onMenuClick: () -> Unit,
     location: String
 ) {
@@ -59,10 +60,10 @@ fun HomeScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        HomeHeader(onProfileClick, onMenuClick, location)
+        HomeHeader(onProfileClick, onMenuClick, onNotificationClick, location)
         
         LazyColumn(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.weight(1f)
         ) {
             item {
                 SearchBar(
@@ -120,7 +121,12 @@ fun HomeScreen(
 }
 
 @Composable
-fun HomeHeader(onProfileClick: () -> Unit, onMenuClick: () -> Unit, location: String) {
+fun HomeHeader(
+    onProfileClick: () -> Unit,
+    onMenuClick: () -> Unit,
+    onNotificationClick: () -> Unit,
+    location: String
+) {
     Surface(
         color = MaterialTheme.colorScheme.surface,
         shadowElevation = 2.dp
@@ -178,7 +184,7 @@ fun HomeHeader(onProfileClick: () -> Unit, onMenuClick: () -> Unit, location: St
                 modifier = Modifier
                     .padding(end = 12.dp)
                     .size(24.dp)
-                    .clickable { }
+                    .clickable { onNotificationClick() }
             )
 
             // iv_profile

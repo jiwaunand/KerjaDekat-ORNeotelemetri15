@@ -31,6 +31,7 @@ import java.time.format.DateTimeFormatter
 fun ApplicationsScreen(
     viewModel: JobViewModel,
     onProfileClick: () -> Unit,
+    onNotificationClick: () -> Unit,
     onDetailClick: (Application) -> Unit,
     onMenuClick: () -> Unit,
     location: String
@@ -57,7 +58,7 @@ fun ApplicationsScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        ApplicationsHeader(onProfileClick, onMenuClick, location)
+        ApplicationsHeader(onProfileClick, onMenuClick, onNotificationClick, location)
         
         // Tab Selector
         Surface(
@@ -126,7 +127,12 @@ fun ApplicationsScreen(
 }
 
 @Composable
-fun ApplicationsHeader(onProfileClick: () -> Unit, onMenuClick: () -> Unit, location: String) {
+fun ApplicationsHeader(
+    onProfileClick: () -> Unit,
+    onMenuClick: () -> Unit,
+    onNotificationClick: () -> Unit,
+    location: String
+) {
     Surface(
         color = MaterialTheme.colorScheme.surface,
         shadowElevation = 2.dp
@@ -181,7 +187,7 @@ fun ApplicationsHeader(onProfileClick: () -> Unit, onMenuClick: () -> Unit, loca
                 modifier = Modifier
                     .padding(end = 12.dp)
                     .size(24.dp)
-                    .clickable { }
+                    .clickable { onNotificationClick() }
             )
 
             Box(
