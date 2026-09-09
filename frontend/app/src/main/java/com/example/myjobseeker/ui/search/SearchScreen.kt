@@ -38,6 +38,7 @@ import com.example.myjobseeker.viewmodel.JobViewModel
 fun SearchScreen(
     viewModel: SearchViewModel,
     jobViewModel: JobViewModel,
+    currentUserId: Int,
     onJobClick: (Job) -> Unit,
     onProfileClick: () -> Unit,
     onApplyClick: (Job) -> Unit,
@@ -49,6 +50,12 @@ fun SearchScreen(
     val searchHistory = viewModel.searchHistory
     val autocompleteSuggestions = viewModel.autocompleteSuggestions
     val searchResults = viewModel.searchResults
+    
+    val jobs by jobViewModel.jobs.collectAsState()
+    
+    LaunchedEffect(jobs) {
+        viewModel.setAllJobs(jobs)
+    }
 
     val voiceRecognitionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
@@ -145,6 +152,7 @@ fun SearchScreen(
                     items(searchResults) { job ->
                         JobCard(
                             job = job,
+                            currentUserId = currentUserId,
                             onClick = { onJobClick(job) },
                             onApplyClick = { onApplyClick(job) },
                             isBookmarked = jobViewModel.isBookmarked(job.id),

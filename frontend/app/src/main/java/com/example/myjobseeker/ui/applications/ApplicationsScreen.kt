@@ -119,6 +119,7 @@ fun ApplicationsScreen(
             items(applications) { application ->
                 ApplicationCard(
                     application = application,
+                    viewModel = viewModel,
                     onDetailClick = { onDetailClick(application) }
                 )
             }
@@ -210,8 +211,9 @@ fun ApplicationsHeader(
 }
 
 @Composable
-fun ApplicationCard(application: Application, onDetailClick: () -> Unit) {
-    val job = getDummyJobs().find { it.id == application.jobId } ?: return
+fun ApplicationCard(application: Application, viewModel: JobViewModel, onDetailClick: () -> Unit) {
+    val jobs by viewModel.jobs.collectAsState()
+    val job = jobs.find { it.id == application.jobId } ?: return
     val appliedDate = LocalDate.parse(application.appliedAt.split("T")[0])
     val today = LocalDate.now()
     val yesterday = today.minusDays(1)

@@ -8,6 +8,7 @@ import com.example.myjobseeker.model.Application
 import com.example.myjobseeker.model.ApplicationStatus
 import com.example.myjobseeker.model.Bookmark
 import com.example.myjobseeker.model.Job
+import com.example.myjobseeker.ui.home.getDummyJobs
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -17,6 +18,9 @@ import java.time.LocalDateTime
 class JobViewModel(application: AndroidApp) : AndroidViewModel(application) {
     private val userDao = AppDatabase.getDatabase(application).userDao()
     
+    private val _jobs = MutableStateFlow(getDummyJobs())
+    val jobs: StateFlow<List<Job>> = _jobs.asStateFlow()
+
     private val _currentUserId = MutableStateFlow(-1)
 
     val applications: StateFlow<List<Application>> = _currentUserId
@@ -92,6 +96,12 @@ class JobViewModel(application: AndroidApp) : AndroidViewModel(application) {
         updateApplicationStatus(applicationId, ApplicationStatus.DITOLAK)
     }
 
+    fun deleteApplication(applicationId: Int) {
+        viewModelScope.launch {
+            userDao.deleteApplication(applicationId)
+        }
+    }
+
     fun markNotificationAsRead(notificationId: Int) {
         viewModelScope.launch {
             userDao.markAsRead(notificationId)
@@ -122,5 +132,27 @@ class JobViewModel(application: AndroidApp) : AndroidViewModel(application) {
 
     fun isBookmarked(jobId: Int): Boolean {
         return bookmarkedJobIds.value.contains(jobId)
+    }
+
+    fun addJob(job: Job) {
+        val userId = _currentUserId.value
+        if (userId == -1) return
+        
+        val jobWithOwner = job.copy(creatorId = userId)
+        _jobs.value = _jobs.value + jobWithOwner
+        
+        viewModelScope.launch {
+            userDao.insertNotification(
+                com.example.myjobseeker.model.Notification(
+                    userId = userId,
+                    title = "Pekerjaan Ditambahkan",
+                    message = "Pekerjaan baru '${job.title}' telah berhasil ditambahkan."
+                )
+            )
+        }
+    }
+
+    fun deleteJob(jobId: Int) {
+        _jobs.value = _jobs.value.filter { it.id != jobId }
     }
 }

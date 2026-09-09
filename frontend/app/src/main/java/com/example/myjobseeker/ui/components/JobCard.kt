@@ -1,5 +1,6 @@
 package com.example.myjobseeker.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -8,12 +9,15 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import com.example.myjobseeker.R
 import com.example.myjobseeker.model.Job
 import com.example.myjobseeker.ui.theme.*
@@ -23,9 +27,11 @@ fun JobCard(
     job: Job,
     onClick: () -> Unit,
     onApplyClick: () -> Unit,
+    currentUserId: Int = -1,
     isBookmarked: Boolean = false,
     onBookmarkClick: () -> Unit = {}
 ) {
+    val isCreator = job.creatorId == currentUserId && currentUserId != -1
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -46,11 +52,23 @@ fun JobCard(
                 verticalAlignment = Alignment.Top
             ) {
                 // company_logo
-                Box(
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(BlueDark)
-                )
+                if (job.imageUri != null) {
+                    Image(
+                        painter = rememberAsyncImagePainter(model = job.imageUri),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(48.dp)
+                            .clip(RoundedCornerShape(8.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(BlueDark)
+                    )
+                }
 
                 Spacer(modifier = Modifier.width(12.dp))
 
@@ -176,14 +194,19 @@ fun JobCard(
 
                 // btn_apply
                 Button(
-                    onClick = onApplyClick,
+                    onClick = {
+                        if (isCreator) onClick()
+                        else onApplyClick()
+                    },
                     modifier = Modifier.height(38.dp),
                     shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = BlueNormal),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (isCreator) LogoutRed else BlueNormal
+                    ),
                     contentPadding = PaddingValues(horizontal = 20.dp)
                 ) {
                     Text(
-                        text = stringResource(id = R.string.apply),
+                        text = if (isCreator) "Detail" else stringResource(id = R.string.apply),
                         fontSize = 12.sp,
                         color = Color.White
                     )

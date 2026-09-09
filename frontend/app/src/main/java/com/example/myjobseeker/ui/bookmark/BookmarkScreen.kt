@@ -31,6 +31,7 @@ import com.example.myjobseeker.ui.home.HomeHeader
 @Composable
 fun BookmarkScreen(
     viewModel: JobViewModel,
+    currentUserId: Int,
     onJobClick: (Job) -> Unit,
     onApplyClick: (Job) -> Unit,
     onProfileClick: () -> Unit,
@@ -39,7 +40,7 @@ fun BookmarkScreen(
     location: String
 ) {
     val bookmarkedJobIds by viewModel.bookmarkedJobIds.collectAsState()
-    val allJobs = getDummyJobs() // Assuming this is available or moved to a shared place
+    val allJobs by viewModel.jobs.collectAsState()
     val bookmarkedJobs = allJobs.filter { bookmarkedJobIds.contains(it.id) }
 
     Column(
@@ -76,6 +77,7 @@ fun BookmarkScreen(
                 items(bookmarkedJobs) { job ->
                     JobCard(
                         job = job,
+                        currentUserId = currentUserId,
                         onClick = { onJobClick(job) },
                         onApplyClick = { onApplyClick(job) },
                         isBookmarked = true,

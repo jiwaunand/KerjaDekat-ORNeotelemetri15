@@ -34,6 +34,7 @@ import com.example.myjobseeker.viewmodel.JobViewModel
 @Composable
 fun HomeScreen(
     jobViewModel: JobViewModel,
+    currentUserId: Int,
     onJobClick: (Job) -> Unit,
     onProfileClick: () -> Unit,
     onApplyClick: (Job) -> Unit,
@@ -54,6 +55,8 @@ fun HomeScreen(
             }
         }
     }
+
+    val jobs by jobViewModel.jobs.collectAsState()
 
     Column(
         modifier = Modifier
@@ -103,9 +106,10 @@ fun HomeScreen(
                 }
             }
 
-            items(getDummyJobs()) { job ->
+            items(jobs) { job ->
                 JobCard(
                     job = job,
+                    currentUserId = currentUserId,
                     onClick = { onJobClick(job) },
                     onApplyClick = { onApplyClick(job) },
                     isBookmarked = jobViewModel.isBookmarked(job.id),

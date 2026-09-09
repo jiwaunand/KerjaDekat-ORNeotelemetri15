@@ -27,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myjobseeker.model.Application
+import com.example.myjobseeker.model.ApplicationStatus
 import com.example.myjobseeker.model.Job
 import com.example.myjobseeker.ui.applications.ApplicationsScreen
 import com.example.myjobseeker.ui.bookmark.BookmarkScreen
@@ -34,6 +35,7 @@ import com.example.myjobseeker.ui.components.NavDrawerContent
 import com.example.myjobseeker.ui.detail.DetailScreen
 import com.example.myjobseeker.ui.home.HomeScreen
 import com.example.myjobseeker.ui.home.getDummyJobs
+import com.example.myjobseeker.ui.job.AddJobScreen
 import com.example.myjobseeker.ui.profile.ProfileScreen
 import com.example.myjobseeker.ui.search.SearchScreen
 import com.example.myjobseeker.ui.theme.BackgroundLightBlue
@@ -194,6 +196,7 @@ class MainActivity : ComponentActivity() {
                             composable("home") {
                                 HomeScreen(
                                     jobViewModel = jobViewModel,
+                                    currentUserId = currentUserId,
                                     onJobClick = { job ->
                                         selectedJob = job
                                         navController.navigate("detail")
@@ -240,6 +243,7 @@ class MainActivity : ComponentActivity() {
                                 SearchScreen(
                                     viewModel = searchViewModel,
                                     jobViewModel = jobViewModel,
+                                    currentUserId = currentUserId,
                                     onJobClick = { job ->
                                         selectedJob = job
                                         navController.navigate("detail")
@@ -269,6 +273,7 @@ class MainActivity : ComponentActivity() {
                             composable("bookmarks") {
                                 BookmarkScreen(
                                     viewModel = jobViewModel,
+                                    currentUserId = currentUserId,
                                     onJobClick = { job ->
                                         selectedJob = job
                                         navController.navigate("detail")
@@ -340,8 +345,24 @@ class MainActivity : ComponentActivity() {
                                     location = currentAddress
                                 )
                             }
+                            composable("add_job") {
+                                AddJobScreen(
+                                    jobViewModel = jobViewModel,
+                                    onBackClick = {
+                                        navController.popBackStack()
+                                    },
+                                    onMenuClick = {
+                                        scope.launch { drawerState.open() }
+                                    },
+                                    onProfileClick = {
+                                        navController.navigate("profile")
+                                    },
+                                    location = currentAddress
+                                )
+                            }
                         composable("detail") {
                             selectedJob?.let { job ->
+                                val isCreator = job.creatorId == currentUserId
                                 DetailScreen(
                                     job = job,
                                     onBackClick = {
@@ -349,13 +370,18 @@ class MainActivity : ComponentActivity() {
                                         navController.popBackStack()
                                     },
                                     onApplyClick = {
-                                        jobViewModel.applyForJob(job)
-                                        navController.navigate("applications") {
-                                            popUpTo(navController.graph.findStartDestination().id) {
-                                                saveState = true
+                                        if (isCreator) {
+                                            jobViewModel.deleteJob(job.id)
+                                            navController.popBackStack()
+                                        } else {
+                                            jobViewModel.applyForJob(job)
+                                            navController.navigate("applications") {
+                                                popUpTo(navController.graph.findStartDestination().id) {
+                                                    saveState = true
+                                                }
+                                                launchSingleTop = true
+                                                restoreState = true
                                             }
-                                            launchSingleTop = true
-                                            restoreState = true
                                         }
                                         selectedJob = null
                                     },
@@ -367,13 +393,16 @@ class MainActivity : ComponentActivity() {
                                     },
                                     isBookmarked = jobViewModel.isBookmarked(job.id),
                                     onBookmarkClick = { jobViewModel.toggleBookmark(job) },
-                                    location = currentAddress
+                                    location = currentAddress,
+                                    buttonText = if (isCreator) "Hapus Pekerjaan" else stringResource(id = R.string.apply_job),
+                                    buttonColor = if (isCreator) LogoutRed else NavNavyHeader
                                 )
                             }
                         }
                         composable("application_detail") {
                             selectedApplication?.let { app ->
-                                getDummyJobs().find { it.id == app.jobId }?.let { job ->
+                                jobViewModel.jobs.value.find { it.id == app.jobId }?.let { job ->
+                                    val isRejected = app.status == ApplicationStatus.DITOLAK
                                     DetailScreen(
                                         job = job,
                                         onBackClick = {
@@ -381,7 +410,11 @@ class MainActivity : ComponentActivity() {
                                             navController.popBackStack()
                                         },
                                         onApplyClick = {
-                                            jobViewModel.cancelApplication(app.id)
+                                            if (isRejected) {
+                                                jobViewModel.deleteApplication(app.id)
+                                            } else {
+                                                jobViewModel.cancelApplication(app.id)
+                                            }
                                             navController.popBackStack()
                                             selectedApplication = null
                                         },
@@ -391,7 +424,7 @@ class MainActivity : ComponentActivity() {
                                         onProfileClick = {
                                             navController.navigate("profile")
                                         },
-                                        buttonText = stringResource(id = R.string.cancel_application),
+                                        buttonText = if (isRejected) "Hapus" else stringResource(id = R.string.cancel_application),
                                         buttonColor = LogoutRed,
                                         location = currentAddress
                                     )
@@ -411,6 +444,7 @@ fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
         NavigationItem("home", "Beranda", R.drawable.ic_home),
         NavigationItem("search", "Cari", R.drawable.ic_search),
+        NavigationItem("add_job", "Tambah Lowongan", R.drawable.ic_edit),
         NavigationItem("applications", "Lamaran", R.drawable.ic_work),
         NavigationItem("profile", "Profil", R.drawable.ic_person)
     )

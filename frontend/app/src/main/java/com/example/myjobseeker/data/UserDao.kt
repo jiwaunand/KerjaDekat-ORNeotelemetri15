@@ -42,6 +42,9 @@ interface UserDao {
     @Query("SELECT * FROM applications WHERE userId = :userId")
     fun getApplicationsByUserId(userId: Int): Flow<List<Application>>
 
+    @Query("DELETE FROM applications WHERE id = :applicationId")
+    suspend fun deleteApplication(applicationId: Int)
+
     // Notifications
     @Insert
     suspend fun insertNotification(notification: com.example.myjobseeker.model.Notification)

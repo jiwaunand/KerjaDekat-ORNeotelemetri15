@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import com.example.myjobseeker.R
 import com.example.myjobseeker.model.Job
 import com.example.myjobseeker.ui.theme.*
@@ -97,12 +98,21 @@ fun DetailScreen(
                                 .fillMaxWidth()
                                 .height(200.dp)
                         ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_launcher_background), // Using background as placeholder
-                                contentDescription = null,
-                                modifier = Modifier.fillMaxSize().background(BlueDark),
-                                contentScale = ContentScale.Crop
-                            )
+                            if (job.imageUri != null) {
+                                Image(
+                                    painter = rememberAsyncImagePainter(model = job.imageUri),
+                                    contentDescription = null,
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentScale = ContentScale.Crop
+                                )
+                            } else {
+                                Image(
+                                    painter = painterResource(id = R.drawable.ic_launcher_background), // Using background as placeholder
+                                    contentDescription = null,
+                                    modifier = Modifier.fillMaxSize().background(BlueDark),
+                                    contentScale = ContentScale.Crop
+                                )
+                            }
                             
                             // Verified Tag
                             Surface(
