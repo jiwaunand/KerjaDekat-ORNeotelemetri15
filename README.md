@@ -19,7 +19,7 @@ Solusi untuk membantu para pencari pekerja untuk mencari pekerjaan yang sesuai, 
 
 ## Tech Stack
 
-**Client:** Mobile app - Kotlin
+**Client:** Mobile app - Kotlin, JetpackCompose
 
 **Server:** Node, Express
 
