@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import com.example.myjobseeker.ui.home.getDummyJobs
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,7 +42,8 @@ fun ApplicationsScreen(
         stringResource(id = R.string.status_rejected)
     )
 
-    val applications = viewModel.applications.filter {
+    val allApplications by viewModel.applications.collectAsState()
+    val applications = allApplications.filter {
         when (selectedTab) {
             0 -> it.status == ApplicationStatus.DIPROSES
             1 -> it.status == ApplicationStatus.DITERIMA
@@ -203,8 +205,8 @@ fun ApplicationsHeader(onProfileClick: () -> Unit, onMenuClick: () -> Unit, loca
 
 @Composable
 fun ApplicationCard(application: Application, onDetailClick: () -> Unit) {
-    val job = application.job
-    val appliedDate = application.appliedAt.toLocalDate()
+    val job = getDummyJobs().find { it.id == application.jobId } ?: return
+    val appliedDate = LocalDate.parse(application.appliedAt.split("T")[0])
     val today = LocalDate.now()
     val yesterday = today.minusDays(1)
     

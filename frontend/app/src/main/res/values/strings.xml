@@ -52,4 +52,15 @@
     <string name="yesterday">Kemaren</string>
     <string name="today">Hari Ini</string>
     <string name="cancel_application">Batalkan</string>
+
+    <!-- Auth -->
+    <string name="login_title">Masuk</string>
+    <string name="register_title">Daftar</string>
+    <string name="email_label">Email</string>
+    <string name="password_label">Kata Sandi</string>
+    <string name="username_label">Username</string>
+    <string name="login_button">MASUK</string>
+    <string name="register_button">DAFTAR</string>
+    <string name="not_registered">Belum terdaftar? register disini</string>
+    <string name="already_registered">Sudah terdaftar? login disini</string>
 </resources>

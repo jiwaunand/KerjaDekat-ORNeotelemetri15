@@ -1,45 +1,78 @@
 package com.example.myjobseeker.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.compose.runtime.mutableStateListOf
+import android.app.Application as AndroidApp
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.myjobseeker.data.AppDatabase
 import com.example.myjobseeker.model.Application
 import com.example.myjobseeker.model.ApplicationStatus
+import com.example.myjobseeker.model.Bookmark
 import com.example.myjobseeker.model.Job
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
-class JobViewModel : ViewModel() {
-    private val _applications = mutableStateListOf<Application>()
-    val applications: List<Application> = _applications
+@OptIn(ExperimentalCoroutinesApi::class)
+class JobViewModel(application: AndroidApp) : AndroidViewModel(application) {
+    private val userDao = AppDatabase.getDatabase(application).userDao()
+    
+    private val _currentUserId = MutableStateFlow(-1)
 
-    private val _bookmarkedJobs = mutableStateListOf<Job>()
-    val bookmarkedJobs: List<Job> = _bookmarkedJobs
+    val applications: StateFlow<List<Application>> = _currentUserId
+        .flatMapLatest { userId ->
+            if (userId != -1) userDao.getApplicationsByUserId(userId)
+            else flowOf(emptyList())
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val bookmarkedJobIds: StateFlow<List<Int>> = _currentUserId
+        .flatMapLatest { userId ->
+            if (userId != -1) userDao.getBookmarkedJobIds(userId)
+            else flowOf(emptyList())
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    fun setCurrentUser(userId: Int) {
+        _currentUserId.value = userId
+    }
 
     fun applyForJob(job: Job) {
-        // Avoid duplicate applications for the same job if needed
-        if (_applications.any { it.job.id == job.id }) return
+        val userId = _currentUserId.value
+        if (userId == -1) return
 
-        val newApplication = Application(
-            id = _applications.size + 1,
-            job = job,
-            status = ApplicationStatus.DIPROSES,
-            appliedAt = LocalDateTime.now()
-        )
-        _applications.add(newApplication)
+        viewModelScope.launch {
+            val currentApps = applications.value
+            if (currentApps.any { it.jobId == job.id }) return@launch
+
+            val newApplication = Application(
+                userId = userId,
+                jobId = job.id,
+                status = ApplicationStatus.DIPROSES,
+                appliedAt = LocalDateTime.now().toString()
+            )
+            userDao.insertApplication(newApplication)
+        }
     }
 
     fun cancelApplication(applicationId: Int) {
-        _applications.removeIf { it.id == applicationId }
+        viewModelScope.launch {
+            userDao.deleteApplication(applicationId)
+        }
     }
 
     fun toggleBookmark(job: Job) {
-        if (_bookmarkedJobs.any { it.id == job.id }) {
-            _bookmarkedJobs.removeIf { it.id == job.id }
-        } else {
-            _bookmarkedJobs.add(job)
+        val userId = _currentUserId.value
+        if (userId == -1) return
+
+        viewModelScope.launch {
+            if (bookmarkedJobIds.value.contains(job.id)) {
+                userDao.deleteBookmark(userId, job.id)
+            } else {
+                userDao.insertBookmark(Bookmark(userId = userId, jobId = job.id))
+            }
         }
     }
 
     fun isBookmarked(jobId: Int): Boolean {
-        return _bookmarkedJobs.any { it.id == jobId }
+        return bookmarkedJobIds.value.contains(jobId)
     }
 }

@@ -26,10 +26,12 @@ import com.example.myjobseeker.ui.theme.TextGray
 @Composable
 fun NavDrawerContent(
     isDark: Boolean,
+    username: String?,
+    email: String?,
     onBookmarkClick: () -> Unit,
     onModeClick: () -> Unit,
     onSettingsClick: () -> Unit,
-    onLoginClick: () -> Unit
+    onLogoutClick: () -> Unit
 ) {
     ModalDrawerSheet(
         modifier = Modifier.width(300.dp),
@@ -58,13 +60,13 @@ fun NavDrawerContent(
             }
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "lorem ipsum",
+                text = username ?: "User",
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "@loremipsum",
+                text = email ?: "@user",
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontSize = 14.sp
             )
@@ -99,8 +101,8 @@ fun NavDrawerContent(
 
         DrawerItem(
             icon = R.drawable.ic_logout,
-            label = "Login / Register",
-            onClick = onLoginClick,
+            label = "Keluar",
+            onClick = onLogoutClick,
             textColor = Color.Red
         )
         

@@ -20,7 +20,13 @@ import com.example.myjobseeker.R
 import com.example.myjobseeker.ui.theme.*
 
 @Composable
-fun ProfileScreen(onBackClick: () -> Unit, location: String) {
+fun ProfileScreen(
+    onBackClick: () -> Unit,
+    location: String,
+    username: String?,
+    email: String?,
+    onLogoutClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -129,7 +135,7 @@ fun ProfileScreen(onBackClick: () -> Unit, location: String) {
                 }
 
                 Text(
-                    text = "lorem ipsum",
+                    text = username ?: "User",
                     modifier = Modifier.padding(top = 8.dp),
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
@@ -137,7 +143,7 @@ fun ProfileScreen(onBackClick: () -> Unit, location: String) {
                 )
                 
                 Text(
-                    text = "@loremipsum",
+                    text = email ?: "@user",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 14.sp
                 )
@@ -199,7 +205,7 @@ fun ProfileScreen(onBackClick: () -> Unit, location: String) {
 
                 // Logout Button
                 OutlinedButton(
-                    onClick = { },
+                    onClick = onLogoutClick,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 32.dp, vertical = 24.dp)

@@ -1,14 +1,33 @@
 package com.example.myjobseeker.viewmodel
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.myjobseeker.data.UserPreferences
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
-class ThemeViewModel : ViewModel() {
-    private val _isDarkTheme = mutableStateOf(false)
-    val isDarkTheme: State<Boolean> = _isDarkTheme
+@OptIn(ExperimentalCoroutinesApi::class)
+class ThemeViewModel(application: Application) : AndroidViewModel(application) {
+    private val userPreferences = UserPreferences(application)
+    private val _currentUserId = MutableStateFlow(-1)
+
+    val isDarkTheme: StateFlow<Boolean> = _currentUserId
+        .flatMapLatest { userId ->
+            if (userId != -1) userPreferences.getTheme(userId)
+            else flowOf(false)
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+
+    fun setCurrentUser(userId: Int) {
+        _currentUserId.value = userId
+    }
 
     fun toggleTheme() {
-        _isDarkTheme.value = !_isDarkTheme.value
+        val userId = _currentUserId.value
+        if (userId == -1) return
+        viewModelScope.launch {
+            userPreferences.setTheme(userId, !isDarkTheme.value)
+        }
     }
 }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -34,6 +33,7 @@ import com.example.myjobseeker.ui.bookmark.BookmarkScreen
 import com.example.myjobseeker.ui.components.NavDrawerContent
 import com.example.myjobseeker.ui.detail.DetailScreen
 import com.example.myjobseeker.ui.home.HomeScreen
+import com.example.myjobseeker.ui.home.getDummyJobs
 import com.example.myjobseeker.ui.profile.ProfileScreen
 import com.example.myjobseeker.ui.search.SearchScreen
 import com.example.myjobseeker.ui.theme.BackgroundLightBlue
@@ -42,6 +42,9 @@ import com.example.myjobseeker.ui.theme.MyJobSeekerTheme
 import com.example.myjobseeker.ui.theme.NavNavyHeader
 import com.example.myjobseeker.ui.theme.TextDark
 import com.example.myjobseeker.ui.theme.TextGray
+import com.example.myjobseeker.ui.auth.LoginScreen
+import com.example.myjobseeker.ui.auth.RegisterScreen
+import com.example.myjobseeker.viewmodel.AuthViewModel
 import com.example.myjobseeker.viewmodel.JobViewModel
 import com.example.myjobseeker.viewmodel.SearchViewModel
 import kotlinx.coroutines.launch
@@ -62,15 +65,36 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val themeViewModel: ThemeViewModel = viewModel()
-            val isDarkTheme by themeViewModel.isDarkTheme
+            val authViewModel: AuthViewModel = viewModel()
+            val jobViewModel: JobViewModel = viewModel()
+            val locationViewModel: LocationViewModel = viewModel()
+            val searchViewModel: SearchViewModel = viewModel()
+
+            val isDarkTheme by themeViewModel.isDarkTheme.collectAsState()
 
             MyJobSeekerTheme(darkTheme = isDarkTheme) {
                 val context = LocalContext.current
                 val navController = rememberNavController()
-                val jobViewModel: JobViewModel = viewModel()
-                val locationViewModel: LocationViewModel = viewModel()
-                val searchViewModel: SearchViewModel = viewModel()
+
+                val isLoggedIn by authViewModel.isLoggedIn.collectAsState()
+                val currentUser by authViewModel.currentUser.collectAsState(initial = null)
+                val currentUserId by authViewModel.userId.collectAsState()
+
+                val isDarkTheme by themeViewModel.isDarkTheme.collectAsState()
+
+                LaunchedEffect(currentUserId) {
+                    jobViewModel.setCurrentUser(currentUserId)
+                    themeViewModel.setCurrentUser(currentUserId)
+                }
                 
+                LaunchedEffect(isLoggedIn) {
+                    if (!isLoggedIn) {
+                        navController.navigate("login") {
+                            popUpTo(0)
+                        }
+                    }
+                }
+
                 val locationPermissionLauncher = rememberLauncherForActivityResult(
                     ActivityResultContracts.RequestMultiplePermissions()
                 ) { permissions ->
@@ -105,6 +129,8 @@ class MainActivity : ComponentActivity() {
                     drawerContent = {
                         NavDrawerContent(
                             isDark = isDarkTheme,
+                            username = currentUser?.username,
+                            email = currentUser?.email,
                             onBookmarkClick = {
                                 navController.navigate("bookmarks") {
                                     popUpTo(navController.graph.findStartDestination().id) {
@@ -123,27 +149,49 @@ class MainActivity : ComponentActivity() {
                                 // Add logic for settings navigation
                                 scope.launch { drawerState.close() }
                             },
-                            onLoginClick = {
-                                // Add logic for login/register
+                            onLogoutClick = {
+                                authViewModel.logout()
                                 scope.launch { drawerState.close() }
                             }
                         )
                     }
                 ) {
+                    val navBackStackEntry by navController.currentBackStackEntryAsState()
+                    val currentRoute = navBackStackEntry?.destination?.route
+                    val showBottomBar = isLoggedIn && selectedJob == null && selectedApplication == null && 
+                            currentRoute != "login" && currentRoute != "register"
+
                     Scaffold(
                         containerColor = MaterialTheme.colorScheme.background,
                         contentWindowInsets = WindowInsets(0, 0, 0, 0),
                         bottomBar = {
-                            if (selectedJob == null && selectedApplication == null) {
+                            if (showBottomBar) {
                                 BottomNavigationBar(navController)
                             }
                         }
                     ) { innerPadding ->
                         NavHost(
                             navController = navController,
-                            startDestination = "home",
+                            startDestination = if (isLoggedIn) "home" else "login",
                             modifier = Modifier.padding(innerPadding)
                         ) {
+                            composable("login") {
+                                LoginScreen(
+                                    viewModel = authViewModel,
+                                    onRegisterClick = { navController.navigate("register") },
+                                    onLoginSuccess = {
+                                        navController.navigate("home") {
+                                            popUpTo("login") { inclusive = true }
+                                        }
+                                    }
+                                )
+                            }
+                            composable("register") {
+                                RegisterScreen(
+                                    viewModel = authViewModel,
+                                    onLoginClick = { navController.popBackStack() }
+                                )
+                            }
                             composable("home") {
                                 HomeScreen(
                                     jobViewModel = jobViewModel,
@@ -244,13 +292,18 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                             composable("profile") {
-                            ProfileScreen(
-                                onBackClick = {
-                                    navController.popBackStack()
-                                },
-                                location = currentAddress
-                            )
-                        }
+                                ProfileScreen(
+                                    onBackClick = {
+                                        navController.popBackStack()
+                                    },
+                                    location = currentAddress,
+                                    username = currentUser?.username,
+                                    email = currentUser?.email,
+                                    onLogoutClick = {
+                                        authViewModel.logout()
+                                    }
+                                )
+                            }
                         composable("detail") {
                             selectedJob?.let { job ->
                                 DetailScreen(
@@ -284,27 +337,29 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("application_detail") {
                             selectedApplication?.let { app ->
-                                DetailScreen(
-                                    job = app.job,
-                                    onBackClick = {
-                                        selectedApplication = null
-                                        navController.popBackStack()
-                                    },
-                                    onApplyClick = {
-                                        jobViewModel.cancelApplication(app.id)
-                                        navController.popBackStack()
-                                        selectedApplication = null
-                                    },
-                                    onMenuClick = {
-                                        scope.launch { drawerState.open() }
-                                    },
-                                    onProfileClick = {
-                                        navController.navigate("profile")
-                                    },
-                                    buttonText = stringResource(id = R.string.cancel_application),
-                                    buttonColor = LogoutRed,
-                                    location = currentAddress
-                                )
+                                getDummyJobs().find { it.id == app.jobId }?.let { job ->
+                                    DetailScreen(
+                                        job = job,
+                                        onBackClick = {
+                                            selectedApplication = null
+                                            navController.popBackStack()
+                                        },
+                                        onApplyClick = {
+                                            jobViewModel.cancelApplication(app.id)
+                                            navController.popBackStack()
+                                            selectedApplication = null
+                                        },
+                                        onMenuClick = {
+                                            scope.launch { drawerState.open() }
+                                        },
+                                        onProfileClick = {
+                                            navController.navigate("profile")
+                                        },
+                                        buttonText = stringResource(id = R.string.cancel_application),
+                                        buttonColor = LogoutRed,
+                                        location = currentAddress
+                                    )
+                                }
                             }
                         }
                     }
