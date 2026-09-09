@@ -188,9 +188,9 @@ fun LoginScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    SocialIcon(R.drawable.ic_google) // Need to make sure these exist or use placeholders
+                    /*SocialIcon(R.drawable.ic_google) // Need to make sure these exist or use placeholders
                     SocialIcon(R.drawable.ic_whatsapp)
-                    SocialIcon(R.drawable.ic_x)
+                    SocialIcon(R.drawable.ic_x)*/
                 }
             }
         }
@@ -209,7 +209,6 @@ fun SocialIcon(iconRes: Int) {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            // Using a simple text for now if icons are missing, but I should check/add them
             Icon(
                 painter = painterResource(id = iconRes),
                 contentDescription = null,

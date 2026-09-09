@@ -444,7 +444,7 @@ fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
         NavigationItem("home", "Beranda", R.drawable.ic_home),
         NavigationItem("search", "Cari", R.drawable.ic_search),
-        NavigationItem("add_job", "Tambah Lowongan", R.drawable.ic_edit),
+        NavigationItem("add_job", "Tambah", R.drawable.ic_edit),
         NavigationItem("applications", "Lamaran", R.drawable.ic_work),
         NavigationItem("profile", "Profil", R.drawable.ic_person)
     )
