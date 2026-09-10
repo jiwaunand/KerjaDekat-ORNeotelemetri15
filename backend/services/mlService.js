@@ -1,11 +1,12 @@
 const axios = require("axios");
 
-const getJobScore = async (deskripsi) => {
+const getJobScore = async (skillText, topN = 10) => {
   try {
     const response = await axios.post(
       process.env.ML_API_URL,
       {
-        deskripsi: deskripsi
+        skill_text: skillText,
+        top_n: topN
       }
     );
 
