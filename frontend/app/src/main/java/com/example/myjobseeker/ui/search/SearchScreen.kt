@@ -52,7 +52,8 @@ fun SearchScreen(
     val searchResults = viewModel.searchResults
     
     val jobs by jobViewModel.jobs.collectAsState()
-    
+    val bookmarkedJobIds by jobViewModel.bookmarkedJobIds.collectAsState()
+
     LaunchedEffect(jobs) {
         viewModel.setAllJobs(jobs)
     }
@@ -96,14 +97,12 @@ fun SearchScreen(
             onFilterSelect = { filterTag ->
                 val query = when (filterTag.lowercase()) {
                     "terdekat" -> "location: Padang" // Example mapping
-                    "shift fleksibel" -> "timerange: part time"
                     "gaji harian" -> "salary: 70000"
                     "category" -> "category: "
                     "company" -> "company: "
                     "skill" -> "skill: "
                     "salary" -> "salary: "
                     "location" -> "location: "
-                    "time range" -> "timerange: "
                     else -> filterTag
                 }
                 viewModel.onSearchQueryChange(query)
@@ -155,7 +154,7 @@ fun SearchScreen(
                             currentUserId = currentUserId,
                             onClick = { onJobClick(job) },
                             onApplyClick = { onApplyClick(job) },
-                            isBookmarked = jobViewModel.isBookmarked(job.id),
+                            isBookmarked = bookmarkedJobIds.contains(job.id),
                             onBookmarkClick = { jobViewModel.toggleBookmark(job) }
                         )
                     }
@@ -167,8 +166,8 @@ fun SearchScreen(
 @Composable
 fun FilterChipsRow(onFilterSelect: (String) -> Unit) {
     val allFilters = listOf(
-        "Terdekat", "Shift Fleksibel", "Gaji Harian", 
-        "Category", "Company", "Skill", "Salary", "Location", "Time Range"
+        "Location", "Salary", "Company", "Terdekat", "Gaji Harian",
+        "Category", "Skill"
     )
     var isExpanded by remember { mutableStateOf(false) }
     var selectedFilter by remember { mutableStateOf("") }

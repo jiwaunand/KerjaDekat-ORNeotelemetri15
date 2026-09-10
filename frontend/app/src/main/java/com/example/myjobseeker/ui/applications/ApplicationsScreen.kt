@@ -259,7 +259,7 @@ fun ApplicationCard(application: Application, viewModel: JobViewModel, onDetailC
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
-                        text = "${job.companyName} • ${job.distance}",
+                        text = stringResource(id = R.string.company_location_format, job.companyName, job.location),
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

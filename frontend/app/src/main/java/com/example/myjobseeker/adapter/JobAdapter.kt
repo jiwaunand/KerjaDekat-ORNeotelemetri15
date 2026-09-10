@@ -16,11 +16,7 @@ class JobAdapter(
     class JobViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.job_title)
         val company: TextView = view.findViewById(R.id.company_info)
-        val match: TextView = view.findViewById(R.id.tv_match)
-        val distance: TextView = view.findViewById(R.id.tv_distance)
         val salary: TextView = view.findViewById(R.id.tv_salary)
-        val time: TextView = view.findViewById(R.id.tv_time)
-        val skill: TextView = view.findViewById(R.id.tv_skill)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JobViewHolder {
@@ -33,12 +29,8 @@ class JobAdapter(
         val job = jobs[position]
         val context = holder.itemView.context
         holder.title.text = job.title
-        holder.company.text = job.companyName
-        holder.match.text = context.getString(R.string.match_format, job.matchPercentage)
-        holder.distance.text = job.distance
+        holder.company.text = context.getString(R.string.company_location_format, job.companyName, job.location)
         holder.salary.text = job.salary
-        holder.time.text = job.timeRange
-        holder.skill.text = job.skill
 
         holder.itemView.setOnClickListener { onItemClick(job) }
     }

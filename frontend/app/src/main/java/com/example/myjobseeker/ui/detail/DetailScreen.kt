@@ -115,7 +115,7 @@ fun DetailScreen(
                             }
                             
                             // Verified Tag
-                            Surface(
+                            /*Surface(
                                 modifier = Modifier.padding(12.dp).align(Alignment.TopStart),
                                 color = Color.Black.copy(alpha = 0.7f),
                                 shape = RoundedCornerShape(8.dp)
@@ -138,13 +138,13 @@ fun DetailScreen(
                                         fontWeight = FontWeight.Bold
                                     )
                                 }
-                            }
+                            }*/
 
                             // Heart and Bookmark icons
                             Row(
                                 modifier = Modifier.padding(12.dp).align(Alignment.TopEnd)
                             ) {
-                                Surface(
+                                /*Surface(
                                     modifier = Modifier.size(32.dp),
                                     color = Color.White.copy(alpha = 0.9f),
                                     shape = RoundedCornerShape(8.dp)
@@ -155,7 +155,7 @@ fun DetailScreen(
                                         modifier = Modifier.padding(8.dp),
                                         tint = TextDark
                                     )
-                                }
+                                }*/
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Surface(
                                     modifier = Modifier.size(32.dp).clickable(onClick = onBookmarkClick),
@@ -168,7 +168,7 @@ fun DetailScreen(
                                         ),
                                         contentDescription = null,
                                         modifier = Modifier.padding(8.dp),
-                                        tint = TextDark
+                                        tint = NavNavyHeader
                                     )
                                 }
                             }
@@ -182,26 +182,15 @@ fun DetailScreen(
                                     Text(text = job.title, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = MaterialTheme.colorScheme.onSurface)
                                     Text(text = job.companyName, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
                                 }
-                                Surface(
-                                    color = MaterialTheme.colorScheme.surfaceVariant,
-                                    shape = RoundedCornerShape(8.dp)
-                                ) {
-                                    Text(
-                                        text = stringResource(id = R.string.shift_night),
-                                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                                        color = BlueNormal,
-                                        fontSize = 11.sp
-                                    )
-                                }
                             }
 
                             Spacer(modifier = Modifier.height(20.dp))
 
-                            // Distance and Salary Blocks
+                            // Location and Salary Blocks
                             Row(modifier = Modifier.fillMaxWidth()) {
                                 InfoBlock(
-                                    label = stringResource(id = R.string.distance_label),
-                                    value = stringResource(id = R.string.distance_near_format, job.distance),
+                                    label = stringResource(id = R.string.location_label),
+                                    value = job.location,
                                     icon = R.drawable.ic_location,
                                     iconColor = BlueNormal,
                                     bgColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -225,31 +214,8 @@ fun DetailScreen(
                             // Description Section
                             SectionContainer(title = stringResource(id = R.string.job_description)) {
                                 Text(
-                                    text = stringResource(id = R.string.job_description_placeholder),
+                                    text = job.description,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    fontSize = 13.sp
-                                )
-                            }
-                            
-                            Spacer(modifier = Modifier.height(16.dp))
-                            
-                            // Skills Section
-                            SectionContainer(title = stringResource(id = R.string.main_skills)) {
-                                FlowRow(modifier = Modifier.fillMaxWidth().padding(top = 12.dp)) {
-                                    SkillTag(stringResource(id = R.string.skill_1))
-                                    SkillTag(stringResource(id = R.string.skill_2))
-                                    SkillTag(stringResource(id = R.string.skill_3))
-                                    SkillTag(stringResource(id = R.string.skill_4))
-                                }
-                            }
-                            
-                            Spacer(modifier = Modifier.height(16.dp))
-                            
-                            // Match Section
-                            SectionContainer(title = stringResource(id = R.string.match_percentage)) {
-                                Text(
-                                    text = stringResource(id = R.string.match_format, job.matchPercentage),
-                                    color = SuccessGreen,
                                     fontSize = 13.sp
                                 )
                             }
@@ -286,7 +252,7 @@ fun DetailScreen(
                             onClick = onApplyClick,
                             modifier = Modifier.weight(1f).height(56.dp),
                             shape = RoundedCornerShape(8.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = buttonColor)
+                            colors = ButtonDefaults.buttonColors(containerColor = BlueNormal)
                         ) {
                             Text(
                                 text = buttonText,

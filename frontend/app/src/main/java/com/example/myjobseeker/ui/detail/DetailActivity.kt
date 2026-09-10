@@ -27,9 +27,9 @@ class DetailActivity : AppCompatActivity() {
         job?.let {
             findViewById<TextView>(R.id.detail_title).text = it.title
             findViewById<TextView>(R.id.detail_company).text = it.companyName
-            findViewById<TextView>(R.id.detail_distance).text = getString(R.string.distance_near_format, it.distance)
+            findViewById<TextView>(R.id.detail_location).text = it.location
             findViewById<TextView>(R.id.detail_salary).text = it.salary
-            findViewById<TextView>(R.id.detail_match).text = getString(R.string.match_format, it.matchPercentage)
+            findViewById<TextView>(R.id.detail_description).text = it.description
         }
 
         setupClickListeners()

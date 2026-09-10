@@ -58,9 +58,9 @@ class HomeFragment : Fragment() {
         binding.rvJobs.layoutManager = LinearLayoutManager(context)
 
         val jobs = listOf(
-            Job(1, "Barista", "Kopi Kenangan", "Khatib Sulaiman", 99, "1.8 km", "Rp. 70.000/hari", "15.00 - 22.00", "Basic Coffee"),
-            Job(2, "Admin Toko", "Toko Fotocopy", "Limau Manis", 70, "7.5 km", "Rp. 100.000/mg", "19.00 - 21.00", "Printing, dll"),
-            Job(3, "Social Media Designer", "Kopi Kenangan", "Khatib Sulaiman", 75, "1.8 km", "Rp. 50.000/design", "free time", "Design")
+            Job(1, "Barista", "Kopi Kenangan", getString(R.string.job_description_placeholder), "Khatib Sulaiman", "Rp. 70.000/hari"),
+            Job(2, "Admin Toko", "Toko Fotocopy", getString(R.string.job_description_placeholder), "Limau Manis", "Rp. 100.000/mg"),
+            Job(3, "Social Media Designer", "Kopi Kenangan", getString(R.string.job_description_placeholder), "Khatib Sulaiman", "Rp. 50.000/design")
         )
 
         val adapter = JobAdapter(jobs) { job ->

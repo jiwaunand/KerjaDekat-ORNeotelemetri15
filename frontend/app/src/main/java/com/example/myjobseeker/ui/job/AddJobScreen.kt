@@ -39,9 +39,6 @@ fun AddJobScreen(
     var companyName by remember { mutableStateOf("") }
     var jobLocation by remember { mutableStateOf("") }
     var salary by remember { mutableStateOf("") }
-    var distance by remember { mutableStateOf("") }
-    var timeRange by remember { mutableStateOf("") }
-    var skills by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
 
@@ -160,35 +157,17 @@ fun AddJobScreen(
 
                             Spacer(modifier = Modifier.height(16.dp))
 
-                            // Distance and Salary Blocks (Inputs)
+                            // Salary Block (Input)
                             Row(modifier = Modifier.fillMaxWidth()) {
-                                OutlinedTextField(
-                                    value = distance,
-                                    onValueChange = { distance = it },
-                                    label = { Text("Jarak (ex: 2.0 km)") },
-                                    modifier = Modifier.weight(1f),
-                                    shape = RoundedCornerShape(8.dp)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
                                 OutlinedTextField(
                                     value = salary,
                                     onValueChange = { salary = it },
                                     label = { Text("Gaji (ex: Rp 1jt)") },
-                                    modifier = Modifier.weight(1f),
+                                    modifier = Modifier.fillMaxWidth(),
                                     shape = RoundedCornerShape(8.dp)
                                 )
                             }
                             
-                            Spacer(modifier = Modifier.height(16.dp))
-
-                            OutlinedTextField(
-                                value = timeRange,
-                                onValueChange = { timeRange = it },
-                                label = { Text("Waktu Kerja (ex: 08.00 - 17.00)") },
-                                modifier = Modifier.fillMaxWidth(),
-                                shape = RoundedCornerShape(8.dp)
-                            )
-
                             Spacer(modifier = Modifier.height(16.dp))
                             
                             // Description Section
@@ -199,23 +178,6 @@ fun AddJobScreen(
                                 modifier = Modifier.fillMaxWidth().height(120.dp),
                                 shape = RoundedCornerShape(8.dp)
                             )
-                            
-                            Spacer(modifier = Modifier.height(16.dp))
-                            
-                            // Skills Section (Simulated Tag Input)
-                            OutlinedTextField(
-                                value = skills,
-                                onValueChange = { skills = it },
-                                label = { Text("Tags / Skill (pisahkan dengan koma)") },
-                                modifier = Modifier.fillMaxWidth(),
-                                shape = RoundedCornerShape(8.dp)
-                            )
-
-                            FlowRow(modifier = Modifier.fillMaxWidth().padding(top = 12.dp)) {
-                                skills.split(",").filter { it.isNotBlank() }.forEach { skill ->
-                                    SkillTag(skill.trim())
-                                }
-                            }
                             
                             Spacer(modifier = Modifier.height(24.dp))
                         }
@@ -239,12 +201,9 @@ fun AddJobScreen(
                                         id = (System.currentTimeMillis() / 1000).toInt(),
                                         title = title,
                                         companyName = companyName,
+                                        description = description,
                                         location = jobLocation,
-                                        matchPercentage = 100,
-                                        distance = distance,
                                         salary = salary,
-                                        timeRange = timeRange,
-                                        skill = skills,
                                         imageUri = imageUri?.toString()
                                     )
                                     jobViewModel.addJob(newJob)

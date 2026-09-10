@@ -57,6 +57,7 @@ fun HomeScreen(
     }
 
     val jobs by jobViewModel.jobs.collectAsState()
+    val bookmarkedJobIds by jobViewModel.bookmarkedJobIds.collectAsState()
 
     Column(
         modifier = Modifier
@@ -112,7 +113,7 @@ fun HomeScreen(
                     currentUserId = currentUserId,
                     onClick = { onJobClick(job) },
                     onApplyClick = { onApplyClick(job) },
-                    isBookmarked = jobViewModel.isBookmarked(job.id),
+                    isBookmarked = bookmarkedJobIds.contains(job.id),
                     onBookmarkClick = { jobViewModel.toggleBookmark(job) }
                 )
             }
@@ -327,13 +328,6 @@ fun SearchBar(
                             showMenu = false
                         }
                     )
-                    DropdownMenuItem(
-                        text = { Text("Time Range") },
-                        onClick = {
-                            if (onClick != null) onClick("timerange: ") else onTextChange("timerange: ")
-                            showMenu = false
-                        }
-                    )
                 }
             }
         }
@@ -341,9 +335,9 @@ fun SearchBar(
 }
 
 fun getDummyJobs(): List<Job> = listOf(
-    Job(1, "Barista", "Kopi Kenangan", "Khatib Sulaiman", 99, "1.8 km", "Rp. 70.000/hari", "15.00 - 22.00", "Basic Coffee"),
-    Job(2, "Admin Toko", "Toko Fotocopy", "Limau Manis", 70, "7.5 km", "Rp. 100.000/mg", "19.00 - 21.00", "Printing, dll"),
-    Job(3, "Social Media Designer", "Kopi Kenangan", "Khatib Sulaiman", 75, "1.8 km", "Rp. 50.000/design", "free time", "Design"),
-    Job(4, "programer", "PT. mencari cinta sejati", "Padang", 90, "20km","RP. 10.000.000/project","8 jam","coding"),
-    Job(5, "programer", "PT. mencari cinta sejati", "bukittinggi", 90, "90km","RP. 10.000.000/project","part time","coding"),
+    Job(1, "Barista", "Kopi Kenangan", "Sebagai barista yang berpengalaman dalam membuat kopi dan meracik minuman.", "Khatib Sulaiman", "Rp. 70.000/hari"),
+    Job(2, "Admin Toko", "Toko Fotocopy", "Melakukan administrasi toko dan pelayanan pelanggan.", "Limau Manis", "Rp. 100.000/mg"),
+    Job(3, "Social Media Designer", "Kopi Kenangan", "Mendesain konten kreatif untuk media sosial.", "Khatib Sulaiman", "Rp. 50.000/design"),
+    Job(4, "programer", "PT. mencari cinta sejati", "Membangun aplikasi web dan mobile.", "Padang", "RP. 10.000.000/project"),
+    Job(5, "programer", "PT. mencari cinta sejati", "Membangun sistem backend.", "bukittinggi", "RP. 10.000.000/project"),
 )

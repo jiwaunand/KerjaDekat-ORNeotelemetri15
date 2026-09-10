@@ -58,9 +58,8 @@ class SearchViewModel : ViewModel() {
                 
                 allJobs.filter { job ->
                     when (prefix) {
-                        "category" -> job.skill.contains(value, ignoreCase = true)
+                        "category", "skill" -> job.description.contains(value, ignoreCase = true)
                         "company" -> job.companyName.contains(value, ignoreCase = true)
-                        "skill" -> job.skill.contains(value, ignoreCase = true)
                         "salary" -> {
                             val numericSalary = value.replace(Regex("[^0-9]"), "").toLongOrNull()
                             val jobSalary = job.salary.replace(Regex("[^0-9]"), "").toLongOrNull()
@@ -71,7 +70,6 @@ class SearchViewModel : ViewModel() {
                             }
                         }
                         "location" -> job.location.contains(value, ignoreCase = true)
-                        "timerange" -> job.timeRange.contains(value, ignoreCase = true)
                         else -> job.title.contains(query, ignoreCase = true) || job.companyName.contains(query, ignoreCase = true)
                     }
                 }

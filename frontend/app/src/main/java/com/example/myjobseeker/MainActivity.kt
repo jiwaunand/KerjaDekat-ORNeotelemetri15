@@ -119,6 +119,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 val currentAddress by locationViewModel.currentLocation
+                val bookmarkedJobIds by jobViewModel.bookmarkedJobIds.collectAsState()
                 var selectedJob by remember { mutableStateOf<Job?>(null) }
                 var selectedApplication by remember { mutableStateOf<Application?>(null) }
 
@@ -391,7 +392,7 @@ class MainActivity : ComponentActivity() {
                                     onProfileClick = {
                                         navController.navigate("profile")
                                     },
-                                    isBookmarked = jobViewModel.isBookmarked(job.id),
+                                    isBookmarked = bookmarkedJobIds.contains(job.id),
                                     onBookmarkClick = { jobViewModel.toggleBookmark(job) },
                                     location = currentAddress,
                                     buttonText = if (isCreator) "Hapus Pekerjaan" else stringResource(id = R.string.apply_job),

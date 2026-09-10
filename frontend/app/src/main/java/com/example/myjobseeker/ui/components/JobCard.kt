@@ -40,157 +40,76 @@ fun JobCard(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .clickable(onClick = onClick)
-                .padding(16.dp)
                 .fillMaxWidth()
+                .height(IntrinsicSize.Min),
+            verticalAlignment = Alignment.Top
         ) {
-            // Header: Logo, Title, Company Info, Bookmark
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.Top
+            // Left: Logo/Image
+            val painter = if (job.imageUri != null) {
+                rememberAsyncImagePainter(model = job.imageUri)
+            } else {
+                painterResource(id = R.drawable.ic_work)
+            }
+
+            Image(
+                painter = painter,
+                contentDescription = null,
+                modifier = Modifier
+                    .width(110.dp)
+                    .fillMaxHeight()
+                    .background(BlueDark),
+                contentScale = ContentScale.Crop
+            )
+
+            // Right: Content
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(16.dp)
             ) {
-                // company_logo
-                if (job.imageUri != null) {
-                    Image(
-                        painter = rememberAsyncImagePainter(model = job.imageUri),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(48.dp)
-                            .clip(RoundedCornerShape(8.dp)),
-                        contentScale = ContentScale.Crop
-                    )
-                } else {
-                    Box(
-                        modifier = Modifier
-                            .size(48.dp)
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(BlueDark)
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(12.dp))
-
-                // job_title and company_info
-                Column(modifier = Modifier.weight(1f)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Text(
                         text = job.title,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.weight(1f)
                     )
-                    Text(
-                        text = "${job.companyName} • ${job.location}",
-                        fontSize = 12.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    // btn_bookmark
+                    Icon(
+                        painter = painterResource(
+                            id = if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outline
+                        ),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable(onClick = onBookmarkClick),
+                        tint = BlueNormal
                     )
                 }
 
-                // btn_bookmark
-                Icon(
-                    painter = painterResource(
-                        id = if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outline
-                    ),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clickable(onClick = onBookmarkClick),
-                    tint = BlueNormal
+                Text(
+                    text = "${job.companyName} • ${job.location}",
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-            }
 
-            Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(12.dp))
 
-            // tags_layout: tv_match, tv_distance
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Start
-            ) {
-                // tv_match
-                Surface(
-                    modifier = Modifier.height(25.dp),
-                    color = SuccessGreenLight,
-                    shape = RoundedCornerShape(8.dp)
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.match_format, job.matchPercentage),
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                        fontSize = 10.sp,
-                        color = SuccessGreen
-                    )
-                }
+                Text(
+                    text = job.salary,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
 
-                Spacer(modifier = Modifier.width(8.dp))
-
-                // tv_distance
-                Surface(
-                    modifier = Modifier
-                        .width(56.dp)
-                        .height(25.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant,
-                    shape = RoundedCornerShape(8.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Text(
-                            text = job.distance,
-                            fontSize = 10.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(5.dp))
-
-            // tv_salary
-            Text(
-                text = job.salary,
-                modifier = Modifier.align(Alignment.End),
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-
-            // details_layout and btn_apply
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                // details_layout: tv_time, tv_skill
-                Row(
-                    modifier = Modifier.weight(1f),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Surface(
-                        modifier = Modifier.height(25.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
-                        Text(
-                            text = job.timeRange,
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                            fontSize = 10.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.width(8.dp))
-
-                    Surface(
-                        modifier = Modifier.height(25.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
-                        Text(
-                            text = job.skill,
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                            fontSize = 10.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
+                Spacer(modifier = Modifier.height(8.dp))
 
                 // btn_apply
                 Button(
@@ -198,7 +117,9 @@ fun JobCard(
                         if (isCreator) onClick()
                         else onApplyClick()
                     },
-                    modifier = Modifier.height(38.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(38.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = if (isCreator) LogoutRed else BlueNormal
@@ -206,8 +127,8 @@ fun JobCard(
                     contentPadding = PaddingValues(horizontal = 20.dp)
                 ) {
                     Text(
-                        text = if (isCreator) "Detail" else stringResource(id = R.string.apply),
-                        fontSize = 12.sp,
+                        text = if (isCreator) "Detail" else "Lamar",
+                        fontSize = 14.sp,
                         color = Color.White
                     )
                 }

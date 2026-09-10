@@ -17,7 +17,9 @@
     <string name="verified_employer">Pemberi Kerja Terverifikasi</string>
     <string name="shift_night">Shift Malam</string>
     <string name="distance_label">Jarak</string>
+    <string name="location_label">Lokasi</string>
     <string name="net_salary">Gaji Bersih</string>
+    <string name="company_location_format">%1$s • %2$s</string>
     <string name="distance_near_format">%s terdekat</string>
     <string name="match_format">%d%% cocok</string>
     <string name="job_description_placeholder">Sebagai barista yang &#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;</string>
