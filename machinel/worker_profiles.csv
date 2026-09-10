@@ -1,0 +1,201 @@
+worker_id,nama,usia,jenis_kelamin,skill_utama,skill_tambahan,pengalaman_tahun,lokasi_kota,latitude,longitude,ekspektasi_upah_harian,rating,status_verifikasi
+WRK0001,Siti Wahyudin,41,P,Mobile Programming,Customer Service,3,Bandung,-6.940963,107.581776,70000,4.0,Terverifikasi
+WRK0002,Dewi Mustofa,19,P,Customer Service,Kurir / Ojek Barang,9,Medan,3.639742,98.626537,250000,4.3,Belum Terverifikasi
+WRK0003,Sri Nuraini,27,P,Data Entry,Asisten Rumah Tangga (ART),2,Malang,-8.005804,112.65384,70000,3.6,Terverifikasi
+WRK0004,Fitri Prasetyo,45,P,Web Programming,Cleaning Service,9,Malang,-7.958064,112.653815,250000,4.0,Terverifikasi
+WRK0005,Hendra Gunawan,38,L,Data Entry,Mobile Programming,12,Padang,-0.908291,100.408581,180000,4.5,Belum Terverifikasi
+WRK0006,Tuti Dabukke,41,P,Asisten Rumah Tangga (ART),Tukang Kebun,2,Bandung,-6.898818,107.616527,70000,3.9,Terverifikasi
+WRK0007,Ani Prakasa,40,P,Mobile Programming,Cleaning Service,1,Palembang,-2.99074,104.791934,130000,4.2,Terverifikasi
+WRK0008,Bambang Hassanah,54,L,Marketing,Tukang Cuci / Laundry,11,Medan,3.629927,98.657211,70000,4.5,Belum Terverifikasi
+WRK0009,Rizal Ardianto,37,L,Tukang Bangunan,Sopir,5,Depok,-6.386717,106.813547,130000,4.4,Belum Terverifikasi
+WRK0010,Agus Utami,51,L,Asisten Rumah Tangga (ART),Baby Sitter,4,Bogor,-6.632775,106.821734,50000,3.2,Belum Terverifikasi
+WRK0011,Lina Maheswara,21,P,Sopir,Asisten Rumah Tangga (ART),2,Makassar,-5.181959,119.413864,50000,3.3,Belum Terverifikasi
+WRK0012,Sri Prasetya,36,P,Baby Sitter,Desain Grafis,3,Padang,-0.936392,100.408618,150000,3.9,Belum Terverifikasi
+WRK0013,Siti Hassanah,26,P,Tukang Bangunan,Juru Masak / Katering Rumahan,6,Medan,3.584726,98.682132,130000,4.9,Belum Terverifikasi
+WRK0014,Ani Prasasta,40,P,Tukang Kebun,Asisten Rumah Tangga (ART),12,Jakarta,-6.209061,106.838666,100000,4.0,Belum Terverifikasi
+WRK0015,Hendra Uwais,44,L,Sopir,Satpam / Security,13,Jakarta,-6.212825,106.803386,180000,4.4,Terverifikasi
+WRK0016,Siti Maryadi,24,P,Data Entry,Tukang Cuci / Laundry,11,Makassar,-5.180513,119.477461,70000,3.9,Belum Terverifikasi
+WRK0017,Dewi Kurniawan,22,P,Sopir,Customer Service,7,Surabaya,-7.267923,112.733127,150000,4.6,Terverifikasi
+WRK0018,Dedi Mansur,30,L,Tukang Kebun,Buruh Gudang,7,Makassar,-5.124962,119.464595,70000,3.3,Terverifikasi
+WRK0019,Agus Hidayat,38,L,Desain Grafis,Tukang Kebun,14,Bekasi,-6.225505,106.971995,150000,4.7,Belum Terverifikasi
+WRK0020,Bambang Gunawan,37,L,Desain Grafis,Data Entry,1,Padang,-0.933961,100.446833,150000,4.0,Belum Terverifikasi
+WRK0021,Budi Situmorang,20,L,Asisten Rumah Tangga (ART),Data Entry,12,Makassar,-5.11453,119.390373,250000,4.2,Terverifikasi
+WRK0022,Fitri Saptono,23,P,Data Entry,Customer Service,3,Padang,-0.946963,100.462972,150000,5.0,Terverifikasi
+WRK0023,Rudi Pratiwi,36,L,Customer Service,Web Programming,5,Tangerang,-6.184524,106.625842,150000,3.7,Belum Terverifikasi
+WRK0024,Fitri Wulandari,42,P,Asisten Rumah Tangga (ART),Satpam / Security,10,Jakarta,-6.179877,106.860331,70000,4.1,Belum Terverifikasi
+WRK0025,Dedi Mustofa,23,L,Pedagang Keliling / Bantu Jualan,Satpam / Security,9,Surabaya,-7.249226,112.716243,180000,3.3,Belum Terverifikasi
+WRK0026,Wati Hidayat,19,P,Customer Service,Pedagang Keliling / Bantu Jualan,2,Malang,-7.946317,112.677311,180000,4.0,Belum Terverifikasi
+WRK0027,Rudi Melani,24,L,Tukang Cuci / Laundry,Customer Service,4,Makassar,-5.102933,119.431327,90000,3.2,Terverifikasi
+WRK0028,Fitri Lazuardi,41,P,Buruh Gudang,Tukang Cuci / Laundry,5,Bandung,-6.907775,107.584525,250000,3.1,Belum Terverifikasi
+WRK0029,Lina Tamba,54,P,Admin Kantor,Data Entry,6,Medan,3.598601,98.653147,150000,4.4,Belum Terverifikasi
+WRK0030,Sri Mahendra,48,P,Baby Sitter,Pedagang Keliling / Bantu Jualan,4,Yogyakarta,-7.792854,110.416127,130000,3.1,Terverifikasi
+WRK0031,Joko Prakasa,32,L,Customer Service,Data Entry,4,Surabaya,-7.231188,112.729379,180000,3.2,Belum Terverifikasi
+WRK0032,Hendra Najmudin,38,L,Web Programming,Cleaning Service,2,Jakarta,-6.219155,106.832996,150000,3.4,Belum Terverifikasi
+WRK0033,Agus Hutagalung,23,L,Tukang Kebun,Tukang Bangunan,15,Jakarta,-6.230112,106.878576,250000,4.2,Belum Terverifikasi
+WRK0034,Agus Mahendra,25,L,Mobile Programming,Kurir / Ojek Barang,3,Yogyakarta,-7.751577,110.380388,130000,3.5,Terverifikasi
+WRK0035,Fitri Yolanda,36,P,Admin Kantor,Mobile Programming,0,Padang,-0.990819,100.450869,100000,4.4,Terverifikasi
+WRK0036,Rina Winarsih,52,P,Asisten Rumah Tangga (ART),Customer Service,11,Denpasar,-8.678843,115.229037,70000,4.9,Terverifikasi
+WRK0037,Lina Halim,40,P,Juru Masak / Katering Rumahan,Tukang Cuci / Laundry,0,Jakarta,-6.195233,106.893704,150000,4.6,Terverifikasi
+WRK0038,Wati Hartati,26,P,Buruh Gudang,Asisten Rumah Tangga (ART),14,Jakarta,-6.22357,106.829455,250000,4.3,Belum Terverifikasi
+WRK0039,Joko Najmudin,52,L,Kurir / Ojek Barang,Admin Kantor,10,Medan,3.549581,98.642147,130000,4.0,Belum Terverifikasi
+WRK0040,Rudi Aryani,45,L,Sopir,Web Programming,8,Semarang,-6.981003,110.444784,70000,4.6,Belum Terverifikasi
+WRK0041,Tuti Santoso,23,P,Customer Service,Mobile Programming,8,Bandung,-6.91788,107.618852,70000,4.5,Terverifikasi
+WRK0042,Tuti Saefullah,46,P,Satpam / Security,Pedagang Keliling / Bantu Jualan,14,Surabaya,-7.299493,112.768192,180000,3.3,Belum Terverifikasi
+WRK0043,Dedi Simbolon,28,L,Kurir / Ojek Barang,Tukang Bangunan,2,Denpasar,-8.620685,115.190056,180000,3.7,Terverifikasi
+WRK0044,Siti Maulana,20,P,Pedagang Keliling / Bantu Jualan,Tukang Kebun,11,Bandung,-6.960777,107.646952,180000,4.9,Belum Terverifikasi
+WRK0045,Tuti Sihotang,35,P,Customer Service,Tukang Cuci / Laundry,11,Padang,-0.920792,100.424592,180000,3.6,Terverifikasi
+WRK0046,Agus Usamah,31,L,Cleaning Service,Satpam / Security,8,Padang,-0.945325,100.458554,130000,4.4,Belum Terverifikasi
+WRK0047,Andi Saefullah,22,L,Data Entry,Marketing,2,Bandung,-6.882217,107.614304,150000,4.3,Belum Terverifikasi
+WRK0048,Wati Rajasa,30,P,Buruh Gudang,Tukang Kebun,11,Tangerang,-6.157344,106.651922,100000,3.2,Terverifikasi
+WRK0049,Siti Melani,43,P,Marketing,Admin Kantor,4,Makassar,-5.142298,119.419591,70000,3.1,Belum Terverifikasi
+WRK0050,Fitri Simbolon,40,P,Asisten Rumah Tangga (ART),Tukang Kebun,14,Surabaya,-7.294967,112.733803,250000,4.4,Terverifikasi
+WRK0051,Hendra Firmansyah,38,L,Cleaning Service,Tukang Cuci / Laundry,4,Yogyakarta,-7.754529,110.325041,130000,3.3,Belum Terverifikasi
+WRK0052,Ani Waskita,23,P,Juru Masak / Katering Rumahan,Customer Service,4,Semarang,-6.99707,110.462335,130000,4.2,Terverifikasi
+WRK0053,Agus Wijaya,54,L,Sopir,Juru Masak / Katering Rumahan,1,Malang,-7.954152,112.6728,50000,3.2,Terverifikasi
+WRK0054,Fitri Hutagalung,43,P,Marketing,Satpam / Security,9,Malang,-8.013571,112.6715,130000,4.0,Belum Terverifikasi
+WRK0055,Budi Nababan,38,L,Baby Sitter,Pedagang Keliling / Bantu Jualan,10,Bandung,-6.923539,107.617525,90000,3.6,Belum Terverifikasi
+WRK0056,Dedi Puspita,27,L,Data Entry,Cleaning Service,3,Yogyakarta,-7.789435,110.351412,130000,3.9,Terverifikasi
+WRK0057,Sri Mulyani,28,P,Buruh Gudang,Admin Kantor,10,Bogor,-6.585562,106.780827,150000,3.4,Belum Terverifikasi
+WRK0058,Yuni Mulyani,40,P,Customer Service,Kurir / Ojek Barang,14,Padang,-0.994782,100.461723,100000,3.4,Terverifikasi
+WRK0059,Lina Jailani,45,P,Admin Kantor,Tukang Kebun,9,Denpasar,-8.632266,115.228026,50000,4.7,Belum Terverifikasi
+WRK0060,Sri Salahudin,22,P,Marketing,Web Programming,6,Makassar,-5.193176,119.387816,150000,4.1,Belum Terverifikasi
+WRK0061,Fitri Najmudin,39,P,Cleaning Service,Marketing,12,Malang,-7.955496,112.595466,150000,4.6,Belum Terverifikasi
+WRK0062,Rudi Mahendra,48,L,Kurir / Ojek Barang,Customer Service,1,Denpasar,-8.669588,115.212608,90000,4.4,Belum Terverifikasi
+WRK0063,Rizal Wacana,37,L,Sopir,Desain Grafis,5,Depok,-6.400949,106.776997,180000,5.0,Belum Terverifikasi
+WRK0064,Fitri Rahayu,19,P,Sopir,Admin Kantor,3,Semarang,-6.969211,110.368364,180000,4.2,Belum Terverifikasi
+WRK0065,Budi Samosir,25,L,Web Programming,Baby Sitter,4,Denpasar,-8.672455,115.215023,100000,3.1,Terverifikasi
+WRK0066,Tuti Purwanti,51,P,Mobile Programming,Baby Sitter,15,Palembang,-3.010957,104.79445,50000,4.4,Belum Terverifikasi
+WRK0067,Dewi Palastri,34,P,Marketing,Admin Kantor,10,Palembang,-2.994725,104.742718,150000,4.4,Terverifikasi
+WRK0068,Joko Rahmawati,49,L,Satpam / Security,Sopir,9,Yogyakarta,-7.81575,110.413649,100000,4.4,Belum Terverifikasi
+WRK0069,Dewi Sihotang,43,P,Satpam / Security,Pedagang Keliling / Bantu Jualan,3,Depok,-6.359051,106.816366,180000,4.8,Terverifikasi
+WRK0070,Siti Saptono,52,P,Data Entry,Juru Masak / Katering Rumahan,8,Semarang,-6.921169,110.374603,250000,3.4,Belum Terverifikasi
+WRK0071,Andi Putra,44,L,Kurir / Ojek Barang,Sopir,7,Denpasar,-8.646411,115.186528,100000,3.1,Belum Terverifikasi
+WRK0072,Agus Farida,30,L,Buruh Gudang,Satpam / Security,13,Jakarta,-6.162348,106.893391,250000,4.0,Belum Terverifikasi
+WRK0073,Siti Hardiansyah,29,P,Tukang Cuci / Laundry,Kurir / Ojek Barang,1,Depok,-6.375628,106.80943,90000,3.8,Belum Terverifikasi
+WRK0074,Wati Mansur,24,P,Satpam / Security,Sopir,1,Depok,-6.3776,106.831429,50000,3.6,Belum Terverifikasi
+WRK0075,Dewi Agustina,25,P,Customer Service,Sopir,14,Yogyakarta,-7.796209,110.413356,130000,3.4,Terverifikasi
+WRK0076,Yuni Lestari,43,P,Satpam / Security,Mobile Programming,6,Tangerang,-6.20968,106.655562,90000,4.2,Belum Terverifikasi
+WRK0077,Hendra Saptono,42,L,Admin Kantor,Tukang Cuci / Laundry,10,Malang,-8.007061,112.680769,100000,3.0,Belum Terverifikasi
+WRK0078,Tuti Handayani,25,P,Juru Masak / Katering Rumahan,Data Entry,11,Semarang,-6.958454,110.423988,100000,3.1,Belum Terverifikasi
+WRK0079,Hendra Hasanah,32,L,Satpam / Security,Tukang Cuci / Laundry,3,Malang,-7.966348,112.672112,130000,3.7,Terverifikasi
+WRK0080,Wati Suryono,23,P,Mobile Programming,Customer Service,15,Padang,-0.922327,100.427774,100000,4.5,Belum Terverifikasi
+WRK0081,Ani Safitri,51,P,Marketing,Data Entry,6,Depok,-6.396083,106.750376,90000,3.3,Terverifikasi
+WRK0082,Rizal Usamah,47,L,Kurir / Ojek Barang,Desain Grafis,14,Padang,-0.988006,100.418238,90000,4.0,Terverifikasi
+WRK0083,Yuni Prasetya,40,P,Tukang Bangunan,Asisten Rumah Tangga (ART),6,Tangerang,-6.226123,106.607346,70000,3.1,Terverifikasi
+WRK0084,Bambang Astuti,42,L,Tukang Kebun,Data Entry,13,Jakarta,-6.230091,106.813598,150000,5.0,Belum Terverifikasi
+WRK0085,Ani Astuti,52,P,Tukang Kebun,Web Programming,11,Malang,-7.920186,112.670055,70000,3.4,Terverifikasi
+WRK0086,Budi Prayoga,33,L,Marketing,Data Entry,13,Bekasi,-6.286026,106.955436,180000,4.6,Belum Terverifikasi
+WRK0087,Joko Pradipta,19,L,Cleaning Service,Tukang Cuci / Laundry,1,Medan,3.638941,98.694702,180000,4.2,Terverifikasi
+WRK0088,Andi Situmorang,32,L,Kurir / Ojek Barang,Marketing,7,Denpasar,-8.717142,115.222378,50000,3.8,Terverifikasi
+WRK0089,Agus Safitri,27,L,Desain Grafis,Customer Service,10,Yogyakarta,-7.746252,110.342916,150000,3.5,Terverifikasi
+WRK0090,Yuni Hakim,40,P,Buruh Gudang,Web Programming,13,Semarang,-7.010604,110.461552,250000,3.1,Belum Terverifikasi
+WRK0091,Sri Pratama,37,P,Marketing,Tukang Kebun,15,Bandung,-6.937511,107.587488,100000,4.7,Belum Terverifikasi
+WRK0092,Yanto Marpaung,39,L,Tukang Kebun,Asisten Rumah Tangga (ART),12,Palembang,-2.929321,104.781129,100000,3.5,Belum Terverifikasi
+WRK0093,Ani Mardhiyah,30,P,Juru Masak / Katering Rumahan,Desain Grafis,12,Yogyakarta,-7.773142,110.338548,50000,4.7,Terverifikasi
+WRK0094,Rina Wastuti,25,P,Tukang Bangunan,Admin Kantor,6,Bogor,-6.556397,106.786319,100000,4.9,Terverifikasi
+WRK0095,Hendra Aryani,40,L,Satpam / Security,Satpam / Security,12,Depok,-6.428567,106.776362,250000,4.1,Belum Terverifikasi
+WRK0096,Dewi Sitorus,44,P,Admin Kantor,Kurir / Ojek Barang,10,Depok,-6.402772,106.754061,100000,3.7,Terverifikasi
+WRK0097,Budi Sinaga,32,L,Mobile Programming,Web Programming,9,Semarang,-6.961369,110.425103,90000,3.4,Terverifikasi
+WRK0098,Dewi Riyanti,40,P,Admin Kantor,Buruh Gudang,15,Malang,-7.922254,112.616356,250000,3.3,Terverifikasi
+WRK0099,Wati Nasyidah,21,P,Kurir / Ojek Barang,Tukang Bangunan,1,Depok,-6.363564,106.843232,70000,4.9,Belum Terverifikasi
+WRK0100,Rudi Rajata,48,L,Customer Service,Admin Kantor,14,Surabaya,-7.236783,112.703014,150000,3.1,Terverifikasi
+WRK0101,Yanto Uyainah,45,L,Juru Masak / Katering Rumahan,Buruh Gudang,9,Yogyakarta,-7.804466,110.321173,50000,4.0,Terverifikasi
+WRK0102,Yanto Farida,23,L,Juru Masak / Katering Rumahan,Pedagang Keliling / Bantu Jualan,11,Bandung,-6.943403,107.631078,130000,4.6,Belum Terverifikasi
+WRK0103,Fitri Halim,42,P,Asisten Rumah Tangga (ART),Marketing,1,Medan,3.644223,98.644786,70000,3.8,Belum Terverifikasi
+WRK0104,Budi Firmansyah,20,L,Mobile Programming,Tukang Cuci / Laundry,10,Tangerang,-6.211162,106.631886,70000,4.8,Terverifikasi
+WRK0105,Yuni Jailani,38,P,Juru Masak / Katering Rumahan,Tukang Bangunan,1,Jakarta,-6.166384,106.864043,90000,4.9,Terverifikasi
+WRK0106,Hendra Waskita,26,L,Tukang Cuci / Laundry,Asisten Rumah Tangga (ART),12,Depok,-6.444806,106.760445,150000,3.8,Belum Terverifikasi
+WRK0107,Andi Prastuti,46,L,Web Programming,Admin Kantor,10,Palembang,-3.002886,104.733002,50000,4.3,Terverifikasi
+WRK0108,Dewi Farida,22,P,Web Programming,Asisten Rumah Tangga (ART),2,Palembang,-2.982915,104.793369,130000,4.6,Belum Terverifikasi
+WRK0109,Hendra Budiman,18,L,Web Programming,Satpam / Security,10,Tangerang,-6.149911,106.597328,150000,3.2,Belum Terverifikasi
+WRK0110,Yuni Situmorang,40,P,Data Entry,Marketing,13,Surabaya,-7.294249,112.720839,70000,3.1,Terverifikasi
+WRK0111,Sri Haryanto,28,P,Asisten Rumah Tangga (ART),Tukang Kebun,7,Jakarta,-6.229615,106.83438,90000,4.4,Belum Terverifikasi
+WRK0112,Yuni Sinaga,22,P,Juru Masak / Katering Rumahan,Pedagang Keliling / Bantu Jualan,13,Padang,-0.982507,100.383921,130000,4.0,Belum Terverifikasi
+WRK0113,Bambang Maryadi,39,L,Tukang Kebun,Web Programming,9,Denpasar,-8.658833,115.208386,50000,4.9,Belum Terverifikasi
+WRK0114,Tuti Sihotang,30,P,Tukang Kebun,Admin Kantor,9,Palembang,-2.944552,104.811351,150000,4.2,Belum Terverifikasi
+WRK0115,Hendra Marpaung,43,L,Admin Kantor,Pedagang Keliling / Bantu Jualan,7,Makassar,-5.168555,119.452196,150000,3.8,Terverifikasi
+WRK0116,Rizal Sihombing,36,L,Tukang Bangunan,Asisten Rumah Tangga (ART),14,Yogyakarta,-7.827607,110.396262,100000,3.9,Belum Terverifikasi
+WRK0117,Wati Mayasari,48,P,Tukang Kebun,Desain Grafis,13,Malang,-7.986317,112.607868,180000,3.1,Belum Terverifikasi
+WRK0118,Dewi Hutagalung,40,P,Marketing,Buruh Gudang,2,Jakarta,-6.179728,106.831553,70000,4.5,Terverifikasi
+WRK0119,Tuti Sinaga,43,P,Juru Masak / Katering Rumahan,Data Entry,7,Bekasi,-6.245254,106.926655,100000,3.9,Terverifikasi
+WRK0120,Siti Andriani,39,P,Asisten Rumah Tangga (ART),Data Entry,3,Padang,-0.986645,100.408798,90000,3.7,Terverifikasi
+WRK0121,Tuti Mahendra,25,P,Data Entry,Tukang Bangunan,10,Padang,-0.987338,100.439399,70000,3.6,Belum Terverifikasi
+WRK0122,Agus Maheswara,47,L,Buruh Gudang,Tukang Cuci / Laundry,5,Depok,-6.35411,106.768591,150000,4.1,Belum Terverifikasi
+WRK0123,Agus Mayasari,31,L,Baby Sitter,Baby Sitter,14,Malang,-7.950869,112.622158,180000,3.8,Belum Terverifikasi
+WRK0124,Rizal Pranowo,34,L,Pedagang Keliling / Bantu Jualan,Admin Kantor,10,Surabaya,-7.22755,112.755789,100000,3.9,Belum Terverifikasi
+WRK0125,Fitri Najmudin,55,P,Data Entry,Asisten Rumah Tangga (ART),5,Palembang,-2.9674,104.760192,130000,4.8,Terverifikasi
+WRK0126,Ani Firmansyah,54,P,Tukang Kebun,Web Programming,12,Medan,3.575738,98.640504,180000,4.2,Belum Terverifikasi
+WRK0127,Bambang Sihombing,29,L,Buruh Gudang,Sopir,5,Malang,-7.962862,112.674516,250000,3.6,Belum Terverifikasi
+WRK0128,Dedi Prasasta,44,L,Web Programming,Data Entry,15,Jakarta,-6.210339,106.815113,180000,4.4,Belum Terverifikasi
+WRK0129,Andi Agustina,36,L,Satpam / Security,Buruh Gudang,1,Denpasar,-8.717414,115.238706,130000,3.4,Belum Terverifikasi
+WRK0130,Dewi Sitompul,46,P,Marketing,Marketing,11,Yogyakarta,-7.834279,110.330921,50000,4.5,Terverifikasi
+WRK0131,Ani Megantara,23,P,Satpam / Security,Data Entry,1,Tangerang,-6.145293,106.657035,250000,3.5,Terverifikasi
+WRK0132,Rudi Suryatmi,31,L,Mobile Programming,Kurir / Ojek Barang,5,Bekasi,-6.214539,106.994513,90000,4.6,Belum Terverifikasi
+WRK0133,Fitri Damanik,50,P,Satpam / Security,Cleaning Service,9,Yogyakarta,-7.828762,110.4174,130000,4.9,Terverifikasi
+WRK0134,Siti Laksmiwati,33,P,Tukang Kebun,Web Programming,7,Semarang,-6.929995,110.379389,90000,4.4,Belum Terverifikasi
+WRK0135,Rizal Sitompul,35,L,Data Entry,Pedagang Keliling / Bantu Jualan,2,Malang,-7.989728,112.624023,70000,3.8,Belum Terverifikasi
+WRK0136,Tuti Dongoran,52,P,Asisten Rumah Tangga (ART),Web Programming,14,Denpasar,-8.720253,115.240014,150000,4.7,Terverifikasi
+WRK0137,Rina Mayasari,21,P,Sopir,Kurir / Ojek Barang,4,Padang,-0.970246,100.450034,250000,4.6,Terverifikasi
+WRK0138,Siti Santoso,26,P,Data Entry,Satpam / Security,0,Surabaya,-7.214557,112.717898,180000,3.4,Terverifikasi
+WRK0139,Ani Wijaya,32,P,Buruh Gudang,Mobile Programming,1,Malang,-7.980556,112.590842,180000,4.3,Terverifikasi
+WRK0140,Budi Wijaya,39,L,Tukang Cuci / Laundry,Cleaning Service,14,Medan,3.592881,98.63547,50000,3.0,Belum Terverifikasi
+WRK0141,Bambang Prakasa,37,L,Cleaning Service,Tukang Kebun,3,Surabaya,-7.284605,112.711033,150000,3.7,Belum Terverifikasi
+WRK0142,Agus Uwais,27,L,Buruh Gudang,Mobile Programming,14,Surabaya,-7.254449,112.702947,150000,4.4,Belum Terverifikasi
+WRK0143,Andi Pertiwi,38,L,Desain Grafis,Tukang Kebun,12,Depok,-6.442453,106.819445,150000,4.9,Terverifikasi
+WRK0144,Ani Anggraini,50,P,Satpam / Security,Baby Sitter,0,Medan,3.60054,98.682201,130000,3.4,Belum Terverifikasi
+WRK0145,Siti Lazuardi,22,P,Admin Kantor,Customer Service,12,Bekasi,-6.198509,107.021067,70000,3.5,Terverifikasi
+WRK0146,Tuti Kuswoyo,22,P,Mobile Programming,Tukang Bangunan,11,Bandung,-6.928816,107.652997,90000,4.5,Terverifikasi
+WRK0147,Joko Rajata,43,L,Web Programming,Asisten Rumah Tangga (ART),9,Medan,3.549183,98.628247,180000,3.8,Terverifikasi
+WRK0148,Ani Hidayanto,22,P,Tukang Kebun,Satpam / Security,10,Semarang,-7.008798,110.458792,180000,4.2,Belum Terverifikasi
+WRK0149,Budi Mustofa,29,L,Data Entry,Cleaning Service,1,Medan,3.553821,98.665648,130000,4.3,Terverifikasi
+WRK0150,Budi Winarsih,35,L,Customer Service,Cleaning Service,8,Bandung,-6.917859,107.603771,90000,3.7,Terverifikasi
+WRK0151,Sri Nurdiyanti,41,P,Desain Grafis,Kurir / Ojek Barang,2,Semarang,-6.964315,110.392995,250000,3.9,Belum Terverifikasi
+WRK0152,Dedi Novitasari,18,L,Desain Grafis,Kurir / Ojek Barang,3,Bandung,-6.941988,107.57939,100000,4.5,Terverifikasi
+WRK0153,Budi Winarsih,33,L,Buruh Gudang,Mobile Programming,1,Padang,-0.960702,100.459223,180000,3.4,Belum Terverifikasi
+WRK0154,Ani Kuswandari,20,P,Kurir / Ojek Barang,Web Programming,5,Denpasar,-8.683219,115.212804,100000,4.6,Terverifikasi
+WRK0155,Yuni Prabowo,36,P,Marketing,Desain Grafis,14,Bekasi,-6.203815,106.95833,50000,3.7,Belum Terverifikasi
+WRK0156,Bambang Simbolon,44,L,Baby Sitter,Tukang Bangunan,7,Makassar,-5.138531,119.432036,90000,3.0,Terverifikasi
+WRK0157,Siti Megantara,33,P,Satpam / Security,Mobile Programming,3,Makassar,-5.197554,119.44843,100000,4.1,Belum Terverifikasi
+WRK0158,Agus Wijayanti,23,L,Tukang Cuci / Laundry,Desain Grafis,13,Tangerang,-6.200317,106.58629,150000,3.9,Terverifikasi
+WRK0159,Hendra Agustina,38,L,Tukang Kebun,Web Programming,7,Surabaya,-7.24831,112.708328,130000,3.5,Belum Terverifikasi
+WRK0160,Lina Pudjiastuti,46,P,Tukang Kebun,Data Entry,3,Semarang,-6.993339,110.461055,90000,3.2,Belum Terverifikasi
+WRK0161,Ani Pudjiastuti,25,P,Data Entry,Asisten Rumah Tangga (ART),9,Yogyakarta,-7.809771,110.396534,250000,3.5,Terverifikasi
+WRK0162,Fitri Wacana,43,P,Tukang Kebun,Customer Service,2,Jakarta,-6.237298,106.881257,100000,4.9,Terverifikasi
+WRK0163,Yuni Yulianti,24,P,Web Programming,Tukang Kebun,14,Bogor,-6.548032,106.759108,100000,3.2,Terverifikasi
+WRK0164,Budi Pranowo,23,L,Baby Sitter,Desain Grafis,12,Bogor,-6.569004,106.778229,150000,4.4,Belum Terverifikasi
+WRK0165,Budi Sihombing,47,L,Tukang Kebun,Kurir / Ojek Barang,2,Surabaya,-7.287725,112.766699,150000,3.2,Terverifikasi
+WRK0166,Sri Firgantoro,35,P,Buruh Gudang,Juru Masak / Katering Rumahan,11,Padang,-0.994152,100.435521,100000,4.8,Belum Terverifikasi
+WRK0167,Budi Handayani,48,L,Satpam / Security,Kurir / Ojek Barang,15,Denpasar,-8.658582,115.187178,180000,4.8,Terverifikasi
+WRK0168,Sri Hutasoit,40,P,Customer Service,Admin Kantor,7,Bandung,-6.925577,107.633365,50000,5.0,Belum Terverifikasi
+WRK0169,Fitri Salahudin,35,P,Tukang Bangunan,Kurir / Ojek Barang,10,Yogyakarta,-7.81344,110.346544,100000,3.1,Belum Terverifikasi
+WRK0170,Fitri Zulaika,32,P,Tukang Cuci / Laundry,Desain Grafis,8,Medan,3.642598,98.632213,50000,4.5,Belum Terverifikasi
+WRK0171,Wati Pudjiastuti,54,P,Pedagang Keliling / Bantu Jualan,Tukang Kebun,0,Bandung,-6.943845,107.6009,150000,4.9,Terverifikasi
+WRK0172,Dewi Handayani,48,P,Kurir / Ojek Barang,Tukang Bangunan,7,Semarang,-6.999144,110.370496,100000,3.0,Belum Terverifikasi
+WRK0173,Agus Mandala,27,L,Sopir,Cleaning Service,1,Makassar,-5.126006,119.474578,50000,3.3,Belum Terverifikasi
+WRK0174,Dedi Hassanah,28,L,Cleaning Service,Mobile Programming,10,Tangerang,-6.134108,106.62146,130000,3.6,Belum Terverifikasi
+WRK0175,Wati Nainggolan,36,P,Pedagang Keliling / Bantu Jualan,Tukang Kebun,7,Tangerang,-6.131426,106.651256,90000,3.8,Terverifikasi
+WRK0176,Rizal Nainggolan,32,L,Desain Grafis,Desain Grafis,1,Palembang,-2.941024,104.802483,90000,4.2,Terverifikasi
+WRK0177,Wati Nashiruddin,39,P,Sopir,Data Entry,5,Makassar,-5.123166,119.4065,70000,4.6,Terverifikasi
+WRK0178,Rina Rajasa,44,P,Cleaning Service,Buruh Gudang,0,Medan,3.614518,98.657248,50000,3.8,Belum Terverifikasi
+WRK0179,Sri Pratama,20,P,Admin Kantor,Satpam / Security,7,Makassar,-5.143098,119.392843,90000,3.9,Terverifikasi
+WRK0180,Yuni Budiyanto,23,P,Web Programming,Sopir,5,Surabaya,-7.30008,112.719111,70000,4.1,Belum Terverifikasi
+WRK0181,Hendra Oktaviani,30,L,Buruh Gudang,Mobile Programming,1,Malang,-8.0001,112.671575,70000,3.7,Belum Terverifikasi
+WRK0182,Yuni Laksita,18,P,Marketing,Mobile Programming,15,Medan,3.554792,98.66149,90000,3.1,Terverifikasi
+WRK0183,Fitri Sirait,25,P,Buruh Gudang,Satpam / Security,9,Padang,-0.977133,100.369774,70000,3.9,Belum Terverifikasi
+WRK0184,Lina Utami,42,P,Marketing,Pedagang Keliling / Bantu Jualan,12,Depok,-6.386396,106.753314,90000,3.7,Terverifikasi
+WRK0185,Siti Nuraini,24,P,Juru Masak / Katering Rumahan,Asisten Rumah Tangga (ART),1,Semarang,-6.972726,110.39304,90000,4.5,Belum Terverifikasi
+WRK0186,Fitri Marpaung,33,P,Customer Service,Admin Kantor,13,Medan,3.60056,98.70628,250000,4.1,Belum Terverifikasi
+WRK0187,Hendra Widiastuti,46,L,Desain Grafis,Buruh Gudang,4,Depok,-6.367106,106.747673,70000,4.9,Terverifikasi
+WRK0188,Rudi Budiman,34,L,Mobile Programming,Sopir,6,Bandung,-6.963232,107.576937,90000,4.7,Terverifikasi
+WRK0189,Hendra Maulana,55,L,Juru Masak / Katering Rumahan,Customer Service,14,Yogyakarta,-7.805865,110.352113,50000,4.6,Belum Terverifikasi
+WRK0190,Hendra Ardianto,52,L,Cleaning Service,Pedagang Keliling / Bantu Jualan,3,Bandung,-6.95268,107.627893,70000,4.6,Belum Terverifikasi
+WRK0191,Sri Aryani,43,P,Kurir / Ojek Barang,Kurir / Ojek Barang,5,Malang,-7.968042,112.643496,130000,3.8,Belum Terverifikasi
+WRK0192,Rina Handayani,37,P,Pedagang Keliling / Bantu Jualan,Satpam / Security,0,Jakarta,-6.184225,106.887683,150000,4.6,Belum Terverifikasi
+WRK0193,Ani Hidayat,23,P,Data Entry,Baby Sitter,10,Bogor,-6.624304,106.786048,130000,4.5,Belum Terverifikasi
+WRK0194,Hendra Permadi,50,L,Pedagang Keliling / Bantu Jualan,Web Programming,1,Tangerang,-6.179854,106.63355,90000,3.1,Terverifikasi
+WRK0195,Agus Permata,41,L,Kurir / Ojek Barang,Baby Sitter,7,Medan,3.632718,98.642273,50000,3.9,Belum Terverifikasi
+WRK0196,Lina Pertiwi,46,P,Tukang Bangunan,Buruh Gudang,7,Yogyakarta,-7.805906,110.411807,150000,4.0,Belum Terverifikasi
+WRK0197,Tuti Iswahyudi,28,P,Asisten Rumah Tangga (ART),Desain Grafis,9,Bandung,-6.883735,107.594966,50000,3.8,Terverifikasi
+WRK0198,Rudi Laksita,26,L,Customer Service,Buruh Gudang,0,Malang,-7.995927,112.647759,50000,3.9,Terverifikasi
+WRK0199,Joko Sudiati,47,L,Juru Masak / Katering Rumahan,Juru Masak / Katering Rumahan,13,Denpasar,-8.639991,115.193146,180000,4.7,Terverifikasi
+WRK0200,Yuni Mustofa,41,P,Desain Grafis,Marketing,3,Malang,-7.964536,112.644961,50000,4.0,Belum Terverifikasi

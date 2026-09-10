@@ -1,0 +1,151 @@
+job_id,judul_pekerjaan,deskripsi,kategori_skill,tipe_pekerjaan,lokasi_kota,latitude,longitude,upah_ditawarkan,satuan_upah,durasi,employer_rating
+INF0001,Sopir,Cari sopir lepas untuk sewa mobil harian.,Sopir,Informal,Surabaya,-7.304999,112.729603,80000,per hari,Mingguan,4.6
+INF0002,Pedagang Keliling / Bantu Jualan,"Membutuhkan tenaga bantu jualan keliling, jujur dan rajin.",Pedagang Keliling / Bantu Jualan,Informal,Depok,-6.397963,106.803249,50000,per hari,Harian,3.6
+INF0003,Juru Masak / Katering Rumahan,"Dibutuhkan tukang masak untuk warung makan, paham masakan rumahan.",Juru Masak / Katering Rumahan,Informal,Denpasar,-8.717846,115.182484,150000,per hari,Mingguan,4.2
+INF0004,Tukang Bangunan,"Dicari tukang untuk proyek pembangunan ruko, bisa mulai kerja minggu ini.",Tukang Bangunan,Informal,Bekasi,-6.207718,106.995414,120000,per hari,Bulanan,3.7
+INF0005,Kurir / Ojek Barang,Butuh ojek barang untuk angkut barang pindahan rumah.,Kurir / Ojek Barang,Informal,Surabaya,-7.269507,112.737998,120000,per hari,Bulanan,4.7
+INF0006,Tukang Cuci / Laundry,"Butuh tenaga laundry kiloan, bisa setrika rapi.",Tukang Cuci / Laundry,Informal,Yogyakarta,-7.833117,110.41173,60000,per hari,Bulanan,4.7
+INF0007,Buruh Gudang,"Dibutuhkan buruh angkut barang gudang, kerja fisik, upah harian.",Buruh Gudang,Informal,Denpasar,-8.701271,115.169556,80000,per hari,Bulanan,5.0
+INF0008,Kurir / Ojek Barang,"Dibutuhkan kurir untuk antar barang harian area kota, punya motor sendiri.",Kurir / Ojek Barang,Informal,Palembang,-2.998303,104.788968,120000,per hari,Mingguan,4.1
+INF0009,Sopir,"Dicari sopir pribadi, paham rute kota, SIM A aktif.",Sopir,Informal,Semarang,-6.946518,110.435055,60000,per hari,Mingguan,4.3
+INF0010,Asisten Rumah Tangga (ART),"Mencari ART untuk bersih-bersih rumah dan masak, bisa harian atau bulanan.",Asisten Rumah Tangga (ART),Informal,Padang,-0.959154,100.466152,80000,per hari,Bulanan,4.8
+INF0011,Cleaning Service,Butuh cleaning service harian untuk area ruko dan gudang.,Cleaning Service,Informal,Bogor,-6.64389,106.787545,100000,per hari,Harian,3.8
+INF0012,Pedagang Keliling / Bantu Jualan,"Membutuhkan tenaga bantu jualan keliling, jujur dan rajin.",Pedagang Keliling / Bantu Jualan,Informal,Makassar,-5.176437,119.432623,200000,per hari,Mingguan,3.9
+INF0013,Pedagang Keliling / Bantu Jualan,"Membutuhkan tenaga bantu jualan keliling, jujur dan rajin.",Pedagang Keliling / Bantu Jualan,Informal,Yogyakarta,-7.791702,110.394201,150000,per proyek,Sekali proyek,4.0
+INF0014,Juru Masak / Katering Rumahan,"Cari koki lepas untuk acara/hajatan, bayaran per acara.",Juru Masak / Katering Rumahan,Informal,Padang,-0.988009,100.371912,60000,per hari,Mingguan,4.4
+INF0015,Baby Sitter,Mencari baby sitter berpengalaman untuk momong bayi usia 1 tahun.,Baby Sitter,Informal,Denpasar,-8.714147,115.200762,200000,per hari,Bulanan,5.0
+INF0016,Sopir,Dibutuhkan sopir untuk antar barang dagangan harian.,Sopir,Informal,Tangerang,-6.216845,106.670379,100000,per hari,Bulanan,3.7
+INF0017,Asisten Rumah Tangga (ART),"Mencari ART untuk bersih-bersih rumah dan masak, bisa harian atau bulanan.",Asisten Rumah Tangga (ART),Informal,Padang,-0.996775,100.439409,100000,per hari,Mingguan,4.3
+INF0018,Sopir,"Dicari sopir pribadi, paham rute kota, SIM A aktif.",Sopir,Informal,Semarang,-6.932533,110.417466,80000,per hari,Mingguan,4.1
+INF0019,Juru Masak / Katering Rumahan,"Dibutuhkan tukang masak untuk warung makan, paham masakan rumahan.",Juru Masak / Katering Rumahan,Informal,Bekasi,-6.196057,107.017449,120000,per proyek,Sekali proyek,3.5
+INF0020,Tukang Kebun,"Membutuhkan tukang kebun untuk merawat taman rumah, datang mingguan.",Tukang Kebun,Informal,Medan,3.550993,98.710001,60000,per hari,Harian,4.6
+INF0021,Juru Masak / Katering Rumahan,"Cari koki lepas untuk acara/hajatan, bayaran per acara.",Juru Masak / Katering Rumahan,Informal,Bekasi,-6.275724,106.991575,75000,per hari,Bulanan,4.3
+INF0022,Baby Sitter,Cari baby sitter live-in untuk anak balita.,Baby Sitter,Informal,Medan,3.638091,98.697727,80000,per hari,Bulanan,4.1
+INF0023,Sopir,Dibutuhkan sopir untuk antar barang dagangan harian.,Sopir,Informal,Makassar,-5.15389,119.434458,60000,per hari,Mingguan,3.8
+INF0024,Tukang Bangunan,"Membutuhkan tukang bangunan untuk renovasi rumah, pengalaman minimal 1 tahun.",Tukang Bangunan,Informal,Denpasar,-8.665108,115.221444,50000,per hari,Harian,4.6
+INF0025,Cleaning Service,"Cari petugas kebersihan gedung, shift pagi/sore.",Cleaning Service,Informal,Surabaya,-7.216958,112.788064,60000,per hari,Mingguan,3.9
+INF0026,Cleaning Service,"Cari petugas kebersihan gedung, shift pagi/sore.",Cleaning Service,Informal,Yogyakarta,-7.832369,110.413051,200000,per hari,Mingguan,4.7
+INF0027,Cleaning Service,Butuh cleaning service harian untuk area ruko dan gudang.,Cleaning Service,Informal,Surabaya,-7.297807,112.745205,150000,per proyek,Sekali proyek,4.2
+INF0028,Tukang Bangunan,"Membutuhkan tukang bangunan untuk renovasi rumah, pengalaman minimal 1 tahun.",Tukang Bangunan,Informal,Malang,-7.951254,112.647218,50000,per proyek,Sekali proyek,4.6
+INF0029,Cleaning Service,"Dibutuhkan tenaga cleaning service untuk kantor, kerja pagi hari.",Cleaning Service,Informal,Medan,3.564221,98.667061,150000,per hari,Mingguan,3.9
+INF0030,Kurir / Ojek Barang,Butuh ojek barang untuk angkut barang pindahan rumah.,Kurir / Ojek Barang,Informal,Padang,-0.916298,100.452797,60000,per hari,Harian,4.5
+INF0031,Tukang Bangunan,"Membutuhkan tukang bangunan untuk renovasi rumah, pengalaman minimal 1 tahun.",Tukang Bangunan,Informal,Surabaya,-7.214863,112.78697,75000,per proyek,Sekali proyek,4.2
+INF0032,Baby Sitter,"Dibutuhkan pengasuh anak harian, sabar dan bertanggung jawab.",Baby Sitter,Informal,Depok,-6.446636,106.782097,150000,per hari,Bulanan,4.9
+INF0033,Tukang Kebun,"Membutuhkan tukang kebun untuk merawat taman rumah, datang mingguan.",Tukang Kebun,Informal,Palembang,-2.956441,104.798451,200000,per hari,Mingguan,3.8
+INF0034,Tukang Bangunan,"Dicari tukang untuk proyek pembangunan ruko, bisa mulai kerja minggu ini.",Tukang Bangunan,Informal,Denpasar,-8.646926,115.168696,120000,per hari,Harian,3.6
+INF0035,Juru Masak / Katering Rumahan,Mencari juru masak harian untuk katering rumahan skala kecil.,Juru Masak / Katering Rumahan,Informal,Depok,-6.367228,106.759943,60000,per hari,Mingguan,3.6
+INF0036,Sopir,Dibutuhkan sopir untuk antar barang dagangan harian.,Sopir,Informal,Bogor,-6.62358,106.767989,80000,per hari,Harian,4.4
+INF0037,Sopir,Dibutuhkan sopir untuk antar barang dagangan harian.,Sopir,Informal,Denpasar,-8.663977,115.194237,100000,per hari,Mingguan,4.5
+INF0038,Cleaning Service,"Dibutuhkan tenaga cleaning service untuk kantor, kerja pagi hari.",Cleaning Service,Informal,Semarang,-6.977121,110.433869,100000,per proyek,Sekali proyek,4.0
+INF0039,Tukang Bangunan,Butuh tukang batu dan tukang kayu untuk pembangunan pagar dan teras.,Tukang Bangunan,Informal,Padang,-0.934984,100.423499,60000,per hari,Harian,4.3
+INF0040,Tukang Kebun,Dicari tukang taman berpengalaman untuk pemangkasan dan penyiraman.,Tukang Kebun,Informal,Bandung,-6.874174,107.657186,80000,per hari,Bulanan,3.9
+INF0041,Juru Masak / Katering Rumahan,Mencari juru masak harian untuk katering rumahan skala kecil.,Juru Masak / Katering Rumahan,Informal,Tangerang,-6.198048,106.680285,50000,per hari,Bulanan,4.9
+INF0042,Asisten Rumah Tangga (ART),"Mencari ART untuk bersih-bersih rumah dan masak, bisa harian atau bulanan.",Asisten Rumah Tangga (ART),Informal,Semarang,-7.005157,110.377404,75000,per hari,Bulanan,3.9
+INF0043,Pedagang Keliling / Bantu Jualan,"Membutuhkan tenaga bantu jualan keliling, jujur dan rajin.",Pedagang Keliling / Bantu Jualan,Informal,Makassar,-5.17734,119.446124,100000,per proyek,Sekali proyek,3.9
+INF0044,Kurir / Ojek Barang,Butuh ojek barang untuk angkut barang pindahan rumah.,Kurir / Ojek Barang,Informal,Malang,-7.974242,112.610268,50000,per hari,Bulanan,4.7
+INF0045,Tukang Kebun,Butuh tenaga kebun untuk bersihkan halaman dan tanaman.,Tukang Kebun,Informal,Bandung,-6.893377,107.624268,150000,per hari,Harian,3.7
+INF0046,Asisten Rumah Tangga (ART),"Dibutuhkan ART pengalaman mengurus rumah tangga, jujur dan rajin.",Asisten Rumah Tangga (ART),Informal,Yogyakarta,-7.841997,110.356422,75000,per proyek,Sekali proyek,3.7
+INF0047,Buruh Gudang,"Dibutuhkan buruh angkut barang gudang, kerja fisik, upah harian.",Buruh Gudang,Informal,Depok,-6.359191,106.84142,50000,per hari,Bulanan,3.8
+INF0048,Sopir,"Dicari sopir pribadi, paham rute kota, SIM A aktif.",Sopir,Informal,Surabaya,-7.272132,112.758088,150000,per hari,Mingguan,4.9
+INF0049,Asisten Rumah Tangga (ART),"Dibutuhkan ART pengalaman mengurus rumah tangga, jujur dan rajin.",Asisten Rumah Tangga (ART),Informal,Bekasi,-6.207223,107.013742,50000,per hari,Mingguan,4.6
+INF0050,Baby Sitter,Cari baby sitter live-in untuk anak balita.,Baby Sitter,Informal,Bekasi,-6.221309,106.999106,80000,per hari,Bulanan,3.7
+INF0051,Kurir / Ojek Barang,"Cari kurir paket cepat, jam kerja fleksibel, bayaran per antar.",Kurir / Ojek Barang,Informal,Palembang,-2.938883,104.811259,80000,per hari,Mingguan,4.7
+INF0052,Buruh Gudang,Cari tenaga buruh gudang untuk sortir dan pindahkan stok barang.,Buruh Gudang,Informal,Semarang,-6.934646,110.453832,80000,per hari,Harian,4.5
+INF0053,Buruh Gudang,Cari tenaga buruh gudang untuk sortir dan pindahkan stok barang.,Buruh Gudang,Informal,Semarang,-6.930265,110.463389,100000,per hari,Bulanan,4.5
+INF0054,Sopir,Dibutuhkan sopir untuk antar barang dagangan harian.,Sopir,Informal,Bogor,-6.593478,106.849924,60000,per hari,Bulanan,3.8
+INF0055,Tukang Bangunan,Butuh tukang batu dan tukang kayu untuk pembangunan pagar dan teras.,Tukang Bangunan,Informal,Surabaya,-7.247843,112.736669,120000,per proyek,Sekali proyek,4.4
+INF0056,Kurir / Ojek Barang,Butuh ojek barang untuk angkut barang pindahan rumah.,Kurir / Ojek Barang,Informal,Palembang,-2.93615,104.744408,50000,per proyek,Sekali proyek,3.5
+INF0057,Sopir,Cari sopir lepas untuk sewa mobil harian.,Sopir,Informal,Tangerang,-6.134274,106.655604,80000,per hari,Bulanan,4.1
+INF0058,Buruh Gudang,Cari tenaga buruh gudang untuk sortir dan pindahkan stok barang.,Buruh Gudang,Informal,Denpasar,-8.689108,115.247402,100000,per hari,Bulanan,4.5
+INF0059,Baby Sitter,Mencari baby sitter berpengalaman untuk momong bayi usia 1 tahun.,Baby Sitter,Informal,Tangerang,-6.198734,106.594629,150000,per proyek,Sekali proyek,4.5
+INF0060,Satpam / Security,"Cari tenaga security untuk jaga toko, jam kerja 12 jam.",Satpam / Security,Informal,Denpasar,-8.690405,115.217394,50000,per hari,Bulanan,3.9
+INF0061,Satpam / Security,Butuh satpam berpengalaman untuk pos ronda kompleks.,Satpam / Security,Informal,Denpasar,-8.655029,115.209099,200000,per hari,Mingguan,4.3
+INF0062,Asisten Rumah Tangga (ART),"Mencari ART untuk bersih-bersih rumah dan masak, bisa harian atau bulanan.",Asisten Rumah Tangga (ART),Informal,Malang,-8.00812,112.634145,120000,per hari,Harian,4.7
+INF0063,Sopir,Dibutuhkan sopir untuk antar barang dagangan harian.,Sopir,Informal,Semarang,-6.994236,110.386613,50000,per hari,Harian,3.9
+INF0064,Satpam / Security,Dibutuhkan satpam shift malam untuk area perumahan.,Satpam / Security,Informal,Bogor,-6.570251,106.801542,80000,per proyek,Sekali proyek,4.2
+INF0065,Asisten Rumah Tangga (ART),Cari ART lepas untuk bersih rumah 3x seminggu.,Asisten Rumah Tangga (ART),Informal,Malang,-7.947838,112.671866,60000,per proyek,Sekali proyek,3.8
+INF0066,Juru Masak / Katering Rumahan,"Dibutuhkan tukang masak untuk warung makan, paham masakan rumahan.",Juru Masak / Katering Rumahan,Informal,Padang,-0.992078,100.39212,60000,per proyek,Sekali proyek,3.7
+INF0067,Sopir,Cari sopir lepas untuk sewa mobil harian.,Sopir,Informal,Yogyakarta,-7.746811,110.379045,200000,per proyek,Sekali proyek,4.7
+INF0068,Tukang Cuci / Laundry,"Butuh tenaga laundry kiloan, bisa setrika rapi.",Tukang Cuci / Laundry,Informal,Depok,-6.436584,106.830349,200000,per hari,Bulanan,4.6
+INF0069,Tukang Kebun,Butuh tenaga kebun untuk bersihkan halaman dan tanaman.,Tukang Kebun,Informal,Bekasi,-6.210533,106.97406,80000,per hari,Bulanan,4.2
+INF0070,Tukang Kebun,Dicari tukang taman berpengalaman untuk pemangkasan dan penyiraman.,Tukang Kebun,Informal,Medan,3.572372,98.654171,60000,per hari,Mingguan,3.7
+INF0071,Pedagang Keliling / Bantu Jualan,Cari orang untuk bantu jaga lapak pasar pagi.,Pedagang Keliling / Bantu Jualan,Informal,Bandung,-6.896858,107.575523,150000,per hari,Bulanan,4.3
+INF0072,Tukang Bangunan,"Dicari tukang untuk proyek pembangunan ruko, bisa mulai kerja minggu ini.",Tukang Bangunan,Informal,Medan,3.628489,98.661148,50000,per proyek,Sekali proyek,4.2
+INF0073,Tukang Kebun,Dicari tukang taman berpengalaman untuk pemangkasan dan penyiraman.,Tukang Kebun,Informal,Bekasi,-6.249301,107.014764,150000,per hari,Mingguan,4.2
+INF0074,Baby Sitter,Mencari baby sitter berpengalaman untuk momong bayi usia 1 tahun.,Baby Sitter,Informal,Padang,-0.994198,100.400813,150000,per hari,Mingguan,4.8
+INF0075,Satpam / Security,Dibutuhkan satpam shift malam untuk area perumahan.,Satpam / Security,Informal,Yogyakarta,-7.842903,110.358902,50000,per hari,Harian,4.5
+INF0076,Tukang Cuci / Laundry,"Cari tukang cuci untuk bantu laundry rumahan, kerja pagi.",Tukang Cuci / Laundry,Informal,Bandung,-6.962472,107.60701,80000,per proyek,Sekali proyek,4.0
+INF0077,Tukang Kebun,Butuh tenaga kebun untuk bersihkan halaman dan tanaman.,Tukang Kebun,Informal,Bekasi,-6.19318,106.967756,60000,per proyek,Sekali proyek,3.5
+INF0078,Tukang Bangunan,"Membutuhkan tukang bangunan untuk renovasi rumah, pengalaman minimal 1 tahun.",Tukang Bangunan,Informal,Makassar,-5.175278,119.389562,50000,per hari,Harian,4.9
+INF0079,Tukang Bangunan,"Dicari tukang untuk proyek pembangunan ruko, bisa mulai kerja minggu ini.",Tukang Bangunan,Informal,Denpasar,-8.705262,115.175222,60000,per hari,Mingguan,4.2
+INF0080,Buruh Gudang,"Dibutuhkan buruh angkut barang gudang, kerja fisik, upah harian.",Buruh Gudang,Informal,Bandung,-6.906911,107.665473,60000,per hari,Mingguan,4.9
+INF0081,Satpam / Security,Dibutuhkan satpam shift malam untuk area perumahan.,Satpam / Security,Informal,Jakarta,-6.165911,106.85318,150000,per proyek,Sekali proyek,4.9
+INF0082,Kurir / Ojek Barang,Butuh ojek barang untuk angkut barang pindahan rumah.,Kurir / Ojek Barang,Informal,Denpasar,-8.651439,115.225324,60000,per hari,Bulanan,4.8
+INF0083,Kurir / Ojek Barang,"Dibutuhkan kurir untuk antar barang harian area kota, punya motor sendiri.",Kurir / Ojek Barang,Informal,Bekasi,-6.189916,107.003864,120000,per proyek,Sekali proyek,4.5
+INF0084,Juru Masak / Katering Rumahan,"Dibutuhkan tukang masak untuk warung makan, paham masakan rumahan.",Juru Masak / Katering Rumahan,Informal,Malang,-7.982477,112.667558,200000,per hari,Harian,4.2
+INF0085,Sopir,Cari sopir lepas untuk sewa mobil harian.,Sopir,Informal,Depok,-6.369629,106.814931,150000,per hari,Mingguan,4.6
+INF0086,Tukang Kebun,Butuh tenaga kebun untuk bersihkan halaman dan tanaman.,Tukang Kebun,Informal,Denpasar,-8.63968,115.216417,200000,per proyek,Sekali proyek,4.2
+INF0087,Satpam / Security,Dibutuhkan satpam shift malam untuk area perumahan.,Satpam / Security,Informal,Semarang,-6.98447,110.39125,60000,per hari,Bulanan,4.8
+INF0088,Tukang Cuci / Laundry,Dibutuhkan tenaga cuci setrika harian untuk rumah tangga.,Tukang Cuci / Laundry,Informal,Denpasar,-8.659467,115.200499,50000,per proyek,Sekali proyek,4.8
+INF0089,Tukang Cuci / Laundry,"Butuh tenaga laundry kiloan, bisa setrika rapi.",Tukang Cuci / Laundry,Informal,Medan,3.580682,98.648035,100000,per hari,Bulanan,4.3
+INF0090,Cleaning Service,"Cari petugas kebersihan gedung, shift pagi/sore.",Cleaning Service,Informal,Surabaya,-7.283364,112.742743,80000,per proyek,Sekali proyek,4.5
+INF0091,Tukang Cuci / Laundry,"Butuh tenaga laundry kiloan, bisa setrika rapi.",Tukang Cuci / Laundry,Informal,Bekasi,-6.286576,106.955024,150000,per hari,Mingguan,4.0
+INF0092,Buruh Gudang,Cari tenaga buruh gudang untuk sortir dan pindahkan stok barang.,Buruh Gudang,Informal,Padang,-0.941753,100.401576,120000,per hari,Bulanan,4.6
+INF0093,Tukang Kebun,Butuh tenaga kebun untuk bersihkan halaman dan tanaman.,Tukang Kebun,Informal,Semarang,-6.993646,110.438828,120000,per hari,Harian,4.6
+INF0094,Asisten Rumah Tangga (ART),"Dibutuhkan ART pengalaman mengurus rumah tangga, jujur dan rajin.",Asisten Rumah Tangga (ART),Informal,Medan,3.566838,98.67062,100000,per hari,Harian,4.7
+INF0095,Cleaning Service,"Dibutuhkan tenaga cleaning service untuk kantor, kerja pagi hari.",Cleaning Service,Informal,Makassar,-5.179756,119.384115,75000,per hari,Bulanan,3.6
+INF0096,Juru Masak / Katering Rumahan,"Cari koki lepas untuk acara/hajatan, bayaran per acara.",Juru Masak / Katering Rumahan,Informal,Semarang,-6.946958,110.379328,200000,per hari,Harian,4.8
+INF0097,Tukang Kebun,Dicari tukang taman berpengalaman untuk pemangkasan dan penyiraman.,Tukang Kebun,Informal,Padang,-0.949229,100.401271,50000,per hari,Bulanan,4.9
+INF0098,Kurir / Ojek Barang,Butuh ojek barang untuk angkut barang pindahan rumah.,Kurir / Ojek Barang,Informal,Bogor,-6.640566,106.805175,50000,per hari,Mingguan,3.7
+INF0099,Tukang Kebun,Dicari tukang taman berpengalaman untuk pemangkasan dan penyiraman.,Tukang Kebun,Informal,Surabaya,-7.208108,112.713945,150000,per hari,Mingguan,4.7
+INF0100,Tukang Cuci / Laundry,Dibutuhkan tenaga cuci setrika harian untuk rumah tangga.,Tukang Cuci / Laundry,Informal,Depok,-6.408228,106.830217,150000,per hari,Bulanan,4.4
+INF0101,Satpam / Security,Dibutuhkan satpam shift malam untuk area perumahan.,Satpam / Security,Informal,Tangerang,-6.218377,106.658174,80000,per hari,Bulanan,4.5
+INF0102,Cleaning Service,"Cari petugas kebersihan gedung, shift pagi/sore.",Cleaning Service,Informal,Bandung,-6.912301,107.584753,150000,per proyek,Sekali proyek,4.5
+INF0103,Tukang Kebun,Dicari tukang taman berpengalaman untuk pemangkasan dan penyiraman.,Tukang Kebun,Informal,Jakarta,-6.235652,106.866296,200000,per hari,Harian,4.5
+INF0104,Sopir,Cari sopir lepas untuk sewa mobil harian.,Sopir,Informal,Denpasar,-8.654382,115.255967,150000,per hari,Harian,4.3
+INF0105,Asisten Rumah Tangga (ART),Cari ART lepas untuk bersih rumah 3x seminggu.,Asisten Rumah Tangga (ART),Informal,Depok,-6.425937,106.758424,50000,per hari,Mingguan,4.7
+INF0106,Pedagang Keliling / Bantu Jualan,"Dibutuhkan tenaga bantu dagang gerobak, kerja pagi-siang.",Pedagang Keliling / Bantu Jualan,Informal,Bogor,-6.590179,106.784861,60000,per proyek,Sekali proyek,4.5
+INF0107,Baby Sitter,Cari baby sitter live-in untuk anak balita.,Baby Sitter,Informal,Semarang,-6.966653,110.41608,60000,per hari,Harian,4.8
+INF0108,Buruh Gudang,"Dibutuhkan buruh angkut barang gudang, kerja fisik, upah harian.",Buruh Gudang,Informal,Denpasar,-8.695463,115.171733,50000,per hari,Bulanan,4.4
+INF0109,Tukang Cuci / Laundry,"Cari tukang cuci untuk bantu laundry rumahan, kerja pagi.",Tukang Cuci / Laundry,Informal,Yogyakarta,-7.780449,110.411107,75000,per proyek,Sekali proyek,4.5
+INF0110,Kurir / Ojek Barang,Butuh ojek barang untuk angkut barang pindahan rumah.,Kurir / Ojek Barang,Informal,Padang,-0.962304,100.400531,60000,per hari,Mingguan,4.0
+INF0111,Tukang Cuci / Laundry,"Cari tukang cuci untuk bantu laundry rumahan, kerja pagi.",Tukang Cuci / Laundry,Informal,Semarang,-6.950442,110.406745,50000,per proyek,Sekali proyek,3.6
+INF0112,Buruh Gudang,"Dibutuhkan buruh angkut barang gudang, kerja fisik, upah harian.",Buruh Gudang,Informal,Surabaya,-7.210482,112.742518,50000,per proyek,Sekali proyek,4.1
+INF0113,Juru Masak / Katering Rumahan,"Cari koki lepas untuk acara/hajatan, bayaran per acara.",Juru Masak / Katering Rumahan,Informal,Makassar,-5.135437,119.432549,200000,per hari,Harian,3.8
+INF0114,Asisten Rumah Tangga (ART),Cari ART lepas untuk bersih rumah 3x seminggu.,Asisten Rumah Tangga (ART),Informal,Depok,-6.423697,106.832285,200000,per hari,Harian,3.5
+INF0115,Satpam / Security,Dibutuhkan satpam shift malam untuk area perumahan.,Satpam / Security,Informal,Bekasi,-6.26437,106.941438,50000,per proyek,Sekali proyek,3.6
+INF0116,Tukang Cuci / Laundry,"Cari tukang cuci untuk bantu laundry rumahan, kerja pagi.",Tukang Cuci / Laundry,Informal,Surabaya,-7.242729,112.717497,100000,per hari,Bulanan,4.1
+INF0117,Tukang Cuci / Laundry,"Cari tukang cuci untuk bantu laundry rumahan, kerja pagi.",Tukang Cuci / Laundry,Informal,Medan,3.590879,98.636664,80000,per hari,Mingguan,4.8
+INF0118,Baby Sitter,Cari baby sitter live-in untuk anak balita.,Baby Sitter,Informal,Makassar,-5.104275,119.433474,50000,per hari,Bulanan,4.6
+INF0119,Satpam / Security,Butuh satpam berpengalaman untuk pos ronda kompleks.,Satpam / Security,Informal,Malang,-7.967636,112.59746,200000,per hari,Bulanan,4.0
+INF0120,Baby Sitter,"Dibutuhkan pengasuh anak harian, sabar dan bertanggung jawab.",Baby Sitter,Informal,Padang,-0.903815,100.45416,80000,per proyek,Sekali proyek,3.9
+INF0121,Tukang Bangunan,Butuh tukang batu dan tukang kayu untuk pembangunan pagar dan teras.,Tukang Bangunan,Informal,Makassar,-5.123229,119.453223,150000,per proyek,Sekali proyek,5.0
+INF0122,Asisten Rumah Tangga (ART),"Dibutuhkan ART pengalaman mengurus rumah tangga, jujur dan rajin.",Asisten Rumah Tangga (ART),Informal,Padang,-0.900618,100.379825,120000,per hari,Harian,4.8
+INF0123,Kurir / Ojek Barang,"Dibutuhkan kurir untuk antar barang harian area kota, punya motor sendiri.",Kurir / Ojek Barang,Informal,Yogyakarta,-7.754556,110.321035,75000,per proyek,Sekali proyek,4.8
+INF0124,Kurir / Ojek Barang,Butuh ojek barang untuk angkut barang pindahan rumah.,Kurir / Ojek Barang,Informal,Padang,-0.918947,100.393702,150000,per hari,Harian,4.8
+INF0125,Juru Masak / Katering Rumahan,Mencari juru masak harian untuk katering rumahan skala kecil.,Juru Masak / Katering Rumahan,Informal,Palembang,-2.930686,104.78808,200000,per hari,Harian,4.4
+INF0126,Sopir,Cari sopir lepas untuk sewa mobil harian.,Sopir,Informal,Malang,-7.924507,112.682343,60000,per proyek,Sekali proyek,5.0
+INF0127,Pedagang Keliling / Bantu Jualan,"Membutuhkan tenaga bantu jualan keliling, jujur dan rajin.",Pedagang Keliling / Bantu Jualan,Informal,Bogor,-6.637049,106.772636,100000,per hari,Harian,3.6
+INF0128,Tukang Kebun,"Membutuhkan tukang kebun untuk merawat taman rumah, datang mingguan.",Tukang Kebun,Informal,Makassar,-5.160216,119.397257,150000,per hari,Mingguan,3.8
+INF0129,Satpam / Security,Butuh satpam berpengalaman untuk pos ronda kompleks.,Satpam / Security,Informal,Bogor,-6.608846,106.824313,200000,per hari,Mingguan,3.8
+INF0130,Tukang Kebun,"Membutuhkan tukang kebun untuk merawat taman rumah, datang mingguan.",Tukang Kebun,Informal,Padang,-0.971567,100.36814,200000,per hari,Bulanan,4.5
+INF0131,Kurir / Ojek Barang,"Cari kurir paket cepat, jam kerja fleksibel, bayaran per antar.",Kurir / Ojek Barang,Informal,Padang,-0.902576,100.465965,100000,per proyek,Sekali proyek,4.5
+INF0132,Tukang Kebun,Dicari tukang taman berpengalaman untuk pemangkasan dan penyiraman.,Tukang Kebun,Informal,Medan,3.645137,98.707534,60000,per hari,Mingguan,4.1
+INF0133,Satpam / Security,Butuh satpam berpengalaman untuk pos ronda kompleks.,Satpam / Security,Informal,Semarang,-6.917431,110.396223,150000,per hari,Bulanan,3.5
+INF0134,Pedagang Keliling / Bantu Jualan,Cari orang untuk bantu jaga lapak pasar pagi.,Pedagang Keliling / Bantu Jualan,Informal,Jakarta,-6.167738,106.870117,100000,per hari,Mingguan,4.4
+INF0135,Cleaning Service,Butuh cleaning service harian untuk area ruko dan gudang.,Cleaning Service,Informal,Malang,-7.997587,112.607663,75000,per hari,Harian,4.9
+INF0136,Tukang Bangunan,"Dicari tukang untuk proyek pembangunan ruko, bisa mulai kerja minggu ini.",Tukang Bangunan,Informal,Semarang,-6.937839,110.370036,120000,per hari,Mingguan,3.6
+INF0137,Buruh Gudang,Cari tenaga buruh gudang untuk sortir dan pindahkan stok barang.,Buruh Gudang,Informal,Tangerang,-6.18675,106.601979,120000,per hari,Bulanan,4.7
+INF0138,Tukang Cuci / Laundry,Dibutuhkan tenaga cuci setrika harian untuk rumah tangga.,Tukang Cuci / Laundry,Informal,Bekasi,-6.258786,107.01264,60000,per proyek,Sekali proyek,4.9
+INF0139,Cleaning Service,"Cari petugas kebersihan gedung, shift pagi/sore.",Cleaning Service,Informal,Bogor,-6.579468,106.823441,150000,per hari,Bulanan,3.6
+INF0140,Tukang Bangunan,"Dicari tukang untuk proyek pembangunan ruko, bisa mulai kerja minggu ini.",Tukang Bangunan,Informal,Semarang,-6.963043,110.412179,100000,per proyek,Sekali proyek,4.7
+INF0141,Kurir / Ojek Barang,Butuh ojek barang untuk angkut barang pindahan rumah.,Kurir / Ojek Barang,Informal,Malang,-7.993218,112.585102,120000,per hari,Mingguan,4.5
+INF0142,Tukang Cuci / Laundry,Dibutuhkan tenaga cuci setrika harian untuk rumah tangga.,Tukang Cuci / Laundry,Informal,Depok,-6.382392,106.809124,60000,per hari,Mingguan,3.6
+INF0143,Tukang Kebun,Butuh tenaga kebun untuk bersihkan halaman dan tanaman.,Tukang Kebun,Informal,Padang,-0.985488,100.39068,75000,per proyek,Sekali proyek,4.2
+INF0144,Pedagang Keliling / Bantu Jualan,Cari orang untuk bantu jaga lapak pasar pagi.,Pedagang Keliling / Bantu Jualan,Informal,Tangerang,-6.133703,106.623813,75000,per proyek,Sekali proyek,4.5
+INF0145,Satpam / Security,Dibutuhkan satpam shift malam untuk area perumahan.,Satpam / Security,Informal,Palembang,-2.932195,104.753374,120000,per hari,Mingguan,4.2
+INF0146,Buruh Gudang,"Dibutuhkan buruh angkut barang gudang, kerja fisik, upah harian.",Buruh Gudang,Informal,Surabaya,-7.209407,112.738833,120000,per hari,Harian,4.1
+INF0147,Kurir / Ojek Barang,"Cari kurir paket cepat, jam kerja fleksibel, bayaran per antar.",Kurir / Ojek Barang,Informal,Bogor,-6.564681,106.765167,80000,per hari,Harian,3.6
+INF0148,Cleaning Service,"Dibutuhkan tenaga cleaning service untuk kantor, kerja pagi hari.",Cleaning Service,Informal,Bandung,-6.888802,107.589621,80000,per hari,Mingguan,4.7
+INF0149,Buruh Gudang,"Dibutuhkan buruh angkut barang gudang, kerja fisik, upah harian.",Buruh Gudang,Informal,Bekasi,-6.273545,107.015653,50000,per hari,Bulanan,4.8
+INF0150,Asisten Rumah Tangga (ART),"Mencari ART untuk bersih-bersih rumah dan masak, bisa harian atau bulanan.",Asisten Rumah Tangga (ART),Informal,Yogyakarta,-7.820535,110.33695,50000,per hari,Mingguan,3.5

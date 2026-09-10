@@ -1,0 +1,131 @@
+worker_id,name,gender,location,salary_expectation,skills
+WRK001,Andi Lestari,Laki-laki,Semarang,4500000,Customer Service dan Telemarketing profesional kemampuan komunikasi handling complaint CRM dan pencatatan log transaksi
+WRK002,Rudi Rahmawati,Laki-laki,Balikpapan,12000000,Backend Engineer berpengalaman Python FastAPI Node JS PostgreSQL MySQL database design RESTful API dan Docker
+WRK003,Siti Pratama,Perempuan,Jakarta Timur,4500000,Staf Administrasi berpengalaman Microsoft Office Excel VLOOKUP Pivot Table rekapitulasi data harian pengarsipan dan surat menyurat
+WRK004,Deni Hidayat,Laki-laki,Balikpapan,3000000,Teknisi AC dan Pendingin Ruangan cuci AC berkala isi freon R32 R410a bongkar pasang unit AC split dan perbaikan kelistrikan AC
+WRK005,Ayu Pertiwi,Perempuan,Jakarta Selatan,15000000,DevOps Engineer CI CD pipeline Kubernetes Docker AWS Cloud Linux System Administration dan Terraform
+WRK006,Sari Pertiwi,Perempuan,Surabaya,5000000,Staf Administrasi berpengalaman Microsoft Office Excel VLOOKUP Pivot Table rekapitulasi data harian pengarsipan dan surat menyurat
+WRK007,Budi Gunawan,Laki-laki,Bandung,5000000,HR Generalist dan Recruitment seleksi karyawan onboarding BPJS Ketenagakerjaan rekap absensi payroll dan hubungan industrial
+WRK008,Rina Pratama,Perempuan,Denpasar,2500000,Tukang Las dan Fabrikasi Besi kanopi pagar besi tempa teralis jendela pengelasan listrik MMA TIG dan konstruksi baja ringan
+WRK009,Dewi Susilo,Perempuan,Makassar,7000000,Crew Event Organizer dan Field Coordinator mengelola ticketing ticketing check in penataan panggung vendor dan koordinasi acara
+WRK010,Ayu Hidayat,Perempuan,Jakarta Timur,15000000,Frontend Web Developer menguasai React JS Tailwind CSS JavaScript ES6 HTML5 CSS3 Git dan integrasi REST API
+WRK011,Arif Pertiwi,Laki-laki,Jakarta Timur,3500000,Customer Service dan Telemarketing profesional kemampuan komunikasi handling complaint CRM dan pencatatan log transaksi
+WRK012,Lia Setiawan,Perempuan,Bekasi,8500000,DevOps Engineer CI CD pipeline Kubernetes Docker AWS Cloud Linux System Administration dan Terraform
+WRK013,Nadia Kurnia,Perempuan,Semarang,3500000,Barista dan Coffee Shop Crew brewing manual brew espresso machine latte art kualiti kontrol rasa kopi dan hospitality
+WRK014,Deni Lestari,Laki-laki,Padang,10000000,DevOps Engineer CI CD pipeline Kubernetes Docker AWS Cloud Linux System Administration dan Terraform
+WRK015,Lia Putra,Perempuan,Balikpapan,5000000,Customer Service dan Telemarketing profesional kemampuan komunikasi handling complaint CRM dan pencatatan log transaksi
+WRK016,Hendrik Irawan,Laki-laki,Jakarta Barat,4000000,Kasir Toko dan Admin Retail pencatatan stok opname transaksi POS kasir pembukuan penjualan harian dan pelayanan pelanggan
+WRK017,Dewi Hidayat,Perempuan,Tangerang,6000000,Staf Administrasi berpengalaman Microsoft Office Excel VLOOKUP Pivot Table rekapitulasi data harian pengarsipan dan surat menyurat
+WRK018,Putri Putra,Perempuan,Denpasar,8500000,Data Analyst menguasai Python Pandas SQL Tableau data visualization Statistical Analysis dan A B Testing
+WRK019,Hendrik Lestari,Laki-laki,Balikpapan,3500000,Tukang Las dan Fabrikasi Besi kanopi pagar besi tempa teralis jendela pengelasan listrik MMA TIG dan konstruksi baja ringan
+WRK020,Putri Utami,Perempuan,Depok,4500000,HR Generalist dan Recruitment seleksi karyawan onboarding BPJS Ketenagakerjaan rekap absensi payroll dan hubungan industrial
+WRK021,Deni Setiawan,Laki-laki,Jakarta Timur,6000000,Frontend Web Developer menguasai React JS Tailwind CSS JavaScript ES6 HTML5 CSS3 Git dan integrasi REST API
+WRK022,Taufik Santoso,Laki-laki,Malang,3500000,Social Media Specialist dan Content Creator kalender konten copywriting Instagram TikTok desain Canva Photoshop dan analisis insight
+WRK023,Maya Utami,Perempuan,Denpasar,3500000,Tukang Bangunan Umum pemasangan keramik lantai pembuatan fondasi pembesian pasang bata merah dan renovasi atap rumah
+WRK024,Taufik Lestari,Laki-laki,Bandung,7000000,Video Editor mahir Premiere Pro After Effects CapCut video reels TikTok youtube editing motion graphic dan color grading
+WRK025,Rina Kurnia,Perempuan,Tangerang,5000000,UI UX Designer mahir Figma Wireframing Prototyping Design System User Research dan Responsive Web Design
+WRK026,Mega Setiawan,Perempuan,Jakarta Selatan,7000000,Staf Akuntansi dan Keuangan laporan keuangan bulanan pembukuan kas masuk keluar rekonsiliasi bank pajak PPh dan Accurate Software
+WRK027,Deni Putra,Laki-laki,Bandung,5000000,Crew Event Organizer dan Field Coordinator mengelola ticketing ticketing check in penataan panggung vendor dan koordinasi acara
+WRK028,Rian Wijaya,Laki-laki,Yogyakarta,4500000,Tukang Las dan Fabrikasi Besi kanopi pagar besi tempa teralis jendela pengelasan listrik MMA TIG dan konstruksi baja ringan
+WRK029,Bayu Wijaya,Laki-laki,Palembang,6000000,Mobile App Developer mahir Flutter Dart REST API state management Provider Firebase dan integrasi UI UX Android iOS
+WRK030,Putri Irawan,Perempuan,Makassar,3500000,Customer Service dan Telemarketing profesional kemampuan komunikasi handling complaint CRM dan pencatatan log transaksi
+WRK031,Faisal Utami,Laki-laki,Jakarta Timur,15000000,Backend Engineer berpengalaman Python FastAPI Node JS PostgreSQL MySQL database design RESTful API dan Docker
+WRK032,Sinta Rahmawati,Perempuan,Balikpapan,7000000,Data Analyst menguasai Python Pandas SQL Tableau data visualization Statistical Analysis dan A B Testing
+WRK033,Nurul Santoso,Perempuan,Semarang,4500000,Tukang Bangunan Umum pemasangan keramik lantai pembuatan fondasi pembesian pasang bata merah dan renovasi atap rumah
+WRK034,Nadia Putra,Perempuan,Balikpapan,4500000,Barista dan Coffee Shop Crew brewing manual brew espresso machine latte art kualiti kontrol rasa kopi dan hospitality
+WRK035,Maya Kurnia,Perempuan,Bekasi,4500000,Tukang Kayu dan Mebel khusus pembuatan kitchen set minimalis lemari pakaian custom perbaikan furnitur kayu dan finishing melamik
+WRK036,Dewi Hidayat,Perempuan,Padang,8500000,Backend Engineer berpengalaman Python FastAPI Node JS PostgreSQL MySQL database design RESTful API dan Docker
+WRK037,Bayu Susilo,Laki-laki,Padang,3000000,Teknisi HP dan Smartphone perbaikan LCD ganti baterai flash firmware troubleshooting mesin IC dan mati total
+WRK038,Budi Lestari,Laki-laki,Jakarta Barat,3500000,Customer Service dan Telemarketing profesional kemampuan komunikasi handling complaint CRM dan pencatatan log transaksi
+WRK039,Hendra Wijaya,Laki-laki,Jakarta Timur,3000000,Tukang Bangunan Umum pemasangan keramik lantai pembuatan fondasi pembesian pasang bata merah dan renovasi atap rumah
+WRK040,Fitri Setiawan,Perempuan,Medan,3000000,Tukang Las dan Fabrikasi Besi kanopi pagar besi tempa teralis jendela pengelasan listrik MMA TIG dan konstruksi baja ringan
+WRK041,Nadia Nugroho,Perempuan,Palembang,3000000,Teknisi AC dan Pendingin Ruangan cuci AC berkala isi freon R32 R410a bongkar pasang unit AC split dan perbaikan kelistrikan AC
+WRK042,Budi Kurnia,Laki-laki,Malang,6000000,HR Generalist dan Recruitment seleksi karyawan onboarding BPJS Ketenagakerjaan rekap absensi payroll dan hubungan industrial
+WRK043,Gita Irawan,Perempuan,Jakarta Barat,3500000,Video Editor mahir Premiere Pro After Effects CapCut video reels TikTok youtube editing motion graphic dan color grading
+WRK044,Ahmad Lestari,Laki-laki,Tangerang,4500000,UI UX Designer mahir Figma Wireframing Prototyping Design System User Research dan Responsive Web Design
+WRK045,Hendrik Susilo,Laki-laki,Denpasar,10000000,Data Analyst menguasai Python Pandas SQL Tableau data visualization Statistical Analysis dan A B Testing
+WRK046,Agus Setiawan,Laki-laki,Padang,10000000,Backend Engineer berpengalaman Python FastAPI Node JS PostgreSQL MySQL database design RESTful API dan Docker
+WRK047,Andi Kurnia,Laki-laki,Balikpapan,6000000,Mobile App Developer mahir Flutter Dart REST API state management Provider Firebase dan integrasi UI UX Android iOS
+WRK048,Rian Gunawan,Laki-laki,Palembang,3000000,Driver Pribadi dan Operasional menguasai mobil matic manual paham rute jalan kota SIM A aktif jujur dan merawat kendaraan
+WRK049,Putri Pratama,Perempuan,Yogyakarta,2500000,Tukang Cat Bangunan dan Dekorasi pengecatan tembok interior exterior plamir dinding perbaikan tembok retak dan pengecatan kayu
+WRK050,Lia Putra,Perempuan,Denpasar,6000000,Sales Executive dan Field Marketing negosiasi bisnis penetrasi pasar B2B pencapaian target penjualan dan presentasi produk
+WRK051,Mega Hidayat,Perempuan,Makassar,3500000,Staf Administrasi berpengalaman Microsoft Office Excel VLOOKUP Pivot Table rekapitulasi data harian pengarsipan dan surat menyurat
+WRK052,Rudi Wijaya,Laki-laki,Jakarta Barat,12000000,Frontend Web Developer menguasai React JS Tailwind CSS JavaScript ES6 HTML5 CSS3 Git dan integrasi REST API
+WRK053,Nurul Putra,Perempuan,Pekanbaru,6000000,DevOps Engineer CI CD pipeline Kubernetes Docker AWS Cloud Linux System Administration dan Terraform
+WRK054,Hendra Santoso,Laki-laki,Jakarta Timur,3500000,Social Media Specialist dan Content Creator kalender konten copywriting Instagram TikTok desain Canva Photoshop dan analisis insight
+WRK055,Ahmad Rahmawati,Laki-laki,Padang,4500000,Teknisi HP dan Smartphone perbaikan LCD ganti baterai flash firmware troubleshooting mesin IC dan mati total
+WRK056,Bayu Rahmawati,Laki-laki,Malang,7000000,Video Editor mahir Premiere Pro After Effects CapCut video reels TikTok youtube editing motion graphic dan color grading
+WRK057,Putri Pertiwi,Perempuan,Medan,5000000,Video Editor mahir Premiere Pro After Effects CapCut video reels TikTok youtube editing motion graphic dan color grading
+WRK058,Agus Gunawan,Laki-laki,Surabaya,5000000,Video Editor mahir Premiere Pro After Effects CapCut video reels TikTok youtube editing motion graphic dan color grading
+WRK059,Sari Putra,Perempuan,Jakarta Timur,10000000,Mobile App Developer mahir Flutter Dart REST API state management Provider Firebase dan integrasi UI UX Android iOS
+WRK060,Budi Susilo,Laki-laki,Medan,3500000,Tukang Bangunan Umum pemasangan keramik lantai pembuatan fondasi pembesian pasang bata merah dan renovasi atap rumah
+WRK061,Faisal Wijaya,Laki-laki,Jakarta Timur,5000000,Customer Service dan Telemarketing profesional kemampuan komunikasi handling complaint CRM dan pencatatan log transaksi
+WRK062,Mega Setiawan,Perempuan,Balikpapan,5000000,Barista dan Coffee Shop Crew brewing manual brew espresso machine latte art kualiti kontrol rasa kopi dan hospitality
+WRK063,Taufik Irawan,Laki-laki,Balikpapan,3500000,Sales Executive dan Field Marketing negosiasi bisnis penetrasi pasar B2B pencapaian target penjualan dan presentasi produk
+WRK064,Agus Rahmawati,Laki-laki,Bandung,3000000,Tukang Las dan Fabrikasi Besi kanopi pagar besi tempa teralis jendela pengelasan listrik MMA TIG dan konstruksi baja ringan
+WRK065,Lia Utami,Perempuan,Medan,5000000,Barista dan Coffee Shop Crew brewing manual brew espresso machine latte art kualiti kontrol rasa kopi dan hospitality
+WRK066,Taufik Kurnia,Laki-laki,Semarang,4000000,Tukang Bangunan Umum pemasangan keramik lantai pembuatan fondasi pembesian pasang bata merah dan renovasi atap rumah
+WRK067,Putri Putra,Perempuan,Jakarta Barat,15000000,Backend Engineer berpengalaman Python FastAPI Node JS PostgreSQL MySQL database design RESTful API dan Docker
+WRK068,Sinta Pertiwi,Perempuan,Jakarta Barat,8500000,Mobile App Developer mahir Flutter Dart REST API state management Provider Firebase dan integrasi UI UX Android iOS
+WRK069,Taufik Pertiwi,Laki-laki,Yogyakarta,4500000,Tukang Kayu dan Mebel khusus pembuatan kitchen set minimalis lemari pakaian custom perbaikan furnitur kayu dan finishing melamik
+WRK070,Nurul Pratama,Perempuan,Bandung,15000000,Backend Engineer berpengalaman Python FastAPI Node JS PostgreSQL MySQL database design RESTful API dan Docker
+WRK071,Deni Pratama,Laki-laki,Bekasi,4500000,Teknisi HP dan Smartphone perbaikan LCD ganti baterai flash firmware troubleshooting mesin IC dan mati total
+WRK072,Ahmad Santoso,Laki-laki,Jakarta Barat,5000000,Sales Executive dan Field Marketing negosiasi bisnis penetrasi pasar B2B pencapaian target penjualan dan presentasi produk
+WRK073,Faisal Wijaya,Laki-laki,Medan,4500000,Video Editor mahir Premiere Pro After Effects CapCut video reels TikTok youtube editing motion graphic dan color grading
+WRK074,Joko Nugroho,Laki-laki,Balikpapan,4500000,Teknisi AC dan Pendingin Ruangan cuci AC berkala isi freon R32 R410a bongkar pasang unit AC split dan perbaikan kelistrikan AC
+WRK075,Faisal Putra,Laki-laki,Padang,7000000,DevOps Engineer CI CD pipeline Kubernetes Docker AWS Cloud Linux System Administration dan Terraform
+WRK076,Siti Santoso,Perempuan,Tangerang,3000000,Teknisi AC dan Pendingin Ruangan cuci AC berkala isi freon R32 R410a bongkar pasang unit AC split dan perbaikan kelistrikan AC
+WRK077,Mega Nugroho,Perempuan,Bandung,2500000,Tukang Cat Bangunan dan Dekorasi pengecatan tembok interior exterior plamir dinding perbaikan tembok retak dan pengecatan kayu
+WRK078,Nadia Hidayat,Perempuan,Denpasar,5000000,HR Generalist dan Recruitment seleksi karyawan onboarding BPJS Ketenagakerjaan rekap absensi payroll dan hubungan industrial
+WRK079,Hendrik Pratama,Laki-laki,Medan,3500000,Tukang Cat Bangunan dan Dekorasi pengecatan tembok interior exterior plamir dinding perbaikan tembok retak dan pengecatan kayu
+WRK080,Sinta Rahmawati,Perempuan,Semarang,7000000,HR Generalist dan Recruitment seleksi karyawan onboarding BPJS Ketenagakerjaan rekap absensi payroll dan hubungan industrial
+WRK081,Fitri Irawan,Perempuan,Balikpapan,2500000,Kasir Toko dan Admin Retail pencatatan stok opname transaksi POS kasir pembukuan penjualan harian dan pelayanan pelanggan
+WRK082,Faisal Pertiwi,Laki-laki,Yogyakarta,3500000,Teknisi HP dan Smartphone perbaikan LCD ganti baterai flash firmware troubleshooting mesin IC dan mati total
+WRK083,Budi Utami,Laki-laki,Malang,5000000,HR Generalist dan Recruitment seleksi karyawan onboarding BPJS Ketenagakerjaan rekap absensi payroll dan hubungan industrial
+WRK084,Ayu Susilo,Perempuan,Bandung,4500000,Tukang Cat Bangunan dan Dekorasi pengecatan tembok interior exterior plamir dinding perbaikan tembok retak dan pengecatan kayu
+WRK085,Agus Pratama,Laki-laki,Malang,12000000,Mobile App Developer mahir Flutter Dart REST API state management Provider Firebase dan integrasi UI UX Android iOS
+WRK086,Joko Gunawan,Laki-laki,Jakarta Timur,5000000,Video Editor mahir Premiere Pro After Effects CapCut video reels TikTok youtube editing motion graphic dan color grading
+WRK087,Fitri Irawan,Perempuan,Bandung,7000000,Sales Executive dan Field Marketing negosiasi bisnis penetrasi pasar B2B pencapaian target penjualan dan presentasi produk
+WRK088,Fitri Gunawan,Perempuan,Tangerang,3500000,Tukang Cat Bangunan dan Dekorasi pengecatan tembok interior exterior plamir dinding perbaikan tembok retak dan pengecatan kayu
+WRK089,Hendrik Gunawan,Laki-laki,Depok,4500000,Video Editor mahir Premiere Pro After Effects CapCut video reels TikTok youtube editing motion graphic dan color grading
+WRK090,Maya Susilo,Perempuan,Jakarta Selatan,5000000,Sales Executive dan Field Marketing negosiasi bisnis penetrasi pasar B2B pencapaian target penjualan dan presentasi produk
+WRK091,Ahmad Nugroho,Laki-laki,Tangerang,4000000,Tukang Kayu dan Mebel khusus pembuatan kitchen set minimalis lemari pakaian custom perbaikan furnitur kayu dan finishing melamik
+WRK092,Fitri Hidayat,Perempuan,Pekanbaru,3000000,Driver Pribadi dan Operasional menguasai mobil matic manual paham rute jalan kota SIM A aktif jujur dan merawat kendaraan
+WRK093,Agus Susilo,Laki-laki,Tangerang,7000000,Backend Engineer berpengalaman Python FastAPI Node JS PostgreSQL MySQL database design RESTful API dan Docker
+WRK094,Nadia Nugroho,Perempuan,Medan,6000000,Data Analyst menguasai Python Pandas SQL Tableau data visualization Statistical Analysis dan A B Testing
+WRK095,Hendrik Setiawan,Laki-laki,Jakarta Timur,4000000,Tukang Kayu dan Mebel khusus pembuatan kitchen set minimalis lemari pakaian custom perbaikan furnitur kayu dan finishing melamik
+WRK096,Rudi Lestari,Laki-laki,Depok,4000000,Driver Pribadi dan Operasional menguasai mobil matic manual paham rute jalan kota SIM A aktif jujur dan merawat kendaraan
+WRK097,Rian Kurnia,Laki-laki,Jakarta Selatan,6000000,UI UX Designer mahir Figma Wireframing Prototyping Design System User Research dan Responsive Web Design
+WRK098,Rian Nugroho,Laki-laki,Pekanbaru,2500000,Tukang Kayu dan Mebel khusus pembuatan kitchen set minimalis lemari pakaian custom perbaikan furnitur kayu dan finishing melamik
+WRK099,Faisal Irawan,Laki-laki,Bandung,3000000,Tukang Kayu dan Mebel khusus pembuatan kitchen set minimalis lemari pakaian custom perbaikan furnitur kayu dan finishing melamik
+WRK100,Fitri Susilo,Perempuan,Balikpapan,5000000,Social Media Specialist dan Content Creator kalender konten copywriting Instagram TikTok desain Canva Photoshop dan analisis insight
+WRK101,Ayu Irawan,Perempuan,Pekanbaru,4500000,Teknisi AC dan Pendingin Ruangan cuci AC berkala isi freon R32 R410a bongkar pasang unit AC split dan perbaikan kelistrikan AC
+WRK102,Putri Santoso,Perempuan,Palembang,3500000,Tukang Kayu dan Mebel khusus pembuatan kitchen set minimalis lemari pakaian custom perbaikan furnitur kayu dan finishing melamik
+WRK103,Hendra Kurnia,Laki-laki,Semarang,4000000,Tukang Bangunan Umum pemasangan keramik lantai pembuatan fondasi pembesian pasang bata merah dan renovasi atap rumah
+WRK104,Agus Setiawan,Laki-laki,Jakarta Timur,5000000,Barista dan Coffee Shop Crew brewing manual brew espresso machine latte art kualiti kontrol rasa kopi dan hospitality
+WRK105,Agus Wijaya,Laki-laki,Tangerang,2500000,Tukang Las dan Fabrikasi Besi kanopi pagar besi tempa teralis jendela pengelasan listrik MMA TIG dan konstruksi baja ringan
+WRK106,Rian Hidayat,Laki-laki,Depok,4500000,Barista dan Coffee Shop Crew brewing manual brew espresso machine latte art kualiti kontrol rasa kopi dan hospitality
+WRK107,Budi Gunawan,Laki-laki,Malang,4500000,Kasir Toko dan Admin Retail pencatatan stok opname transaksi POS kasir pembukuan penjualan harian dan pelayanan pelanggan
+WRK108,Maya Pratama,Perempuan,Medan,4000000,Teknisi AC dan Pendingin Ruangan cuci AC berkala isi freon R32 R410a bongkar pasang unit AC split dan perbaikan kelistrikan AC
+WRK109,Hendra Putra,Laki-laki,Depok,2500000,Driver Pribadi dan Operasional menguasai mobil matic manual paham rute jalan kota SIM A aktif jujur dan merawat kendaraan
+WRK110,Lia Nugroho,Perempuan,Depok,4500000,Teknisi AC dan Pendingin Ruangan cuci AC berkala isi freon R32 R410a bongkar pasang unit AC split dan perbaikan kelistrikan AC
+WRK111,Eko Hidayat,Laki-laki,Semarang,4000000,Teknisi AC dan Pendingin Ruangan cuci AC berkala isi freon R32 R410a bongkar pasang unit AC split dan perbaikan kelistrikan AC
+WRK112,Ahmad Wijaya,Laki-laki,Depok,10000000,DevOps Engineer CI CD pipeline Kubernetes Docker AWS Cloud Linux System Administration dan Terraform
+WRK113,Bayu Susilo,Laki-laki,Jakarta Selatan,4500000,Tukang Cat Bangunan dan Dekorasi pengecatan tembok interior exterior plamir dinding perbaikan tembok retak dan pengecatan kayu
+WRK114,Budi Kurnia,Laki-laki,Malang,10000000,Data Analyst menguasai Python Pandas SQL Tableau data visualization Statistical Analysis dan A B Testing
+WRK115,Andi Pertiwi,Laki-laki,Depok,3000000,Kasir Toko dan Admin Retail pencatatan stok opname transaksi POS kasir pembukuan penjualan harian dan pelayanan pelanggan
+WRK116,Sari Wijaya,Perempuan,Depok,6000000,Staf Akuntansi dan Keuangan laporan keuangan bulanan pembukuan kas masuk keluar rekonsiliasi bank pajak PPh dan Accurate Software
+WRK117,Sinta Rahmawati,Perempuan,Palembang,15000000,Mobile App Developer mahir Flutter Dart REST API state management Provider Firebase dan integrasi UI UX Android iOS
+WRK118,Joko Hidayat,Laki-laki,Jakarta Timur,3500000,Crew Event Organizer dan Field Coordinator mengelola ticketing ticketing check in penataan panggung vendor dan koordinasi acara
+WRK119,Hendrik Hidayat,Laki-laki,Jakarta Selatan,4500000,Social Media Specialist dan Content Creator kalender konten copywriting Instagram TikTok desain Canva Photoshop dan analisis insight
+WRK120,Rian Setiawan,Laki-laki,Bandung,3000000,Teknisi HP dan Smartphone perbaikan LCD ganti baterai flash firmware troubleshooting mesin IC dan mati total
+WRK121,Dina Pertiwi,Perempuan,Bekasi,12000000,DevOps Engineer CI CD pipeline Kubernetes Docker AWS Cloud Linux System Administration dan Terraform
+WRK122,Arif Irawan,Laki-laki,Yogyakarta,3500000,Sales Executive dan Field Marketing negosiasi bisnis penetrasi pasar B2B pencapaian target penjualan dan presentasi produk
+WRK123,Faisal Pertiwi,Laki-laki,Depok,3000000,Tukang Cat Bangunan dan Dekorasi pengecatan tembok interior exterior plamir dinding perbaikan tembok retak dan pengecatan kayu
+WRK124,Bayu Lestari,Laki-laki,Padang,5000000,UI UX Designer mahir Figma Wireframing Prototyping Design System User Research dan Responsive Web Design
+WRK125,Arif Utami,Laki-laki,Jakarta Barat,7000000,HR Generalist dan Recruitment seleksi karyawan onboarding BPJS Ketenagakerjaan rekap absensi payroll dan hubungan industrial
+WRK126,Fitri Wijaya,Perempuan,Jakarta Timur,3500000,Tukang Bangunan Umum pemasangan keramik lantai pembuatan fondasi pembesian pasang bata merah dan renovasi atap rumah
+WRK127,Hendra Gunawan,Laki-laki,Palembang,6000000,UI UX Designer mahir Figma Wireframing Prototyping Design System User Research dan Responsive Web Design
+WRK128,Fitri Putra,Perempuan,Denpasar,4500000,Barista dan Coffee Shop Crew brewing manual brew espresso machine latte art kualiti kontrol rasa kopi dan hospitality
+WRK129,Mega Lestari,Perempuan,Pekanbaru,5000000,Crew Event Organizer dan Field Coordinator mengelola ticketing ticketing check in penataan panggung vendor dan koordinasi acara
+WRK130,Gita Gunawan,Perempuan,Semarang,3000000,Kasir Toko dan Admin Retail pencatatan stok opname transaksi POS kasir pembukuan penjualan harian dan pelayanan pelanggan
