@@ -10,6 +10,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  mlworker:
+    build: ./machinel
+    container_name: mlworker
+    restart: always
+
   backend:
     build: ./backend
     container_name: mainserver
@@ -18,8 +23,37 @@ services:
       - .env
     depends_on:
       - database
-    ports:
-      - "127.0.0.1:3000:3000"
+
+  cloudflared:
+      image: docker.io/cloudflare/cloudflared:latest
+      container_name: kerjadekat_tunnel
+      restart: unless-stopped
+      command: tunnel --no-autoupdate run
+      env_file:
+        - .env
+      depends_on:
+        - backend
+
+  dbgate:
+      image: docker.io/dbgate/dbgate:latest
+      container_name: kerjadekat_dbgate
+      restart: unless-stopped
+      depends_on:
+        - database
+      ports:
+        - "3000:3000"
+      volumes:
+        - dbgate-data:/root/.dbgate
+      environment:
+        CONNECTIONS: con1
+
+        LABEL_con1: Kerja Dekat DB
+        SERVER_con1: ${DB_HOST}
+        USER_con1: ${POSTGRES_USER}
+        PASSWORD_con1: ${POSTGRES_PASSWORD}
+        PORT_con1: ${DB_PORT}
+        ENGINE_con1: postgres@dbgate-plugin-postgres
 
 volumes:
   postgres_data:
+  dbgate-data:
