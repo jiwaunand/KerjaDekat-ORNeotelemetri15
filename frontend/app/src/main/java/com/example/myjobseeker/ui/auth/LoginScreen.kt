@@ -60,20 +60,16 @@ fun LoginScreen(
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Logo placeholder
-                Box(
-                    modifier = Modifier
-                        .size(120.dp)
-                        .background(Color(0xFF7597E0), RoundedCornerShape(8.dp)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("LOGO", color = Color.White, fontWeight = FontWeight.Bold)
-                }
+                Image(
+                    painter = painterResource(id = R.drawable.kerja_dekat),
+                    contentDescription = "Logo KerjaDekat",
+                    modifier = Modifier.size(150.dp)
+                )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Text(
-                    text = "KerjaDekat",
+                    text = "Kerja Dekat",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black

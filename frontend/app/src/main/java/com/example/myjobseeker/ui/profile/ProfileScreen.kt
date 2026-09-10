@@ -34,7 +34,7 @@ fun ProfileScreen(
     onLogoutClick: () -> Unit
 ) {
     val applications by jobViewModel.applications.collectAsState()
-    
+
     val totalLamaran = applications.size
     val diproses = applications.count { it.status == ApplicationStatus.DIPROSES }
     val selesai = applications.count { it.status == ApplicationStatus.DITERIMA || it.status == ApplicationStatus.DITOLAK }

@@ -1,5 +1,6 @@
 package com.example.myjobseeker.ui.applications
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -146,17 +147,14 @@ fun ApplicationsHeader(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Surface(
-                color = MaterialTheme.colorScheme.surfaceVariant,
-                shape = RoundedCornerShape(4.dp),
+                color = Color.Transparent,
                 modifier = Modifier.clickable(onClick = onMenuClick)
             ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_settings),
+                Image(
+                    painter = painterResource(id = R.drawable.kerja_dekat),
                     contentDescription = "Menu",
                     modifier = Modifier
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                        .size(20.dp),
-                    tint = MaterialTheme.colorScheme.onSurface
+                        .size(32.dp)
                 )
             }
 

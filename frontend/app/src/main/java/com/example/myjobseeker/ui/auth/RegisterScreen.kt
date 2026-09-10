@@ -1,6 +1,7 @@
 package com.example.myjobseeker.ui.auth
 
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -60,14 +61,11 @@ fun RegisterScreen(
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(100.dp)
-                        .background(Color(0xFF7597E0), RoundedCornerShape(8.dp)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("LOGO", color = Color.White, fontWeight = FontWeight.Bold)
-                }
+                Image(
+                    painter = painterResource(id = R.drawable.kerja_dekat),
+                    contentDescription = "Logo KerjaDekat",
+                    modifier = Modifier.size(100.dp)
+                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 

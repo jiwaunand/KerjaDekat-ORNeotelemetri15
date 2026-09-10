@@ -281,19 +281,16 @@ fun DetailHeader(onProfileClick: () -> Unit, onMenuClick: () -> Unit, onBackClic
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Settings Icon (Drawer) - Now on the left in the box
+            // Settings Icon (Drawer) - Now a clickable logo
             Surface(
-                color = MaterialTheme.colorScheme.surfaceVariant,
-                shape = RoundedCornerShape(4.dp),
+                color = Color.Transparent,
                 modifier = Modifier.clickable(onClick = onMenuClick)
             ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_settings),
+                Image(
+                    painter = painterResource(id = R.drawable.kerja_dekat),
                     contentDescription = "Menu",
                     modifier = Modifier
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                        .size(20.dp),
-                    tint = MaterialTheme.colorScheme.onSurface
+                        .size(32.dp)
                 )
             }
 

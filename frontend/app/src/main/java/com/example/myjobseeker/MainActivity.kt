@@ -29,6 +29,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myjobseeker.model.Application
 import com.example.myjobseeker.model.ApplicationStatus
 import com.example.myjobseeker.model.Job
+import com.example.myjobseeker.ui.SplashScreen
 import com.example.myjobseeker.ui.applications.ApplicationsScreen
 import com.example.myjobseeker.ui.bookmark.BookmarkScreen
 import com.example.myjobseeker.ui.components.NavDrawerContent
@@ -89,7 +90,7 @@ class MainActivity : ComponentActivity() {
                 }
                 
                 LaunchedEffect(isLoggedIn) {
-                    if (!isLoggedIn) {
+                    if (!isLoggedIn && navController.currentDestination?.route != "splash") {
                         navController.navigate("login") {
                             popUpTo(0)
                         }
@@ -161,7 +162,7 @@ class MainActivity : ComponentActivity() {
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     val currentRoute = navBackStackEntry?.destination?.route
                     val showBottomBar = isLoggedIn && selectedJob == null && selectedApplication == null && 
-                            currentRoute != "login" && currentRoute != "register"
+                            currentRoute != "login" && currentRoute != "register" && currentRoute != "splash"
 
                     Scaffold(
                         containerColor = MaterialTheme.colorScheme.background,
@@ -174,9 +175,19 @@ class MainActivity : ComponentActivity() {
                     ) { innerPadding ->
                         NavHost(
                             navController = navController,
-                            startDestination = if (isLoggedIn) "home" else "login",
+                            startDestination = "splash",
                             modifier = Modifier.padding(innerPadding)
                         ) {
+                            composable("splash") {
+                                SplashScreen(
+                                    onTimeout = {
+                                        val destination = if (isLoggedIn) "home" else "login"
+                                        navController.navigate(destination) {
+                                            popUpTo("splash") { inclusive = true }
+                                        }
+                                    }
+                                )
+                            }
                             composable("login") {
                                 LoginScreen(
                                     viewModel = authViewModel,

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.speech.RecognizerIntent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -143,19 +144,16 @@ fun HomeHeader(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // tv_logo -> Now a clickable settings icon for drawer
+            // tv_logo -> Now a clickable logo for drawer
             Surface(
-                color = MaterialTheme.colorScheme.surfaceVariant,
-                shape = RoundedCornerShape(4.dp),
+                color = Color.Transparent,
                 modifier = Modifier.clickable(onClick = onMenuClick)
             ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_settings),
+                Image(
+                    painter = painterResource(id = R.drawable.kerja_dekat),
                     contentDescription = "Menu",
                     modifier = Modifier
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                        .size(20.dp),
-                    tint = MaterialTheme.colorScheme.onSurface
+                        .size(32.dp)
                 )
             }
 
