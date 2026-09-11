@@ -23,16 +23,54 @@ import com.example.myjobseeker.viewmodel.JobViewModel
 import com.example.myjobseeker.model.ApplicationStatus
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.widget.Toast
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import coil.compose.AsyncImage
 
 @Composable
 fun ProfileScreen(
     jobViewModel: JobViewModel,
     onBackClick: () -> Unit,
+    onNotificationClick: () -> Unit,
     location: String,
     username: String?,
     email: String?,
     onLogoutClick: () -> Unit
 ) {
+    val context = LocalContext.current
+    var profileImageUri by remember { mutableStateOf<Uri?>(null) }
+
+    val photoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri ->
+            if (uri != null) {
+                // Check dimensions
+                val options = BitmapFactory.Options().apply {
+                    inJustDecodeBounds = true
+                }
+                context.contentResolver.openInputStream(uri)?.use {
+                    BitmapFactory.decodeStream(it, null, options)
+                }
+
+                if (options.outWidth <= 320 && options.outHeight <= 320) {
+                    profileImageUri = uri
+                    Toast.makeText(context, "Foto profil berhasil diperbarui", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Ukuran foto terlalu besar! Maksimal 320x320 pixel. (Ukuran saat ini: ${options.outWidth}x${options.outHeight})", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    )
+
     val applications by jobViewModel.applications.collectAsState()
 
     val totalLamaran = applications.size
@@ -92,9 +130,12 @@ fun ProfileScreen(
                 
                 Icon(
                     painter = painterResource(id = R.drawable.ic_notifications),
-                    contentDescription = null,
+                    contentDescription = "Notifications",
                     tint = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.size(32.dp).padding(4.dp)
+                    modifier = Modifier
+                        .size(32.dp)
+                        .padding(4.dp)
+                        .clickable(onClick = onNotificationClick)
                 )
             }
         }
@@ -120,6 +161,11 @@ fun ProfileScreen(
                     modifier = Modifier
                         .padding(top = 16.dp)
                         .size(100.dp)
+                        .clickable {
+                            photoPickerLauncher.launch(
+                                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                            )
+                        }
                 ) {
                     Surface(
                         modifier = Modifier.size(100.dp),
@@ -127,7 +173,26 @@ fun ProfileScreen(
                         color = MaterialTheme.colorScheme.surfaceVariant,
                         border = BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface)
                     ) {
-                        // Image placeholder
+                        if (profileImageUri != null) {
+                            AsyncImage(
+                                model = profileImageUri,
+                                contentDescription = "Profile Picture",
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = ContentScale.Crop
+                            )
+                        } else {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_person),
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.onSurface,
+                                    modifier = Modifier.size(50.dp)
+                                )
+                            }
+                        }
                     }
                     
                     Surface(

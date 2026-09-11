@@ -184,8 +184,8 @@ fun LoginScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    /*SocialIcon(R.drawable.ic_google) // Need to make sure these exist or use placeholders
-                    SocialIcon(R.drawable.ic_whatsapp)
+                    //SocialIcon(R.drawable.ic_google)
+                    /*SocialIcon(R.drawable.ic_whatsapp)
                     SocialIcon(R.drawable.ic_x)*/
                 }
             }

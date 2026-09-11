@@ -1,5 +1,7 @@
 package com.example.myjobseeker.ui.profile
 
+import android.app.Activity
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +14,6 @@ import androidx.fragment.app.Fragment
 import com.example.myjobseeker.databinding.FragmentProfileBinding
 import com.yalantis.ucrop.UCrop
 import java.io.File
-import android.app.Activity
 
 
 class ProfileFragment : Fragment() {
@@ -22,7 +23,19 @@ class ProfileFragment : Fragment() {
 
     private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
-            startCrop(uri)
+            // Check dimensions
+            val options = BitmapFactory.Options().apply {
+                inJustDecodeBounds = true
+            }
+            requireContext().contentResolver.openInputStream(uri)?.use {
+                BitmapFactory.decodeStream(it, null, options)
+            }
+
+            if (options.outWidth <= 320 && options.outHeight <= 320) {
+                startCrop(uri)
+            } else {
+                Toast.makeText(requireContext(), "Ukuran foto terlalu besar! Maksimal 320x320 pixel. (Ukuran saat ini: ${options.outWidth}x${options.outHeight})", Toast.LENGTH_LONG).show()
+            }
         } else {
             Toast.makeText(requireContext(), "Tidak ada gambar yang dipilih", Toast.LENGTH_SHORT).show()
         }
@@ -61,6 +74,10 @@ class ProfileFragment : Fragment() {
 
         binding.btnEditAvatar.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+
+        binding.ivNotifications.setOnClickListener {
+            Toast.makeText(context, "Notifications clicked", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnLogout.setOnClickListener {

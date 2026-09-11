@@ -342,6 +342,9 @@ class MainActivity : ComponentActivity() {
                                     onBackClick = {
                                         navController.popBackStack()
                                     },
+                                    onNotificationClick = {
+                                        navController.navigate("notifications")
+                                    },
                                     location = currentAddress,
                                     username = currentUser?.username,
                                     email = currentUser?.email,
