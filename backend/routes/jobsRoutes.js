@@ -1,6 +1,6 @@
 const express = require("express");
 const Job = require("../models/Job");
-const upload = require("../middleware/upload");
+const { createUploadUrl } = require("../services/r2Service");
 const { getJobScore } = require("../services/mlService");
 
 const router = express.Router();
@@ -52,7 +52,7 @@ router.get("/", async (req, res) => {
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             required:
@@ -77,9 +77,9 @@ router.get("/", async (req, res) => {
  *               perkiraan_salary:
  *                 type: integer
  *                 example: 5000000
- *               image:
+ *               image_url:
  *                 type: string
- *                 format: binary
+ *                 example: https://kerjadekatproject.9414295e210f876f77e8f1ace4c716b8.r2.cloudflarestorage.com/1789133983321-perusahaan.jpg
  *     responses:
  *       201:
  *         description: Pekerjaan berhasil ditambahkan
@@ -88,14 +88,15 @@ router.get("/", async (req, res) => {
  *       500:
  *         description: Gagal menambahkan pekerjaan
  */
-router.post("/", upload.single("image"), async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const {
       job_name,
       nama_perusahaan,
       deskripsi_utama,
       lokasi,
-      perkiraan_salary
+      perkiraan_salary,
+      image_url
     } = req.body;
 
     if (
@@ -116,7 +117,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       deskripsi_utama,
       lokasi,
       perkiraan_salary,
-      image_url: null
+      image_url: image_url || null
     });
 
     res.status(201).json({
@@ -185,6 +186,73 @@ router.post("/score", async (req, res) => {
 
     res.status(500).json({
       message: "Gagal menghubungi ML",
+      error: error.message
+    });
+  }
+});
+
+/**
+ * @swagger
+ * /jobs/upload-url:
+ *   post:
+ *     summary: Membuat presigned URL untuk upload gambar pekerjaan
+ *     tags: [Jobs]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - file_name
+ *               - content_type
+ *             properties:
+ *               file_name:
+ *                 type: string
+ *                 example: perusahaan.jpg
+ *               content_type:
+ *                 type: string
+ *                 example: image/jpeg
+ *     responses:
+ *       200:
+ *         description: Presigned URL berhasil dibuat
+ *       400:
+ *         description: Data upload tidak valid
+ *       500:
+ *         description: Gagal membuat presigned URL
+ */
+router.post("/upload-url", async (req, res) => {
+  try {
+    const { file_name, content_type } = req.body;
+
+    if (!file_name || !content_type) {
+      return res.status(400).json({
+        message: "file_name dan content_type wajib diisi"
+      });
+    }
+
+    if (!content_type.startsWith("image/")) {
+      return res.status(400).json({
+        message: "File harus berupa gambar"
+      });
+    }
+
+    const result = await createUploadUrl(
+      file_name,
+      content_type
+    );
+
+    res.status(200).json({
+      message: "Presigned URL berhasil dibuat",
+      upload_url: result.uploadUrl,
+      key: result.key
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Gagal membuat presigned URL",
       error: error.message
     });
   }
