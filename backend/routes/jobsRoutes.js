@@ -79,7 +79,7 @@ router.get("/", async (req, res) => {
  *                 example: 5000000
  *               image_url:
  *                 type: string
- *                 example: https://kerjadekatproject.9414295e210f876f77e8f1ace4c716b8.r2.cloudflarestorage.com/1789133983321-perusahaan.jpg
+ *                 example: https://kerjadekat.my.id/1789133983321-perusahaan.jpg
  *     responses:
  *       201:
  *         description: Pekerjaan berhasil ditambahkan
@@ -111,13 +111,17 @@ router.post("/", async (req, res) => {
       });
     }
 
+    // Scoring dijalankan secara internal oleh backend
+    const score = await getJobScore(deskripsi_utama);
+
     const job = await Job.create({
       job_name,
       nama_perusahaan,
       deskripsi_utama,
       lokasi,
       perkiraan_salary,
-      image_url: image_url || null
+      image_url,
+      scoring: score
     });
 
     res.status(201).json({
@@ -130,62 +134,6 @@ router.post("/", async (req, res) => {
 
     res.status(500).json({
       message: "Gagal menambahkan pekerjaan",
-      error: error.message
-    });
-  }
-});
-
-/**
- * @swagger
- * /jobs/score:
- *   post:
- *     summary: Mengirim permintaan scoring pekerjaan ke ML
- *     tags: [Jobs]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - skill_text
- *             properties:
- *               skill_text:
- *                 type: string
- *                 example: "Python, SQL, REST API"
- *               top_n:
- *                 type: integer
- *                 example: 10
- *     responses:
- *       200:
- *         description: Hasil scoring dari ML
- *       400:
- *         description: Data tidak valid
- *       500:
- *         description: Gagal menghubungi ML
- */
-router.post("/score", async (req, res) => {
-  try {
-    const { skill_text, top_n } = req.body;
-
-    if (!skill_text) {
-      return res.status(400).json({
-        message: "skill_text wajib diisi"
-      });
-    }
-
-    const result = await getJobScore(
-      skill_text,
-      top_n || 10
-    );
-
-    res.status(200).json(result);
-
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      message: "Gagal menghubungi ML",
       error: error.message
     });
   }
@@ -292,6 +240,7 @@ router.get("/:id", async (req, res) => {
     }
 
     res.status(200).json(job);
+
   } catch (error) {
     console.error(error);
 
