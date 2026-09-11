@@ -47,3 +47,4 @@ out/
 .Trashes
 ehthumbs.db
 Thumbs.db
+__pycache__

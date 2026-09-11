@@ -11,9 +11,11 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   mlworker:
-    build: ./machinel
+    build: ./machinelnew
     container_name: mlworker
-    restart: always
+    restart: unless-stopped
+    env_file:
+        - .env
 
   backend:
     build: ./backend
