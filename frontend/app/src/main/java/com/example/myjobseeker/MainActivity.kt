@@ -35,11 +35,12 @@ import com.example.myjobseeker.ui.bookmark.BookmarkScreen
 import com.example.myjobseeker.ui.components.NavDrawerContent
 import com.example.myjobseeker.ui.detail.DetailScreen
 import com.example.myjobseeker.ui.home.HomeScreen
-import com.example.myjobseeker.ui.home.getDummyJobs
+//import com.example.myjobseeker.ui.home.getDummyJobs
 import com.example.myjobseeker.ui.job.AddJobScreen
 import com.example.myjobseeker.ui.profile.ProfileScreen
 import com.example.myjobseeker.ui.search.SearchScreen
 import com.example.myjobseeker.ui.theme.BackgroundLightBlue
+import com.example.myjobseeker.ui.theme.BlueNormal
 import com.example.myjobseeker.ui.theme.LogoutRed
 import com.example.myjobseeker.ui.theme.MyJobSeekerTheme
 import com.example.myjobseeker.ui.theme.NavNavyHeader
@@ -127,8 +128,14 @@ class MainActivity : ComponentActivity() {
                 val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
                 val scope = rememberCoroutineScope()
 
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
+                val isAuthRoute = currentRoute == "login" || currentRoute == "register" || currentRoute == "splash"
+                val gesturesEnabled = !isAuthRoute && isLoggedIn
+
                 ModalNavigationDrawer(
                     drawerState = drawerState,
+                    gesturesEnabled = gesturesEnabled,
                     drawerContent = {
                         NavDrawerContent(
                             isDark = isDarkTheme,
@@ -159,10 +166,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) {
-                    val navBackStackEntry by navController.currentBackStackEntryAsState()
-                    val currentRoute = navBackStackEntry?.destination?.route
-                    val showBottomBar = isLoggedIn && selectedJob == null && selectedApplication == null && 
-                            currentRoute != "login" && currentRoute != "register" && currentRoute != "splash"
+                    val showBottomBar = isLoggedIn && selectedJob == null && selectedApplication == null && !isAuthRoute
 
                     Scaffold(
                         containerColor = MaterialTheme.colorScheme.background,
@@ -407,7 +411,7 @@ class MainActivity : ComponentActivity() {
                                     onBookmarkClick = { jobViewModel.toggleBookmark(job) },
                                     location = currentAddress,
                                     buttonText = if (isCreator) "Hapus Pekerjaan" else stringResource(id = R.string.apply_job),
-                                    buttonColor = if (isCreator) LogoutRed else NavNavyHeader
+                                    buttonColor = if (isCreator) LogoutRed else BlueNormal
                                 )
                             }
                         }

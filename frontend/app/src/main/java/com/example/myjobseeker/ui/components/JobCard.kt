@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
@@ -54,15 +55,22 @@ fun JobCard(
                 painterResource(id = R.drawable.ic_work)
             }
 
-            Image(
-                painter = painter,
-                contentDescription = null,
+            Box(
                 modifier = Modifier
                     .width(110.dp)
                     .fillMaxHeight()
                     .background(BlueDark),
-                contentScale = ContentScale.Crop
-            )
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painter,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(60.dp)
+                        .clip(RoundedCornerShape(12.dp)),
+                    contentScale = ContentScale.Crop
+                )
+            }
 
             // Right: Content
             Column(
@@ -122,7 +130,7 @@ fun JobCard(
                         .height(38.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isCreator) LogoutRed else BlueNormal
+                        containerColor = BlueNormal
                     ),
                     contentPadding = PaddingValues(horizontal = 20.dp)
                 ) {

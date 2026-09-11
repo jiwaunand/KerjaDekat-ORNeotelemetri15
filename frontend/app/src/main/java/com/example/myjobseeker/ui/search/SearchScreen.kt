@@ -139,24 +139,41 @@ fun SearchScreen(
                     }
                 } else {
                     // Show Search Results
-                    item {
-                        Text(
-                            text = "${searchResults.size} Lowongan",
-                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp,
-                            color = MaterialTheme.colorScheme.onBackground
-                        )
-                    }
-                    items(searchResults) { job ->
-                        JobCard(
-                            job = job,
-                            currentUserId = currentUserId,
-                            onClick = { onJobClick(job) },
-                            onApplyClick = { onApplyClick(job) },
-                            isBookmarked = bookmarkedJobIds.contains(job.id),
-                            onBookmarkClick = { jobViewModel.toggleBookmark(job) }
-                        )
+                    if (searchResults.isEmpty()) {
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(32.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "Tidak ada lowongan yang ditemukan",
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    fontSize = 14.sp
+                                )
+                            }
+                        }
+                    } else {
+                        item {
+                            Text(
+                                text = "${searchResults.size} Lowongan",
+                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 14.sp,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
+                        items(searchResults) { job ->
+                            JobCard(
+                                job = job,
+                                currentUserId = currentUserId,
+                                onClick = { onJobClick(job) },
+                                onApplyClick = { onApplyClick(job) },
+                                isBookmarked = bookmarkedJobIds.contains(job.id),
+                                onBookmarkClick = { jobViewModel.toggleBookmark(job) }
+                            )
+                        }
                     }
                 }
             }

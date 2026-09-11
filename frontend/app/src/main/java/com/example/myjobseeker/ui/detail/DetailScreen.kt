@@ -14,6 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
@@ -97,6 +98,8 @@ fun DetailScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(200.dp)
+                                .background(if (job.imageUri != null) Color.Transparent else Color.LightGray),
+                            contentAlignment = Alignment.Center
                         ) {
                             if (job.imageUri != null) {
                                 Image(
@@ -106,11 +109,11 @@ fun DetailScreen(
                                     contentScale = ContentScale.Crop
                                 )
                             } else {
-                                Image(
-                                    painter = painterResource(id = R.drawable.ic_launcher_background), // Using background as placeholder
-                                    contentDescription = null,
-                                    modifier = Modifier.fillMaxSize().background(BlueDark),
-                                    contentScale = ContentScale.Crop
+                                Text(
+                                    text = "Image not available",
+                                    fontSize = 16.sp,
+                                    textAlign = TextAlign.Center,
+                                    color = Color.DarkGray
                                 )
                             }
                             
@@ -177,7 +180,37 @@ fun DetailScreen(
                         // Header Info
                         Column(modifier = Modifier.padding(16.dp)) {
                             Row(verticalAlignment = Alignment.Top) {
-                                Box(modifier = Modifier.size(48.dp).background(Color(0xFF5D6D7E)))
+                                if (job.imageUri != null) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(48.dp)
+                                            .clip(RoundedCornerShape(8.dp))
+                                            .background(BlueDark),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Image(
+                                            painter = rememberAsyncImagePainter(model = job.imageUri),
+                                            contentDescription = null,
+                                            modifier = Modifier.fillMaxSize(),
+                                            contentScale = ContentScale.Crop
+                                        )
+                                    }
+                                } else {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(48.dp)
+                                            .clip(RoundedCornerShape(8.dp))
+                                            .background(Color.LightGray),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Text(
+                                            text = "No Image",
+                                            fontSize = 8.sp,
+                                            textAlign = TextAlign.Center,
+                                            color = Color.DarkGray
+                                        )
+                                    }
+                                }
                                 Column(modifier = Modifier.padding(start = 12.dp).weight(1f)) {
                                     Text(text = job.title, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = MaterialTheme.colorScheme.onSurface)
                                     Text(text = job.companyName, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
@@ -252,7 +285,7 @@ fun DetailScreen(
                             onClick = onApplyClick,
                             modifier = Modifier.weight(1f).height(56.dp),
                             shape = RoundedCornerShape(8.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = BlueNormal)
+                            colors = ButtonDefaults.buttonColors(containerColor = buttonColor)
                         ) {
                             Text(
                                 text = buttonText,

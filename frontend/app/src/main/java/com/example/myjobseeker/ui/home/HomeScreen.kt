@@ -108,17 +108,34 @@ fun HomeScreen(
                 }
             }
 
-            items(jobs) { job ->
-                JobCard(
-                    job = job,
-                    currentUserId = currentUserId,
-                    onClick = { onJobClick(job) },
-                    onApplyClick = { onApplyClick(job) },
-                    isBookmarked = bookmarkedJobIds.contains(job.id),
-                    onBookmarkClick = { jobViewModel.toggleBookmark(job) }
-                )
+            if (jobs.isEmpty()) {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(32.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Tidak ada lowongan tersedia saat ini",
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            fontSize = 14.sp
+                        )
+                    }
+                }
+            } else {
+                items(jobs) { job ->
+                    JobCard(
+                        job = job,
+                        currentUserId = currentUserId,
+                        onClick = { onJobClick(job) },
+                        onApplyClick = { onApplyClick(job) },
+                        isBookmarked = bookmarkedJobIds.contains(job.id),
+                        onBookmarkClick = { jobViewModel.toggleBookmark(job) }
+                    )
+                }
             }
-            
+
             item {
                 Spacer(modifier = Modifier.height(16.dp))
             }
