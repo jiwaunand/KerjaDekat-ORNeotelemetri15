@@ -1,7 +1,5 @@
-const {
-  S3Client,
-  PutObjectCommand
-} = require("@aws-sdk/client-s3");
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
 const s3 = new S3Client({
   region: "auto",
@@ -12,21 +10,25 @@ const s3 = new S3Client({
   }
 });
 
-async function uploadToR2(file) {
-  const fileName = `${Date.now()}-${file.originalname}`;
+async function createUploadUrl(fileName, contentType) {
+  const key = `${Date.now()}-${fileName}`;
 
-  await s3.send(
-    new PutObjectCommand({
-      Bucket: process.env.R2_BUCKET_NAME,
-      Key: fileName,
-      Body: file.buffer,
-      ContentType: file.mimetype
-    })
-  );
+  const command = new PutObjectCommand({
+    Bucket: process.env.R2_BUCKET_NAME,
+    Key: key,
+    ContentType: contentType
+  });
 
-  return `${process.env.R2_PUBLIC_URL}/${fileName}`;
+  const uploadUrl = await getSignedUrl(s3, command, {
+    expiresIn: 300
+  });
+
+  return {
+    uploadUrl,
+    key
+  };
 }
 
 module.exports = {
-  uploadToR2
+  createUploadUrl
 };
