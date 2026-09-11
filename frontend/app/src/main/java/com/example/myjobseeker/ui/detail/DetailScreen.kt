@@ -33,7 +33,8 @@ fun DetailScreen(
     isBookmarked: Boolean = false,
     onBookmarkClick: () -> Unit = {},
     buttonText: String = stringResource(id = R.string.apply_job),
-    buttonColor: Color = NavNavyHeader
+    buttonColor: Color = NavNavyHeader,
+    isAccepted: Boolean = false
 ) {
     Column(
         modifier = Modifier
@@ -117,48 +118,10 @@ fun DetailScreen(
                                 )
                             }
                             
-                            // Verified Tag
-                            /*Surface(
-                                modifier = Modifier.padding(12.dp).align(Alignment.TopStart),
-                                color = Color.Black.copy(alpha = 0.7f),
-                                shape = RoundedCornerShape(8.dp)
-                            ) {
-                                Row(
-                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_verified),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(14.dp),
-                                        tint = SuccessGreen
-                                    )
-                                    Text(
-                                        text = stringResource(id = R.string.verified_employer),
-                                        modifier = Modifier.padding(start = 6.dp),
-                                        color = Color.White,
-                                        fontSize = 10.sp,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                }
-                            }*/
-
                             // Heart and Bookmark icons
                             Row(
                                 modifier = Modifier.padding(12.dp).align(Alignment.TopEnd)
                             ) {
-                                /*Surface(
-                                    modifier = Modifier.size(32.dp),
-                                    color = Color.White.copy(alpha = 0.9f),
-                                    shape = RoundedCornerShape(8.dp)
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_heart_outline),
-                                        contentDescription = null,
-                                        modifier = Modifier.padding(8.dp),
-                                        tint = TextDark
-                                    )
-                                }*/
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Surface(
                                     modifier = Modifier.size(32.dp).clickable(onClick = onBookmarkClick),
@@ -281,18 +244,36 @@ fun DetailScreen(
                             )
                         }
                         Spacer(modifier = Modifier.width(16.dp))
-                        Button(
-                            onClick = onApplyClick,
-                            modifier = Modifier.weight(1f).height(56.dp),
-                            shape = RoundedCornerShape(8.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = buttonColor)
-                        ) {
-                            Text(
-                                text = buttonText,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 16.sp,
-                                color = Color.White
-                            )
+                        if (isAccepted) {
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(56.dp)
+                                    .background(SuccessGreenLight, RoundedCornerShape(8.dp))
+                                    .border(1.dp, SuccessGreen, RoundedCornerShape(8.dp)),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "Diterima!",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 16.sp,
+                                    color = SuccessGreen
+                                )
+                            }
+                        } else {
+                            Button(
+                                onClick = onApplyClick,
+                                modifier = Modifier.weight(1f).height(56.dp),
+                                shape = RoundedCornerShape(8.dp),
+                                colors = ButtonDefaults.buttonColors(containerColor = buttonColor)
+                            ) {
+                                Text(
+                                    text = buttonText,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 16.sp,
+                                    color = Color.White
+                                )
+                            }
                         }
                     }
                 }

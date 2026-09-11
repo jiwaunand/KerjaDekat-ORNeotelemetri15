@@ -1,16 +1,12 @@
-package com.example.myjobseeker.ui.bookmark
+package com.example.myjobseeker.ui.applications
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,26 +16,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myjobseeker.R
-import com.example.myjobseeker.model.Job
-import com.example.myjobseeker.ui.components.JobCard
-import com.example.myjobseeker.ui.home.getDummyJobs
+import com.example.myjobseeker.model.Application
+import com.example.myjobseeker.model.ApplicationStatus
 import com.example.myjobseeker.ui.theme.*
 import com.example.myjobseeker.viewmodel.JobViewModel
 
-import com.example.myjobseeker.ui.home.HomeHeader
-
 @Composable
-fun BookmarkScreen(
+fun RiwayatPekerjaanScreen(
     viewModel: JobViewModel,
-    currentUserId: Int,
-    onJobClick: (Job) -> Unit,
-    onApplyClick: (Job) -> Unit,
     onBackClick: () -> Unit,
+    onDetailClick: (Application) -> Unit,
     location: String
 ) {
-    val bookmarkedJobIds by viewModel.bookmarkedJobIds.collectAsState()
-    val allJobs by viewModel.jobs.collectAsState()
-    val bookmarkedJobs = allJobs.filter { bookmarkedJobIds.contains(it.id) }
+    val allApplications by viewModel.applications.collectAsState()
+    val riwayatApplications = allApplications.filter {
+        it.status == ApplicationStatus.DITERIMA || it.status == ApplicationStatus.DITOLAK
+    }
 
     Column(
         modifier = Modifier
@@ -65,7 +57,7 @@ fun BookmarkScreen(
                         .clickable { onBackClick() },
                     tint = MaterialTheme.colorScheme.onSurface
                 )
-                
+
                 Spacer(modifier = Modifier.width(12.dp))
 
                 Row(
@@ -90,37 +82,33 @@ fun BookmarkScreen(
         }
 
         Text(
-            text = "Halaman Bookmark",
+            text = "Riwayat Pekerjaan",
             modifier = Modifier.padding(16.dp),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground
         )
 
-        if (bookmarkedJobs.isEmpty()) {
+        if (riwayatApplications.isEmpty()) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "tidak ada bookmark yang tersedia",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    fontSize = 16.sp
+                    text = "Belum ada riwayat pekerjaan",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(bottom = 16.dp)
+                contentPadding = PaddingValues(16.dp)
             ) {
-                items(bookmarkedJobs) { job ->
-                    JobCard(
-                        job = job,
-                        currentUserId = currentUserId,
-                        onClick = { onJobClick(job) },
-                        onApplyClick = { onApplyClick(job) },
-                        isBookmarked = true,
-                        onBookmarkClick = { viewModel.toggleBookmark(job) }
+                items(riwayatApplications) { application ->
+                    ApplicationCard(
+                        application = application,
+                        viewModel = viewModel,
+                        onDetailClick = { onDetailClick(application) }
                     )
                 }
             }

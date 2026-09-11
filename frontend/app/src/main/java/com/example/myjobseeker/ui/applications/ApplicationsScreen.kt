@@ -116,6 +116,25 @@ fun ApplicationsScreen(
             }
         }
 
+        if (selectedTab == 1 && applications.isNotEmpty()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Text(
+                    text = "Hapus History",
+                    color = BlueNormal,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.clickable {
+                        viewModel.clearApplicationsByStatus(ApplicationStatus.DITERIMA)
+                    }
+                )
+            }
+        }
+
         if (applications.isEmpty()) {
             Box(
                 modifier = Modifier

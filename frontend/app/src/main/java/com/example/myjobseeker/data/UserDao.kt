@@ -13,6 +13,9 @@ interface UserDao {
     @Insert
     suspend fun insertUser(user: User)
 
+    @androidx.room.Update
+    suspend fun updateUser(user: User)
+
     @Query("SELECT * FROM users WHERE email = :email AND password = :password")
     suspend fun login(email: String, password: String): User?
 
@@ -44,6 +47,9 @@ interface UserDao {
 
     @Query("DELETE FROM applications WHERE id = :applicationId")
     suspend fun deleteApplication(applicationId: Int)
+
+    @Query("DELETE FROM applications WHERE userId = :userId AND status = :status")
+    suspend fun deleteApplicationsByStatus(userId: Int, status: com.example.myjobseeker.model.ApplicationStatus)
 
     // Notifications
     @Insert

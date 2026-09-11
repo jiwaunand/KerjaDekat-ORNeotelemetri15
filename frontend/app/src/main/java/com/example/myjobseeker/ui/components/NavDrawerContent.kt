@@ -29,6 +29,7 @@ fun NavDrawerContent(
     username: String?,
     email: String?,
     onBookmarkClick: () -> Unit,
+    onRiwayatClick: () -> Unit,
     onModeClick: () -> Unit,
     onSettingsClick: () -> Unit,
     onLogoutClick: () -> Unit
@@ -82,6 +83,12 @@ fun NavDrawerContent(
             label = "Halaman Bookmark",
             onClick = onBookmarkClick
         )
+
+        DrawerItem(
+            icon = R.drawable.ic_work_history,
+            label = "Riwayat Pekerjaan",
+            onClick = onRiwayatClick
+        )
         
         DrawerItem(
             icon = if (isDark) R.drawable.ic_sun else R.drawable.ic_moon, // placeholder icon, user should have better ones
@@ -89,11 +96,11 @@ fun NavDrawerContent(
             onClick = onModeClick
         )
 
-        DrawerItem(
+        /*DrawerItem(
             icon = R.drawable.ic_settings,
             label = "Pengaturan",
             onClick = onSettingsClick
-        )
+        )*/
 
         Spacer(modifier = Modifier.weight(1f))
 

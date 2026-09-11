@@ -38,6 +38,8 @@ import com.example.myjobseeker.ui.home.HomeScreen
 //import com.example.myjobseeker.ui.home.getDummyJobs
 import com.example.myjobseeker.ui.job.AddJobScreen
 import com.example.myjobseeker.ui.profile.ProfileScreen
+import com.example.myjobseeker.ui.profile.MyProfileScreen
+import com.example.myjobseeker.ui.profile.SkillScreen
 import com.example.myjobseeker.ui.search.SearchScreen
 import com.example.myjobseeker.ui.theme.BackgroundLightBlue
 import com.example.myjobseeker.ui.theme.BlueNormal
@@ -61,6 +63,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import com.example.myjobseeker.ui.notifications.NotificationsScreen
+import com.example.myjobseeker.ui.applications.RiwayatPekerjaanScreen
 import com.example.myjobseeker.viewmodel.LocationViewModel
 import com.example.myjobseeker.viewmodel.ThemeViewModel
 
@@ -134,6 +137,9 @@ class MainActivity : ComponentActivity() {
                 val isAuthRoute = currentRoute == "login" || currentRoute == "register" || currentRoute == "splash"
                 val gesturesEnabled = !isAuthRoute && isLoggedIn
 
+                val mainRoutes = listOf("home", "search", "add_job", "applications", "profile")
+                val showBottomBar = isLoggedIn && currentRoute in mainRoutes
+
                 ModalNavigationDrawer(
                     drawerState = drawerState,
                     gesturesEnabled = gesturesEnabled,
@@ -144,6 +150,16 @@ class MainActivity : ComponentActivity() {
                             email = currentUser?.email,
                             onBookmarkClick = {
                                 navController.navigate("bookmarks") {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                                scope.launch { drawerState.close() }
+                            },
+                            onRiwayatClick = {
+                                navController.navigate("riwayat_pekerjaan") {
                                     popUpTo(navController.graph.findStartDestination().id) {
                                         saveState = true
                                     }
@@ -167,8 +183,6 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) {
-                    val showBottomBar = isLoggedIn && selectedJob == null && selectedApplication == null && !isAuthRoute
-
                     Scaffold(
                         containerColor = MaterialTheme.colorScheme.background,
                         contentWindowInsets = WindowInsets(0, 0, 0, 0),
@@ -305,14 +319,8 @@ class MainActivity : ComponentActivity() {
                                             restoreState = true
                                         }
                                     },
-                                    onProfileClick = {
-                                        navController.navigate("profile")
-                                    },
-                                    onNotificationClick = {
-                                        navController.navigate("notifications")
-                                    },
-                                    onMenuClick = {
-                                        scope.launch { drawerState.open() }
+                                    onBackClick = {
+                                        navController.popBackStack()
                                     },
                                     location = currentAddress
                                 )
@@ -345,11 +353,33 @@ class MainActivity : ComponentActivity() {
                                     onNotificationClick = {
                                         navController.navigate("notifications")
                                     },
+                                    onMyProfileClick = {
+                                        navController.navigate("my_profile")
+                                    },
+                                    onSkillClick = {
+                                        navController.navigate("skills")
+                                    },
                                     location = currentAddress,
                                     username = currentUser?.username,
                                     email = currentUser?.email,
                                     onLogoutClick = {
                                         authViewModel.logout()
+                                    }
+                                )
+                            }
+                            composable("my_profile") {
+                                MyProfileScreen(
+                                    authViewModel = authViewModel,
+                                    onBackClick = {
+                                        navController.popBackStack()
+                                    }
+                                )
+                            }
+                            composable("skills") {
+                                SkillScreen(
+                                    authViewModel = authViewModel,
+                                    onBackClick = {
+                                        navController.popBackStack()
                                     }
                                 )
                             }
@@ -376,6 +406,19 @@ class MainActivity : ComponentActivity() {
                                     },
                                     onProfileClick = {
                                         navController.navigate("profile")
+                                    },
+                                    location = currentAddress
+                                )
+                            }
+                            composable("riwayat_pekerjaan") {
+                                RiwayatPekerjaanScreen(
+                                    viewModel = jobViewModel,
+                                    onBackClick = {
+                                        navController.popBackStack()
+                                    },
+                                    onDetailClick = { application ->
+                                        selectedApplication = application
+                                        navController.navigate("application_detail")
                                     },
                                     location = currentAddress
                                 )
@@ -423,6 +466,7 @@ class MainActivity : ComponentActivity() {
                             selectedApplication?.let { app ->
                                 jobViewModel.jobs.value.find { it.id == app.jobId }?.let { job ->
                                     val isRejected = app.status == ApplicationStatus.DITOLAK
+                                    val isAccepted = app.status == ApplicationStatus.DITERIMA
                                     DetailScreen(
                                         job = job,
                                         onBackClick = {
@@ -446,7 +490,8 @@ class MainActivity : ComponentActivity() {
                                         },
                                         buttonText = if (isRejected) "Hapus" else stringResource(id = R.string.cancel_application),
                                         buttonColor = LogoutRed,
-                                        location = currentAddress
+                                        location = currentAddress,
+                                        isAccepted = isAccepted
                                     )
                                 }
                             }
@@ -462,11 +507,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
-        NavigationItem("home", "Beranda", R.drawable.ic_home),
-        NavigationItem("search", "Cari", R.drawable.ic_search),
-        NavigationItem("add_job", "Tambah", R.drawable.ic_edit),
-        NavigationItem("applications", "Lamaran", R.drawable.ic_work),
-        NavigationItem("profile", "Profil", R.drawable.ic_person)
+        NavigationItem("home", stringResource(R.string.nav_home), R.drawable.ic_home),
+        NavigationItem("search", stringResource(R.string.nav_search), R.drawable.ic_search),
+        NavigationItem("add_job", stringResource(R.string.nav_add_job), R.drawable.ic_edit),
+        NavigationItem("applications", stringResource(R.string.nav_applications), R.drawable.ic_work),
+        NavigationItem("profile", stringResource(R.string.nav_profile), R.drawable.ic_person)
     )
     
     NavigationBar(

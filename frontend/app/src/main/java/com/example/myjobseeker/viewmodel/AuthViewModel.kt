@@ -73,4 +73,10 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             userPreferences.clearLoginSession()
         }
     }
+
+    fun updateProfile(user: User) {
+        viewModelScope.launch {
+            userDao.updateUser(user)
+        }
+    }
 }

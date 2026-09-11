@@ -102,6 +102,15 @@ class JobViewModel(application: AndroidApp) : AndroidViewModel(application) {
         }
     }
 
+    fun clearApplicationsByStatus(status: ApplicationStatus) {
+        val userId = _currentUserId.value
+        if (userId != -1) {
+            viewModelScope.launch {
+                userDao.deleteApplicationsByStatus(userId, status)
+            }
+        }
+    }
+
     fun markNotificationAsRead(notificationId: Int) {
         viewModelScope.launch {
             userDao.markAsRead(notificationId)

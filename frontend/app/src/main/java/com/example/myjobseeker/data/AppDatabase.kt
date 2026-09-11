@@ -21,7 +21,7 @@ class Converters {
     fun toStatus(value: String): ApplicationStatus = ApplicationStatus.valueOf(value)
 }
 
-@Database(entities = [User::class, Bookmark::class, Application::class, Notification::class, SearchHistory::class], version = 4, exportSchema = false)
+@Database(entities = [User::class, Bookmark::class, Application::class, Notification::class, SearchHistory::class], version = 5, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao

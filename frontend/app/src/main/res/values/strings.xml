@@ -2,7 +2,10 @@
     <string name="app_name">Kerja Dekat</string>
     <string name="nav_home">Beranda</string>
     <string name="nav_search">Cari</string>
+    <string name="nav_add_job">Tambah</string>
+    <string name="nav_bookmarks">Bookmark</string>
     <string name="nav_applications">Lamaran</string>
+    <string name="nav_riwayat">Riwayat</string>
     <string name="nav_profile">Profil</string>
     <string name="search_hint">Cari Pekerjaan&#8230;</string>
     <string name="recommendation_title">Rekomendasi Pekerjaan</string>
@@ -40,7 +43,7 @@
     <string name="menu_skill">Skill Saya</string>
     <string name="menu_riwayat">Riwayat Pekerjaan</string>
     <string name="menu_pengaturan">Pengaturan</string>
-    <string name="menu_bantuan">Pusat Bantuan</string>
+    <string name="menu_bantuan">tentang</string>
     <string name="logout">Keluar</string>
 
     <!-- Applications -->

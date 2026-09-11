@@ -41,6 +41,8 @@ fun ProfileScreen(
     jobViewModel: JobViewModel,
     onBackClick: () -> Unit,
     onNotificationClick: () -> Unit,
+    onMyProfileClick: () -> Unit,
+    onSkillClick: () -> Unit,
     location: String,
     username: String?,
     email: String?,
@@ -273,11 +275,28 @@ fun ProfileScreen(
                         .fillMaxWidth()
                         .padding(top = 24.dp)
                 ) {
-                    ProfileMenuItem(icon = R.drawable.ic_person, title = stringResource(id = R.string.menu_profile))
-                    ProfileMenuItem(icon = R.drawable.ic_skill, title = stringResource(id = R.string.menu_skill))
-                    ProfileMenuItem(icon = R.drawable.ic_work_history, title = stringResource(id = R.string.menu_riwayat))
-                    ProfileMenuItem(icon = R.drawable.ic_settings, title = stringResource(id = R.string.menu_pengaturan))
-                    ProfileMenuItem(icon = R.drawable.ic_help, title = stringResource(id = R.string.menu_bantuan), isLast = true)
+                    ProfileMenuItem(
+                        icon = R.drawable.ic_person,
+                        title = stringResource(id = R.string.menu_profile),
+                        onClick = onMyProfileClick
+                    )
+                    ProfileMenuItem(
+                        icon = R.drawable.ic_skill,
+                        title = stringResource(id = R.string.menu_skill),
+                        onClick = onSkillClick
+                    )
+                    //ProfileMenuItem(icon = R.drawable.ic_work_history, title = stringResource(id = R.string.menu_riwayat))
+                    ProfileMenuItem(
+                        icon = R.drawable.ic_settings,
+                        title = stringResource(id = R.string.menu_pengaturan),
+                        onClick = {}
+                    )
+                    ProfileMenuItem(
+                        icon = R.drawable.ic_help,
+                        title = stringResource(id = R.string.menu_bantuan),
+                        isLast = true,
+                        onClick = {}
+                    )
                 }
 
                 // Logout Button
@@ -329,12 +348,12 @@ fun StatBlock(label: String, value: String, modifier: Modifier) {
 }
 
 @Composable
-fun ProfileMenuItem(icon: Int, title: String, isLast: Boolean = false) {
+fun ProfileMenuItem(icon: Int, title: String, isLast: Boolean = false, onClick: () -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = if (isLast) 24.dp else 8.dp)
-            .clickable { },
+            .clickable(onClick = onClick),
         shape = RoundedCornerShape(8.dp),
         color = MaterialTheme.colorScheme.surfaceVariant
     ) {
