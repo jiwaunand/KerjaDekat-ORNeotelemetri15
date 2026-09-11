@@ -1,6 +1,7 @@
 const express = require("express");
 const Job = require("../models/Job");
 const upload = require("../middleware/upload");
+const { uploadToR2 } = require("../services/r2Service");
 const { getJobScore } = require("../services/mlService");
 
 const router = express.Router();
@@ -110,13 +111,21 @@ router.post("/", upload.single("image"), async (req, res) => {
       });
     }
 
+    let image_url = null;
+
+    if (req.file) {
+      const fileName = await uploadToR2(req.file);
+
+      image_url = fileName;
+    }
+
     const job = await Job.create({
       job_name,
       nama_perusahaan,
       deskripsi_utama,
       lokasi,
       perkiraan_salary,
-      image_url: null
+      image_url
     });
 
     res.status(201).json({
