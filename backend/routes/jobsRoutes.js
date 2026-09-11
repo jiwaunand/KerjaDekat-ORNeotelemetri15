@@ -45,6 +45,97 @@ router.get("/", async (req, res) => {
 
 /**
  * @swagger
+ * /jobs:
+ *   post:
+ *     summary: Menambahkan pekerjaan baru
+ *     tags: [Jobs]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - job_name
+ *               - nama_perusahaan
+ *               - deskripsi_utama
+ *               - lokasi
+ *               - perkiraan_salary
+ *             properties:
+ *               job_name:
+ *                 type: string
+ *                 example: Backend Developer
+ *               nama_perusahaan:
+ *                 type: string
+ *                 example: PT Contoh Indonesia
+ *               deskripsi_utama:
+ *                 type: string
+ *                 example: Mengembangkan REST API menggunakan Node.js
+ *               lokasi:
+ *                 type: string
+ *                 example: Padang
+ *               perkiraan_salary:
+ *                 type: integer
+ *                 example: 5000000
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Pekerjaan berhasil ditambahkan
+ *       400:
+ *         description: Data tidak valid
+ *       500:
+ *         description: Gagal menambahkan pekerjaan
+ */
+router.post("/", upload.single("image"), async (req, res) => {
+  try {
+    const {
+      job_name,
+      nama_perusahaan,
+      deskripsi_utama,
+      lokasi,
+      perkiraan_salary
+    } = req.body;
+
+    if (
+      !job_name ||
+      !nama_perusahaan ||
+      !deskripsi_utama ||
+      !lokasi ||
+      !perkiraan_salary
+    ) {
+      return res.status(400).json({
+        message: "Data pekerjaan wajib diisi"
+      });
+    }
+
+    const job = await Job.create({
+      job_name,
+      nama_perusahaan,
+      deskripsi_utama,
+      lokasi,
+      perkiraan_salary,
+      image_url: null
+    });
+
+    res.status(201).json({
+      message: "Pekerjaan berhasil ditambahkan",
+      data: job
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Gagal menambahkan pekerjaan",
+      error: error.message
+    });
+  }
+});
+
+/**
+ * @swagger
  * /jobs/score:
  *   post:
  *     summary: Mengirim permintaan scoring pekerjaan ke ML
