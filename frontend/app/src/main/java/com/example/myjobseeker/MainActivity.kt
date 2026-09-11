@@ -88,6 +88,7 @@ class MainActivity : ComponentActivity() {
                 LaunchedEffect(currentUserId) {
                     jobViewModel.setCurrentUser(currentUserId)
                     themeViewModel.setCurrentUser(currentUserId)
+                    searchViewModel.setCurrentUser(currentUserId)
                 }
                 
                 LaunchedEffect(isLoggedIn) {

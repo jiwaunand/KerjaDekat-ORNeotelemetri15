@@ -47,7 +47,7 @@ fun SearchScreen(
     location: String
 ) {
     val searchQuery = viewModel.searchQuery
-    val searchHistory = viewModel.searchHistory
+    val searchHistory by viewModel.searchHistory.collectAsState()
     val autocompleteSuggestions = viewModel.autocompleteSuggestions
     val searchResults = viewModel.searchResults
     
@@ -90,22 +90,40 @@ fun SearchScreen(
                     putExtra(RecognizerIntent.EXTRA_PROMPT, "Silakan bicara...")
                 }
                 voiceRecognitionLauncher.launch(intent)
+            },
+            onSearch = {
+                viewModel.performSearch(searchQuery)
             }
         )
 
         FilterChipsRow(
             onFilterSelect = { filterTag ->
-                val query = when (filterTag.lowercase()) {
-                    "terdekat" -> "location: Padang" // Example mapping
-                    "gaji harian" -> "salary: 70000"
-                    "category" -> "category: "
-                    "company" -> "company: "
-                    "skill" -> "skill: "
-                    "salary" -> "salary: "
-                    "location" -> "location: "
-                    else -> filterTag
+                when (filterTag.lowercase()) {
+                    "salary" -> {
+                        // If user has typed a number, use it as the salary nominal and perform search
+                        val nominal = searchQuery.filter { it.isDigit() }
+                        if (nominal.isNotEmpty()) {
+                            viewModel.performSearch("salary: $nominal")
+                        } else {
+                            // If search box is empty or doesn't have digits, just set the prefix
+                            viewModel.onSearchQueryChange("salary: ")
+                        }
+                    }
+                    "terdekat" -> viewModel.performSearch("location: Padang")
+                    "gaji harian" -> viewModel.performSearch("salary: 70000")
+                    "location" -> {
+                        // If user typed a location name, search for it
+                        if (searchQuery.isNotEmpty() && !searchQuery.contains(":")) {
+                            viewModel.performSearch("location: $searchQuery")
+                        } else {
+                            viewModel.onSearchQueryChange("location: ")
+                        }
+                    }
+                    "company" -> {
+                        viewModel.onSearchQueryChange("$filterTag: ")
+                    }
+                    else -> viewModel.performSearch(filterTag)
                 }
-                viewModel.onSearchQueryChange(query)
             }
         )
 
@@ -113,8 +131,9 @@ fun SearchScreen(
             modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(bottom = 16.dp)
         ) {
+            if (!viewModel.isSearchActive) {
+                // Show Search History or Autocomplete Suggestions while typing
                 if (searchQuery.isEmpty()) {
-                    // Show Search History
                     item {
                         Text(
                             text = "Riwayat Pencarian",
@@ -129,62 +148,62 @@ fun SearchScreen(
                             onClick = { viewModel.performSearch(historyItem) }
                         )
                     }
-                } else if (searchResults.isEmpty() && autocompleteSuggestions.isNotEmpty()) {
-                    // Show Autocomplete Suggestions
+                } else {
+                    // Show suggestions while typing
                     items(autocompleteSuggestions) { suggestion ->
                         SearchHistoryItem(
                             text = suggestion,
                             onClick = { viewModel.performSearch(suggestion) }
                         )
                     }
-                } else {
-                    // Show Search Results
-                    if (searchResults.isEmpty()) {
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(32.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Text(
-                                    text = "Tidak ada lowongan yang ditemukan",
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    fontSize = 14.sp
-                                )
-                            }
-                        }
-                    } else {
-                        item {
+                }
+            } else {
+                // Show Search Results or "No results" only after Enter/Search performed
+                if (searchResults.isEmpty()) {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(32.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
                             Text(
-                                text = "${searchResults.size} Lowongan",
-                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 14.sp,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-                        }
-                        items(searchResults) { job ->
-                            JobCard(
-                                job = job,
-                                currentUserId = currentUserId,
-                                onClick = { onJobClick(job) },
-                                onApplyClick = { onApplyClick(job) },
-                                isBookmarked = bookmarkedJobIds.contains(job.id),
-                                onBookmarkClick = { jobViewModel.toggleBookmark(job) }
+                                text = "Tidak ada lowongan yang ditemukan",
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                fontSize = 14.sp
                             )
                         }
                     }
+                } else {
+                    item {
+                        Text(
+                            text = "${searchResults.size} Lowongan",
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
+                    items(searchResults) { job ->
+                        JobCard(
+                            job = job,
+                            currentUserId = currentUserId,
+                            onClick = { onJobClick(job) },
+                            onApplyClick = { onApplyClick(job) },
+                            isBookmarked = bookmarkedJobIds.contains(job.id),
+                            onBookmarkClick = { jobViewModel.toggleBookmark(job) }
+                        )
+                    }
                 }
             }
+        }
     }
 }
 
 @Composable
 fun FilterChipsRow(onFilterSelect: (String) -> Unit) {
     val allFilters = listOf(
-        "Location", "Salary", "Company", "Terdekat", "Gaji Harian",
-        "Category", "Skill"
+        "Location", "Salary", "Company", "Terdekat", "Gaji Harian"
     )
     var isExpanded by remember { mutableStateOf(false) }
     var selectedFilter by remember { mutableStateOf("") }

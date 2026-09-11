@@ -13,6 +13,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -23,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myjobseeker.R
@@ -81,7 +84,8 @@ fun HomeScreen(
                         }
                         voiceRecognitionLauncher.launch(intent)
                     },
-                    onClick = { onSearchClick(it) }
+                    onClick = { onSearchClick(it) },
+                    onSearch = { onSearchClick(searchText) }
                 )
             }
 
@@ -232,7 +236,8 @@ fun SearchBar(
     text: String,
     onTextChange: (String) -> Unit,
     onMicClick: () -> Unit,
-    onClick: ((String) -> Unit)? = null
+    onClick: ((String) -> Unit)? = null,
+    onSearch: (() -> Unit)? = null
 ) {
     var showMenu by remember { mutableStateOf(false) }
 
@@ -279,7 +284,11 @@ fun SearchBar(
                     onValueChange = onTextChange,
                     modifier = Modifier.fillMaxWidth(),
                     textStyle = TextStyle(fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface),
-                    singleLine = true
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                    keyboardActions = KeyboardActions(onSearch = { 
+                        onSearch?.invoke()
+                    })
                 )
             }
 
@@ -306,42 +315,38 @@ fun SearchBar(
                 )
                 DropdownMenu(
                     expanded = showMenu,
-                    onDismissRequest = { showMenu = false }
+                    onDismissRequest = { showMenu = false },
+                    modifier = Modifier.background(MaterialTheme.colorScheme.surface)
                 ) {
                     DropdownMenuItem(
-                        text = { Text("Category") },
-                        onClick = {
-                            if (onClick != null) onClick("category: ") else onTextChange("category: ")
-                            showMenu = false
-                        }
-                    )
-                    DropdownMenuItem(
-                        text = { Text("Company") },
+                        text = { Text("Company", color = MaterialTheme.colorScheme.onSurface) },
                         onClick = {
                             if (onClick != null) onClick("company: ") else onTextChange("company: ")
                             showMenu = false
-                        }
+                        },
+                        colors = MenuDefaults.itemColors(
+                            textColor = MaterialTheme.colorScheme.onSurface
+                        )
                     )
                     DropdownMenuItem(
-                        text = { Text("Skill") },
-                        onClick = {
-                            if (onClick != null) onClick("skill: ") else onTextChange("skill: ")
-                            showMenu = false
-                        }
-                    )
-                    DropdownMenuItem(
-                        text = { Text("Salary") },
+                        text = { Text("Salary", color = MaterialTheme.colorScheme.onSurface) },
                         onClick = {
                             if (onClick != null) onClick("salary: ") else onTextChange("salary: ")
                             showMenu = false
-                        }
+                        },
+                        colors = MenuDefaults.itemColors(
+                            textColor = MaterialTheme.colorScheme.onSurface
+                        )
                     )
                     DropdownMenuItem(
-                        text = { Text("Location") },
+                        text = { Text("Location", color = MaterialTheme.colorScheme.onSurface) },
                         onClick = {
                             if (onClick != null) onClick("location: ") else onTextChange("location: ")
                             showMenu = false
-                        }
+                        },
+                        colors = MenuDefaults.itemColors(
+                            textColor = MaterialTheme.colorScheme.onSurface
+                        )
                     )
                 }
             }

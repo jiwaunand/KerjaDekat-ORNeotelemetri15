@@ -1,20 +1,46 @@
 package com.example.myjobseeker.viewmodel
 
+import android.app.Application
 import androidx.compose.runtime.*
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.myjobseeker.data.AppDatabase
 import com.example.myjobseeker.model.Job
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
-class SearchViewModel : ViewModel() {
+@OptIn(ExperimentalCoroutinesApi::class)
+class SearchViewModel(application: Application) : AndroidViewModel(application) {
+    private val searchHistoryDao = AppDatabase.getDatabase(application).searchHistoryDao()
+    
     var searchQuery by mutableStateOf("")
         private set
 
-    private val _searchHistory = mutableStateListOf("Barista", "Kasir", "Admin Toko")
-    val searchHistory: List<String> = _searchHistory
+    var isSearchActive by mutableStateOf(false)
+        private set
+
+    private val _currentUserId = MutableStateFlow(-1)
+    
+    val searchHistory: StateFlow<List<String>> = _currentUserId
+        .flatMapLatest { userId ->
+            if (userId != -1) {
+                searchHistoryDao.getSearchHistory(userId).map { historyList ->
+                    historyList.map { it.query }
+                }
+            } else {
+                flowOf(emptyList())
+            }
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     private val _autocompleteSuggestions = mutableStateListOf<String>()
     val autocompleteSuggestions: List<String> = _autocompleteSuggestions
 
     private var allJobs = listOf<Job>()
+
+    fun setCurrentUser(userId: Int) {
+        _currentUserId.value = userId
+    }
 
     fun setAllJobs(jobs: List<Job>) {
         allJobs = jobs
@@ -25,10 +51,9 @@ class SearchViewModel : ViewModel() {
 
     fun onSearchQueryChange(newQuery: String) {
         searchQuery = newQuery
+        isSearchActive = false
         updateAutocomplete(newQuery)
-        if (newQuery.contains(":") || newQuery.length > 2) {
-            performSearchInternal(newQuery, addToHistory = false)
-        } else if (newQuery.isEmpty()) {
+        if (newQuery.isEmpty()) {
             _searchResults.clear()
         }
     }
@@ -36,16 +61,28 @@ class SearchViewModel : ViewModel() {
     private fun updateAutocomplete(query: String) {
         _autocompleteSuggestions.clear()
         if (query.isNotEmpty() && !query.contains(":")) {
-            val suggestions = allJobs.map { it.title }
+            // Get matching terms from search history
+            val historySuggestions = searchHistory.value.filter { 
+                it.contains(query, ignoreCase = true) 
+            }
+
+            // Get matching terms from job titles
+            val jobSuggestions = allJobs.map { it.title }
                 .distinct()
                 .filter { it.contains(query, ignoreCase = true) }
-            _autocompleteSuggestions.addAll(suggestions)
+            
+            // Combine suggestions, prioritizing history, and taking unique items
+            val combined = (historySuggestions + jobSuggestions).distinct()
+            _autocompleteSuggestions.addAll(combined)
         }
     }
 
     fun performSearch(query: String) {
-        searchQuery = query
-        performSearchInternal(query, addToHistory = true)
+        if (query.isNotBlank()) {
+            searchQuery = query
+            isSearchActive = true
+            performSearchInternal(query, addToHistory = true)
+        }
     }
 
     private fun performSearchInternal(query: String, addToHistory: Boolean) {
@@ -58,13 +95,13 @@ class SearchViewModel : ViewModel() {
                 
                 allJobs.filter { job ->
                     when (prefix) {
-                        "category", "skill" -> job.description.contains(value, ignoreCase = true)
                         "company" -> job.companyName.contains(value, ignoreCase = true)
                         "salary" -> {
-                            val numericSalary = value.replace(Regex("[^0-9]"), "").toLongOrNull()
-                            val jobSalary = job.salary.replace(Regex("[^0-9]"), "").toLongOrNull()
-                            if (numericSalary != null && jobSalary != null) {
-                                jobSalary >= numericSalary
+                            val numericSearchValue = value.replace(Regex("[^0-9]"), "")
+                            val numericJobSalary = job.salary.replace(Regex("[^0-9]"), "")
+                            
+                            if (numericSearchValue.isNotEmpty() && numericJobSalary.isNotEmpty()) {
+                                numericJobSalary == numericSearchValue
                             } else {
                                 job.salary.contains(value, ignoreCase = true)
                             }
@@ -81,21 +118,26 @@ class SearchViewModel : ViewModel() {
             }
             _searchResults.addAll(results)
             if (addToHistory) {
-                addToHistory(query)
+                addQueryToHistory(query)
             }
         }
     }
 
-    private fun addToHistory(query: String) {
-        if (query.isNotBlank() && !_searchHistory.contains(query)) {
-            _searchHistory.add(0, query)
-            if (_searchHistory.size > 10) {
-                _searchHistory.removeAt(_searchHistory.size - 1)
+    private fun addQueryToHistory(query: String) {
+        val userId = _currentUserId.value
+        if (userId != -1 && query.isNotBlank()) {
+            viewModelScope.launch {
+                searchHistoryDao.addSearchQuery(userId, query)
             }
         }
     }
 
     fun clearHistory() {
-        _searchHistory.clear()
+        val userId = _currentUserId.value
+        if (userId != -1) {
+            viewModelScope.launch {
+                searchHistoryDao.clearHistory(userId)
+            }
+        }
     }
 }

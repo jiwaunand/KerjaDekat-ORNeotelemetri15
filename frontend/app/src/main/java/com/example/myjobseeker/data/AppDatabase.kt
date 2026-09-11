@@ -8,6 +8,8 @@ import com.example.myjobseeker.model.Application
 import com.example.myjobseeker.model.ApplicationStatus
 import com.example.myjobseeker.model.Bookmark
 import com.example.myjobseeker.model.User
+import com.example.myjobseeker.model.Notification
+import com.example.myjobseeker.model.SearchHistory
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 
@@ -19,10 +21,11 @@ class Converters {
     fun toStatus(value: String): ApplicationStatus = ApplicationStatus.valueOf(value)
 }
 
-@Database(entities = [User::class, Bookmark::class, Application::class, com.example.myjobseeker.model.Notification::class], version = 3, exportSchema = false)
+@Database(entities = [User::class, Bookmark::class, Application::class, Notification::class, SearchHistory::class], version = 4, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun searchHistoryDao(): SearchHistoryDao
 
     companion object {
         @Volatile
