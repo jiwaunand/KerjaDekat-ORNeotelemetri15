@@ -32,6 +32,9 @@ letakkan `.env` di root folder project ini
 
 `DB_HOST` \
 `DB_PORT` \
-`DB_NAME` \
-`DB_USER` \
-`DB_PASSWORD`
+`POSTGRES_DB` \
+`POSTGRES_USER` \
+`POSTGRES_PASSWORD` \
+`PORT` \
+`ML_API_URL` \
+`TUNNEL_TOKEN`
