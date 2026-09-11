@@ -31,9 +31,7 @@ import com.example.myjobseeker.ui.home.HomeHeader
 @Composable
 fun BookmarkScreen(
     viewModel: JobViewModel,
-    currentUserId: Int,
     onJobClick: (Job) -> Unit,
-    onApplyClick: (Job) -> Unit,
     onBackClick: () -> Unit,
     location: String
 ) {
@@ -116,9 +114,7 @@ fun BookmarkScreen(
                 items(bookmarkedJobs) { job ->
                     JobCard(
                         job = job,
-                        currentUserId = currentUserId,
                         onClick = { onJobClick(job) },
-                        onApplyClick = { onApplyClick(job) },
                         isBookmarked = true,
                         onBookmarkClick = { viewModel.toggleBookmark(job) }
                     )

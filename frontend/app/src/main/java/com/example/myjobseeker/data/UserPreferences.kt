@@ -16,7 +16,7 @@ class UserPreferences(private val context: Context) {
     companion object {
         private val IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
         private val USER_ID = intPreferencesKey("user_id")
-        
+
         fun getThemeKey(userId: Int) = booleanPreferencesKey("theme_user_$userId")
     }
 

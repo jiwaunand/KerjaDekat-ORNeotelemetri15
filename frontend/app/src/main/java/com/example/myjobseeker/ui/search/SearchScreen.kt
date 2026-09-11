@@ -38,10 +38,8 @@ import com.example.myjobseeker.viewmodel.JobViewModel
 fun SearchScreen(
     viewModel: SearchViewModel,
     jobViewModel: JobViewModel,
-    currentUserId: Int,
     onJobClick: (Job) -> Unit,
     onProfileClick: () -> Unit,
-    onApplyClick: (Job) -> Unit,
     onNotificationClick: () -> Unit,
     onMenuClick: () -> Unit,
     location: String
@@ -187,9 +185,7 @@ fun SearchScreen(
                     items(searchResults) { job ->
                         JobCard(
                             job = job,
-                            currentUserId = currentUserId,
                             onClick = { onJobClick(job) },
-                            onApplyClick = { onApplyClick(job) },
                             isBookmarked = bookmarkedJobIds.contains(job.id),
                             onBookmarkClick = { jobViewModel.toggleBookmark(job) }
                         )

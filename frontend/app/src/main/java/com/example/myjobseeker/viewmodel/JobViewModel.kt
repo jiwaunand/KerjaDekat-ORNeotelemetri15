@@ -8,7 +8,6 @@ import com.example.myjobseeker.model.Application
 import com.example.myjobseeker.model.ApplicationStatus
 import com.example.myjobseeker.model.Bookmark
 import com.example.myjobseeker.model.Job
-import com.example.myjobseeker.ui.home.getDummyJobs
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -17,9 +16,39 @@ import java.time.LocalDateTime
 @OptIn(ExperimentalCoroutinesApi::class)
 class JobViewModel(application: AndroidApp) : AndroidViewModel(application) {
     private val userDao = AppDatabase.getDatabase(application).userDao()
-    
-    private val _jobs = MutableStateFlow(getDummyJobs())
+
+    private val _jobs = MutableStateFlow(emptyList<Job>())
     val jobs: StateFlow<List<Job>> = _jobs.asStateFlow()
+
+    init {
+        fetchJobsFromApi()
+    }
+
+    fun fetchJobsFromApi() {
+        viewModelScope.launch {
+            try {
+                val response = com.example.myjobseeker.retrofit.RetrofitInstance.api.getJobs()
+                val mappedJobs = response.data.map { apiJob ->
+                    val formatter = java.text.NumberFormat.getNumberInstance(java.util.Locale("in", "ID"))
+                    val salaryStr = apiJob.perkiraanSalary?.let { "Rp. ${formatter.format(it)}" } ?: "Rp. 0"
+                    Job(
+                        id = apiJob.id,
+                        title = apiJob.jobName ?: "",
+                        companyName = apiJob.namaPerusahaan ?: "",
+                        description = apiJob.deskripsiUtama ?: "",
+                        location = apiJob.lokasi ?: "",
+                        salary = salaryStr,
+                        logoResId = 0,
+                        creatorId = -1,
+                        imageUri = apiJob.imageUrl
+                    )
+                }
+                _jobs.value = mappedJobs
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 
     private val _currentUserId = MutableStateFlow(-1)
 
@@ -147,17 +176,36 @@ class JobViewModel(application: AndroidApp) : AndroidViewModel(application) {
         val userId = _currentUserId.value
         if (userId == -1) return
         
-        val jobWithOwner = job.copy(creatorId = userId)
-        _jobs.value = _jobs.value + jobWithOwner
-        
         viewModelScope.launch {
-            userDao.insertNotification(
-                com.example.myjobseeker.model.Notification(
-                    userId = userId,
-                    title = "Pekerjaan Ditambahkan",
-                    message = "Pekerjaan baru '${job.title}' telah berhasil ditambahkan."
+            try {
+                // Parse salary from string to Int (e.g. "Rp. 70.000" -> 70000)
+                val cleanSalary = job.salary.replace(Regex("[^0-9]"), "")
+                val salaryInt = cleanSalary.toIntOrNull() ?: 0
+
+                val request = com.example.myjobseeker.retrofit.CreateJobRequest(
+                    jobName = job.title,
+                    namaPerusahaan = job.companyName,
+                    deskripsiUtama = job.description,
+                    lokasi = job.location,
+                    perkiraanSalary = salaryInt,
+                    imageUrl = job.imageUri ?: ""
                 )
-            )
+                
+                com.example.myjobseeker.retrofit.RetrofitInstance.api.createJob(request)
+                
+                // Refresh jobs from API after successful addition
+                fetchJobsFromApi()
+
+                userDao.insertNotification(
+                    com.example.myjobseeker.model.Notification(
+                        userId = userId,
+                        title = "Pekerjaan Ditambahkan",
+                        message = "Pekerjaan baru '${job.title}' telah berhasil ditambahkan ke server."
+                    )
+                )
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 

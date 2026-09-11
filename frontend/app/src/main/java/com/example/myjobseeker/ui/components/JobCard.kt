@@ -27,12 +27,9 @@ import com.example.myjobseeker.ui.theme.*
 fun JobCard(
     job: Job,
     onClick: () -> Unit,
-    onApplyClick: () -> Unit,
-    currentUserId: Int = -1,
     isBookmarked: Boolean = false,
     onBookmarkClick: () -> Unit = {}
 ) {
-    val isCreator = job.creatorId == currentUserId && currentUserId != -1
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -121,10 +118,7 @@ fun JobCard(
 
                 // btn_apply
                 Button(
-                    onClick = {
-                        if (isCreator) onClick()
-                        else onApplyClick()
-                    },
+                    onClick = onClick,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(38.dp),
@@ -135,7 +129,7 @@ fun JobCard(
                     contentPadding = PaddingValues(horizontal = 20.dp)
                 ) {
                     Text(
-                        text = if (isCreator) "Detail" else "Lamar",
+                        text = "Detail",
                         fontSize = 14.sp,
                         color = Color.White
                     )

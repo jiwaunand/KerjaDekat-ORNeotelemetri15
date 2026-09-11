@@ -38,10 +38,8 @@ import com.example.myjobseeker.viewmodel.JobViewModel
 @Composable
 fun HomeScreen(
     jobViewModel: JobViewModel,
-    currentUserId: Int,
     onJobClick: (Job) -> Unit,
     onProfileClick: () -> Unit,
-    onApplyClick: (Job) -> Unit,
     onSearchClick: (String) -> Unit,
     onNotificationClick: () -> Unit,
     onMenuClick: () -> Unit,
@@ -131,9 +129,7 @@ fun HomeScreen(
                 items(jobs) { job ->
                     JobCard(
                         job = job,
-                        currentUserId = currentUserId,
                         onClick = { onJobClick(job) },
-                        onApplyClick = { onApplyClick(job) },
                         isBookmarked = bookmarkedJobIds.contains(job.id),
                         onBookmarkClick = { jobViewModel.toggleBookmark(job) }
                     )
@@ -354,10 +350,4 @@ fun SearchBar(
     }
 }
 
-fun getDummyJobs(): List<Job> = listOf(
-    Job(1, "Barista", "Kopi Kenangan", "Sebagai barista yang berpengalaman dalam membuat kopi dan meracik minuman.", "Khatib Sulaiman", "Rp. 70.000/hari"),
-    Job(2, "Admin Toko", "Toko Fotocopy", "Melakukan administrasi toko dan pelayanan pelanggan.", "Limau Manis", "Rp. 100.000/mg"),
-    Job(3, "Social Media Designer", "Kopi Kenangan", "Mendesain konten kreatif untuk media sosial.", "Khatib Sulaiman", "Rp. 50.000/design"),
-    Job(4, "programer", "PT. mencari cinta sejati", "Membangun aplikasi web dan mobile.", "Padang", "RP. 10.000.000/project"),
-    Job(5, "programer", "PT. mencari cinta sejati", "Membangun sistem backend.", "bukittinggi", "RP. 10.000.000/project"),
-)
+fun getDummyJobs(): List<Job> = emptyList()

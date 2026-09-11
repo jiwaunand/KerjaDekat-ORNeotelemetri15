@@ -227,23 +227,12 @@ class MainActivity : ComponentActivity() {
                             composable("home") {
                                 HomeScreen(
                                     jobViewModel = jobViewModel,
-                                    currentUserId = currentUserId,
                                     onJobClick = { job ->
                                         selectedJob = job
                                         navController.navigate("detail")
                                     },
                                     onProfileClick = {
                                         navController.navigate("profile") {
-                                            popUpTo(navController.graph.findStartDestination().id) {
-                                                saveState = true
-                                            }
-                                            launchSingleTop = true
-                                            restoreState = true
-                                        }
-                                    },
-                                    onApplyClick = { job ->
-                                        jobViewModel.applyForJob(job)
-                                        navController.navigate("applications") {
                                             popUpTo(navController.graph.findStartDestination().id) {
                                                 saveState = true
                                             }
@@ -274,7 +263,6 @@ class MainActivity : ComponentActivity() {
                                 SearchScreen(
                                     viewModel = searchViewModel,
                                     jobViewModel = jobViewModel,
-                                    currentUserId = currentUserId,
                                     onJobClick = { job ->
                                         selectedJob = job
                                         navController.navigate("detail")
@@ -285,16 +273,6 @@ class MainActivity : ComponentActivity() {
                                     onNotificationClick = {
                                         navController.navigate("notifications")
                                     },
-                                    onApplyClick = { job ->
-                                        jobViewModel.applyForJob(job)
-                                        navController.navigate("applications") {
-                                            popUpTo(navController.graph.findStartDestination().id) {
-                                                saveState = true
-                                            }
-                                            launchSingleTop = true
-                                            restoreState = true
-                                        }
-                                    },
                                     onMenuClick = {
                                         scope.launch { drawerState.open() }
                                     },
@@ -304,20 +282,9 @@ class MainActivity : ComponentActivity() {
                             composable("bookmarks") {
                                 BookmarkScreen(
                                     viewModel = jobViewModel,
-                                    currentUserId = currentUserId,
                                     onJobClick = { job ->
                                         selectedJob = job
                                         navController.navigate("detail")
-                                    },
-                                    onApplyClick = { job ->
-                                        jobViewModel.applyForJob(job)
-                                        navController.navigate("applications") {
-                                            popUpTo(navController.graph.findStartDestination().id) {
-                                                saveState = true
-                                            }
-                                            launchSingleTop = true
-                                            restoreState = true
-                                        }
                                     },
                                     onBackClick = {
                                         navController.popBackStack()
