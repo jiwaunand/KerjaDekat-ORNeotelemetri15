@@ -2,7 +2,6 @@ const axios = require("axios");
 
 const getJobScore = async (skillText) => {
   try {
-    // ML belum tersedia
     if (!process.env.ML_API_URL) {
       console.log("ML_API_URL belum tersedia, scoring dilewati.");
       return null;
@@ -14,7 +13,19 @@ const getJobScore = async (skillText) => {
         job_description: skillText
       }
     );
-    console.log(response.data);;
+
+    console.log("Response ML:", response.data);
+
+    // Kalau response ML berupa string
+    if (typeof response.data === "string") {
+      return response.data;
+    }
+
+    // Kalau response ML berupa object dan punya field score
+    if (response.data && response.data.score !== undefined) {
+      return String(response.data.score);
+    }
+
     return String(response.data);
 
   } catch (error) {
