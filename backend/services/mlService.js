@@ -11,10 +11,10 @@ const getJobScore = async (skillText) => {
     const response = await axios.post(
       process.env.ML_API_URL,
       {
-        skill_text: skillText
+        job_description: skillText
       }
     );
-
+    console.log(response.data);;
     return String(response.data);
 
   } catch (error) {

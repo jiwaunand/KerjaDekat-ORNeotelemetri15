@@ -103,11 +103,5 @@ def calculate_job_score(payload: JobDescriptionRequest):
         category = "Peluang sangat rendah"
 
     return {
-        "status": "success",
         "score": final_score,
-        "category": category,
-        "details": {
-            "job_demand_score": round(job_demand_score, 2),
-            "worker_scarcity_score": round(worker_scarcity_score, 2),
-        },
     }
