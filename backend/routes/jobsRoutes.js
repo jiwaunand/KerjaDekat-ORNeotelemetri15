@@ -113,7 +113,7 @@ router.post("/", async (req, res) => {
 
     // Scoring dijalankan secara internal oleh backend
     const score = await getJobScore(deskripsi_utama);
-
+    console.log("THISDEBUG", score)
     const job = await Job.create({
       job_name,
       nama_perusahaan,
@@ -121,7 +121,7 @@ router.post("/", async (req, res) => {
       lokasi,
       perkiraan_salary,
       image_url,
-      scoring: score
+      scoring: Math.round(score * 100) / 100
     });
 
     res.status(201).json({

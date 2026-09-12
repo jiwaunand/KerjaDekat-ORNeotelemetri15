@@ -6,7 +6,7 @@ const Job = {
 
     const result = await pool.query(
       `SELECT * FROM jobs
-      ORDER BY id DESC
+      ORDER BY scoring DESC NULLS LAST, id DESC
       LIMIT $1 OFFSET $2`,
       [limit + 1, offset]
     );
@@ -28,7 +28,8 @@ const Job = {
       deskripsi_utama,
       lokasi,
       perkiraan_salary,
-      image_url
+      image_url,
+      scoring
     } = data;
 
     const result = await pool.query(
@@ -39,9 +40,10 @@ const Job = {
         deskripsi_utama,
         lokasi,
         perkiraan_salary,
-        image_url
+        image_url,
+        scoring
       )
-      VALUES ($1, $2, $3, $4, $5, $6)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *`,
       [
         job_name,
@@ -49,7 +51,8 @@ const Job = {
         deskripsi_utama,
         lokasi,
         perkiraan_salary,
-        image_url
+        image_url,
+        scoring
       ]
     );
 

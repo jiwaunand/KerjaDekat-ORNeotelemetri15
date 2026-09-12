@@ -12,17 +12,12 @@ app = FastAPI(
     description="API Engine Rekomendasi & Analisis Tren Pasar",
 )
 
-# ---------------------------------------------------------------------------
-# 1. LOAD 5 ARTIFACTS TERBARU DARI COLAB
-# ---------------------------------------------------------------------------
 vectorizer = joblib.load("artifacts/tfidf_vectorizer.pkl")
 jobs_df = joblib.load("artifacts/jobs_data.pkl")
 job_vectors = joblib.load("artifacts/job_vectors.pkl")
 workers_df = joblib.load("artifacts/workers_data.pkl")
 worker_vectors = joblib.load("artifacts/worker_vectors.pkl")
 
-
-# Preprocessing teks sederhana untuk query input baru
 def clean_text(text):
     if not isinstance(text, str):
         return ""
@@ -30,13 +25,6 @@ def clean_text(text):
     text = re.sub(r"[^a-z0-9\s]", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
-
-# ---------------------------------------------------------------------------
-# 5. ENDPOINT MARKET TREND ANALYTICS (Analisis Tren Pasar)
-# ---------------------------------------------------------------------------
-# ---------------------------------------------------------------------------
-# 5. ENDPOINT SKOR KESESUAIAN PASAR
-# ---------------------------------------------------------------------------
 class JobDescriptionRequest(BaseModel):
     job_description: str
 
@@ -79,15 +67,11 @@ def calculate_job_score(payload: JobDescriptionRequest):
     job_similarities = cosine_similarity(query_vector, job_vectors).ravel()
     worker_similarities = cosine_similarity(query_vector, worker_vectors).ravel()
 
-    # Permintaan pasar diwakili oleh kemiripan dengan listing lowongan aktif.
     job_demand_score = _mean_top_similarities(job_similarities) * 100
 
-    # Semakin banyak profil pekerja serupa, semakin rendah skor kelangkaannya.
     worker_supply_score = _mean_top_similarities(worker_similarities) * 100
     worker_scarcity_score = 100 - worker_supply_score
 
-    # Listing aktif menjadi faktor utama, sedangkan kelangkaan pekerja menjadi
-    # faktor pendukung. Hasil akhir selalu dibatasi pada rentang 0-100.
     final_score = (0.75 * job_demand_score) + (0.25 * worker_scarcity_score)
     final_score = round(float(np.clip(final_score, 0, 100)), 2)
 
@@ -103,11 +87,5 @@ def calculate_job_score(payload: JobDescriptionRequest):
         category = "Peluang sangat rendah"
 
     return {
-        "status": "success",
         "score": final_score,
-        "category": category,
-        "details": {
-            "job_demand_score": round(job_demand_score, 2),
-            "worker_scarcity_score": round(worker_scarcity_score, 2),
-        },
     }
